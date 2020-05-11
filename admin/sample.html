@@ -1,0 +1,959 @@
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Discount Coupon</title>
+    <!-- core js -->
+    <script type="text/javascript" src="https://bootstrap.arcadier.com/adminportal/js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="https://bootstrap.arcadier.com/adminportal/js/jquery.js"></script>
+    <!-- bootstrap js -->
+    <script type="text/javascript" src="https://bootstrap.arcadier.com/adminportal/js/bootstrap.min.js"></script>
+    <!-- nicescroll js -->
+    <script type="text/javascript"
+        src="https://bootstrap.arcadier.com/adminportal/js/jquery.nicescroll.min.js"></script>
+    <!-- Moment js -->
+    <script type="text/javascript" src="https://bootstrap.arcadier.com/adminportal/js/moment.min.js"></script>
+    <!-- bootbox js -->
+    <script type="text/javascript" src="https://bootstrap.arcadier.com/adminportal/js/bootbox.min.js"></script>
+    <!-- tablesorter js -->
+    <script type="text/javascript" src="https://bootstrap.arcadier.com/adminportal/js/jquery.tablesorter.js"></script>
+    <!-- html5upload js -->
+    <script type="text/javascript" src="https://bootstrap.arcadier.com/adminportal/js/html5imageupload.min.js"></script>
+    <!-- custom js -->
+    <script type="text/javascript" src="https://bootstrap.arcadier.com/adminportal/js/custom.js"></script>
+    <!-- bootstrap style -->
+    <link href="https://bootstrap.arcadier.com/adminportal/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="https://bootstrap.arcadier.com/adminportal/css/jquery-ui.min.css" rel="stylesheet" type="text/css">
+    <link href="https://bootstrap.arcadier.com/adminportal/css/html5imageupload.css" rel="stylesheet" type="text/css">
+    <link href="https://bootstrap.arcadier.com/adminportal/css/switch-btn.css" rel="stylesheet" type="text/css">
+    <!-- custom style-->
+    <link href="https://bootstrap.arcadier.com/adminportal/css/style.css" rel="stylesheet" type="text/css">
+    <link href="https://bootstrap.arcadier.com/adminportal/css/sidemenu.css" rel="stylesheet" type="text/css"
+        media="screen,print">
+    <!-- responsive style-->
+    <link href="https://bootstrap.arcadier.com/adminportal/css/responsive.css" rel="stylesheet" type="text/css">
+    <link href="css/adminstyle.css" rel="stylesheet" type="text/css">
+    <link href="css/coupon.css" rel="stylesheet" type="text/css">
+</head>
+
+<body class="page-coupon">
+    <div class="mobi-header visible-xs">
+        <div class="container">
+            <div class="pull-left">
+                <div class="brand-logo"><a href="#"><img alt="logo"
+                            src="https://bootstrap.arcadier.com/adminportal/images/brand-logo.png"></a></div>
+            </div>
+            <div class="pull-right">
+                <button type="button" class="navbar-toggle"> <span class="sr-only">Toggle navigation</span> <span
+                        class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    <div class="main template-sidebar">
+        <div class="col-sm-3 sidebar">
+            <button class="navbar-back" type="button"> <i class="icon icon-arrowleft"></i> </button>
+            <div class="brand-logo"><a href="start.html"><img
+                        src="https://bootstrap.arcadier.com/adminportal/images/brand-logo.png" alt="logo"></a></div>
+            <div class="setion-wrapper">
+                <div class="section-sidebar">
+                    <a href="" class="view-marketplace">
+                        <span>View Marketplace</span>
+                        <i class="view-marketplace-icon"></i>
+                    </a>
+                    <ul class="section-links">
+                        <li class="menu-item item-setup"><a href="#"><i class="sm-submenu submenu-icon1"></i>Content
+                                Mgmt.</a>
+                            <ul class="ul-submenu submenu-basic sm-sub-hide">
+                                <li class="sm-item item-pol"><a href="customize_policy.html"><i
+                                            class="sm-submenu sub-submenu-icon5"></i>Customize Policies</a></li>
+                                <li class="sm-item item-lay"><a href="layout.html"><i
+                                            class="sm-submenu sub-submenu-icon1"></i>Layout</a></li>
+                                <li class="sm-item item-cat"><a href="category.html"><i
+                                            class="sm-submenu sub-submenu-icon2"></i>Categories</a></li>
+                                <li class="sm-item item-cfield"><a href="custom-listing.html"><i
+                                            class="sm-submenu sub-submenu-icon3"></i>Custom Fields</a></li>
+                                <li class="sm-item header-footer"><a href="external-links.html"><i
+                                            class="sm-submenu sub-header-icon"></i>External Links</a></li>
+                                <li class="sm-item item-field"><a href="custom-user-field.html"><i
+                                            class="sm-submenu sub-submenu-icon6"></i>Custom User Fields</a></li>
+                            </ul>
+                        </li>
+                        <li class="menu-item item-advanced ">
+                            <a href="#"><i class="sm-submenu submenu-icon2"></i>Advanced</a>
+                            <ul class="ul-submenu submenu-advance sm-sub-hide">
+                                <li class="sm-item item-domain"><a href="custom_domain.html"><i
+                                            class="sm-submenu sub-submenu-icon6"></i>Custom Domain</a></li>
+                                <li class="sm-item item-code"><a href="custom_code.html"><i
+                                            class="sm-submenu sub-submenu-icon4"></i>Custom Code</a></li>
+                                <li class="sm-item item-pri active"><a href="#"><i
+                                            class="sm-submenu sub-submenu-icon5"></i>Private Settings</a></li>
+                            </ul>
+                        </li>
+                        <li class="menu-item item-content"><a href="#"><i class="sm-submenu submenu-icon3"></i>User
+                                Mgmt.</a>
+                            <ul class="ul-submenu submenu-mgmt sm-sub-hide">
+                                <li class="sm-item item-items"><a href="items.html"><i
+                                            class="sm-submenu sub-submenu-icon1"></i>Items</a></li>
+                                <li class="sm-item item-sel"><a href="sellers.html"><i
+                                            class="sm-submenu sub-submenu-icon3"></i>Sellers</a></li>
+                                <li class="sm-item item-buyers"><a href="buyer-listing.html"><i
+                                            class="sm-submenu sub-submenu-icon5"></i>Buyers</a></li>
+                            </ul>
+                        </li>
+                        <li class="menu-item item-trans"><a href="#"><i class="sm-submenu submenu-icon-1"></i>Payments &
+                                Transactions</a>
+                            <ul class="ul-submenu submenu-trans sm-sub-hide">
+                                <li class="sm-item item-pay"><a href="payments.html"><i
+                                            class="sm-submenu sub-submenu-icon4"></i>Configure Payments</a></li>
+                                <li class="sm-item item-pay"><a href="transactions.html"><i
+                                            class="sm-submenu sub-submenu-icon5"></i>Transactions</a></li>
+                            </ul>
+                        </li>
+                        <li class="menu-item item-analyseo"><a href="#"><i
+                                    class="sm-submenu submenu-icon-2"></i>Analytics/SEO</a>
+                            <ul class="ul-submenu submenu-analyseo sm-sub-hide">
+                                <li class="sm-item item-dashboard"><a href="admin_dashboard.html"><i
+                                            class="sm-submenu sub-submenu-icon4"></i>Marketplace Analytics</a></li>
+                                <li class="sm-item item-goo"><a href="analytics.html"><i
+                                            class="sm-submenu sub-submenu-icon3"></i>Google Analytics</a></li>
+                                <li class="sm-item item-seo"><a href="seo.html"><i
+                                            class="sm-submenu sub-submenu-icon2"></i>SEO</a></li>
+                            </ul>
+                        </li>
+                        <li class="menu-item item-lng"><a href="#"><i class="sm-submenu submenu-icon4"></i>Language</a>
+                            <ul class="ul-submenu submenu-lang sm-sub-hide">
+                                <li class="sm-item item-langset"><a href="language.html"><i
+                                            class="sm-submenu sub-submenu-icon1"></i>Language Settings</a></li>
+                                <li class="sm-item item-translate"><a href="web-content.html"><i
+                                            class="sm-submenu sub-submenu-icon2"></i>Edit Text</a></li>
+                                <li class="sm-item item-gootranslate"><a href="google_translate.html"><i
+                                            class="sm-submenu sub-submenu-icon3"></i>Google Translate</a></li>
+                            </ul>
+                        </li>
+                        <li class="menu-item item-accset"><a href="#"><i class="sm-submenu submenu-icon5"></i>Account
+                                Settings</a>
+                            <ul class="ul-submenu submenu-accset sm-sub-hide">
+                                <li class="sm-item item-subs"><a href="subscription.html"><i
+                                            class="sm-submenu sub-submenu-icon1"></i>Subscription</a></li>
+                                <li class="sm-item item-subsinvoice"><a href="subscription-invoice.html"><i
+                                            class="sm-submenu sub-submenu-icon4"></i>Subscription Invoice</a></li>
+                                <li class="sm-item item-accinfo"><a href="account-info.html"><i
+                                            class="sm-submenu sub-submenu-icon2"></i>Account Info</a></li>
+                                <li class="sm-item item-myaccinfo"><a href="contact-info.html"><i
+                                            class="sm-submenu sub-submenu-icon3"></i>Contact Info</a></li>
+                            </ul>
+                        </li>
+                        <li class="menu-item item-lng "><a href="#"><i
+                                    class="sm-submenu submenu-devapp"></i>Plug-ins</a>
+                            <ul class="ul-submenu submenu-lang sm-sub-hide">
+                                <li class="sm-item item-langset"><a href="delivery-option-settings.html"><i
+                                            class="sm-submenu sub-submenu-icon1"></i>Delivery 2.0</a></li>
+                            </ul>
+                        </li>
+                        <li class="menu-item item-lng active "><a href="#"><i
+                                    class="sm-submenu submenu-icon4"></i>Installed Packages</a>
+                            <ul class="ul-submenu submenu-lang ">
+                                <li class="sm-item item-langset"><a href="discount_coupon.html"><i
+                                            class="sm-submenu sub-submenu-icon1"></i>Discount Coupon</a></li>
+                            </ul>
+                        </li>
+                        <li class="menu-item"><a data-toggle="modal" data-target="" href="javascript:void(0);"><i
+                                    class="sm-submenu submenu-icon50"></i>Help Center</a></li>
+                        <li class="menu-item"><a data-toggle="modal" data-target="#StartSelling"
+                                href="javascript:void(0);"><i class="sm-submenu submenu-icon51"></i>Start Selling</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="sidebar-footer">
+                <ul>
+                    <li><a href="#">Terms & Conditions</a></li>
+                    <li><a href="#">Privacy & Policy</a></li>
+                    <li><a href="#">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-sm-9 main-content">
+            <div class="page-header" id="no-sub-title">
+                <div class="pull-left">
+                    <div class="wrapper">
+                        <div class="page-icon"><i class="icon discount-icon"></i></div>
+                        <div class="page-title">
+                            <h1>Discount Coupon</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="page-content page-layout">
+                <div class="gutter-wrapper">
+                    <div class="panel-box no-b-margin">
+                        <div class="page-content-top private-setting-container-switch">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div><i class="icon icon-3x discount-icon-big"></i></div>
+                                    <div>
+                                        <p><b>Create coupon for your marketplace for special price discounts</b></p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 text-right">
+                                	<a href="#" class="blue-btn al-middle" data-toggle="modal"
+                                        data-target="#freeitemcoupon">Free Item Coupon</a>
+                                    <a href="#" class="blue-btn al-middle" data-toggle="modal"
+                                        data-target="#createcampaign">Create new campaign</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-box ">
+                        <div class="blsl-list-tblsec">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Campaign Name</th>
+                                        <th>Last Updated</th>
+                                        <th>Coupon Code</th>
+                                        <th>Discount value</th>
+                                        <th>Merchants</th>
+                                        <th>Redemption</th>
+                                        <th>&nbsp;</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Marketplace opening discount</td>
+                                        <td>30/04/2019 13:00</td>
+                                        <td>OPENINGSPE</td>
+
+                                        <td>5%</td>
+                                        <td>1</td>
+                                        <td>
+                                            <div class="onoffswitch yn">
+                                                <input type="checkbox" name="onoffswitch"
+                                                    class="onoffswitch-checkbox switch-private-checkbox "
+                                                    id="myonoffswitch" checked="checked">
+                                                <label class="onoffswitch-label" for="myonoffswitch"> <span
+                                                        class="onoffswitch-inner"></span> <span
+                                                        class="onoffswitch-switch"></span> </label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <a href="#" data-toggle="modal" data-target="#createcampaign"><i
+                                                    class="icon icon-edit"></i></a>
+                                            <a href="#" class="btn_delete_act"><i class="icon icon-delete"></i></a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>April special discount</td>
+                                        <td>30/04/2019 13:00</td>
+                                        <td>APRILPROMO</td>
+
+                                        <td>10.00</td>
+                                        <td>10</td>
+                                        <td>
+                                            <div class="onoffswitch yn">
+                                                <input type="checkbox" name="onoffswitch"
+                                                    class="onoffswitch-checkbox switch-private-checkbox "
+                                                    id="myonoffswitch1" checked="checked">
+                                                <label class="onoffswitch-label" for="myonoffswitch1"> <span
+                                                        class="onoffswitch-inner"></span> <span
+                                                        class="onoffswitch-switch"></span> </label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <a href="#" data-toggle="modal" data-target="#createcampaign"><i
+                                                    class="icon icon-edit"></i></a>
+                                            <a href="#" class="btn_delete_act"><i class="icon icon-delete"></i></a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Limited Promo</td>
+                                        <td>30/04/2019 13:00</td>
+                                        <td>HSICE3891N</td>
+
+                                        <td>5%</td>
+                                        <td>5</td>
+                                        <td>
+                                            <div class="limited-count">
+                                                <span>10</span> / <span>200</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <a href="#" data-toggle="modal" data-target="#createcampaign"><i
+                                                    class="icon icon-edit"></i></a>
+                                            <a href="#" class="btn_delete_act"><i class="icon icon-delete"></i></a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Limited Promo 2</td>
+                                        <td>30/04/2019 13:00</td>
+                                        <td>J20AM210CK</td>
+
+                                        <td>3.50</td>
+                                        <td>9999</td>
+                                        <td>
+                                            <div class="limited-count">
+                                                <span>0</span> / <span>100</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <a href="#" data-toggle="modal" data-target="#createcampaign"><i
+                                                    class="icon icon-edit"></i></a>
+                                            <a href="#" class="btn_delete_act"><i class="icon icon-delete"></i></a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Item name used in free item coupon</td>
+                                        <td>30/04/2019 13:00</td>
+                                        <td>FREEITEM</td>
+
+                                        <td>ITEM</td>
+                                        <td>ITEM</td>
+                                        <td>
+                                            <div class="limited-count">
+                                                <span>0</span> / <span>100</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <a href="#" data-toggle="modal" data-target="#createcampaign"><i
+                                                    class="icon icon-edit"></i></a>
+                                            <a href="#" class="btn_delete_act"><i class="icon icon-delete"></i></a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="popup  popup-area popup-delete-confirm " id="DeleteCustomMethod">
+            <div class="wrapper"> <a href="javascript:;" class="close-popup"><img src="images/cross-icon.svg"></a>
+                <div class="content-area">
+                    <p>Are you sure you want to delete this?</p>
+                </div>
+                <div class="btn-area text-center smaller">
+                    <input type="button" value="Cancel" class="btn-black " id="popup_btncancel">
+                    <input id="popup_btnconfirm" type="button" value="Okay" class="my-btn btn-blue">
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade modal-campaign-details" tabindex="-1" role="dialog" aria-labelledby="createcampaign" id="createcampaign">
+            <div class="modal-dialog modal-cm" role="document">
+                <div class="modal-content">
+                    <form class="needs-validation" action=" " method="post" id="createcampaign2" novalidate>
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><img
+                                    src="images/cross-icon.svg"></button>
+                            <h4 class="modal-title" id="gridSystemModalLabel">Campaign Details</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-sm-7">
+                                    <div class="form-element">
+                                        <label>Campaign name</label>
+                                        <input type="text" name="" class="w-100 " required />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 left-part">
+                                    <div class="form-element">
+                                        <label>Is this a limited coupon?</label>
+                                        <div class="onoffswitch ">
+                                            <input type="checkbox" name="limited"
+                                                class="onoffswitch-checkbox switch-private-checkbox " id="limited">
+                                            <label class="onoffswitch-label" for="limited"> <span
+                                                    class="onoffswitch-inner"></span> <span
+                                                    class="onoffswitch-switch"></span> </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-element">
+                                        <label>Maximum Redemptions</label>
+                                        <input type="text" name="" class="w-100" id="redeem" disabled="disabled">
+                                    </div>
+
+                                    <div class="form-element">
+                                        <label>Coupon Code</label>
+                                        <input type="text" name="" class="w-100" id="coupon_code" maxlength="10 "
+                                            required />
+                                        <div class="error_msg">Coupon code already exists.</div>
+                                    </div>
+                                    
+                                    <div class="form-element pgfncyopt">
+                                        <label>Discount Type</label>
+                                        <div class="fancy-radio">
+                                            <input type="radio" value="percentage" name="discount_type" id="discount_type_1" checked class="">
+                                            <label for="discount_type_1"><span>Percentage</span></label>
+                                        </div>
+                                        &nbsp;
+                                        &nbsp;
+                                        &nbsp;
+                                        <div class="fancy-radio">
+                                            <input type="radio" value="fixed" name="discount_type" id="discount_type_2" class="">
+                                            <label for="discount_type_2"><span>Fixed</span></label>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-element val-change">
+                                        <label>Discount value</label>
+                                        <span>
+                                            <input type="number" name="" id="d-val" class="w-100 " min="0" max="100"
+                                            required />
+                                        </span>
+                                        <span class="sign-indicator">%</span>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-element">
+                                        <label>Apply to Merchants</label>
+                                        <div class="classy-merchant-box">
+                                            <div class="merchant-box-head">
+                                                <input type="text" name="q" placeholder="Search merchants">
+                                            </div>
+                                            <div class="merchant-box-body">
+                                                <div class="body-filter">
+                                                    <div class="item-row">
+                                                        <div class="fancy-checkbox">
+                                                            <input type="checkbox" id="select-all-merchant" >
+                                                            <label for="select-all-merchant">Select all</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="body-items">
+                                                    <div class="item-row">
+                                                        <div class="fancy-checkbox">
+                                                            <input type="checkbox" id="merchant-1" name="merchant[]">
+                                                            <label for="merchant-1">Merchant A</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="item-row">
+                                                        <div class="fancy-checkbox">
+                                                            <input type="checkbox" id="merchant-2" name="merchant[]">
+                                                            <label for="merchant-2">Merchant B</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="item-row">
+                                                        <div class="fancy-checkbox">
+                                                            <input type="checkbox" id="merchant-3" name="merchant[]">
+                                                            <label for="merchant-3">Merchant C</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="item-row">
+                                                        <div class="fancy-checkbox">
+                                                            <input type="checkbox" id="merchant-4" name="merchant[]">
+                                                            <label for="merchant-4">Merchant D</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="item-row">
+                                                        <div class="fancy-checkbox">
+                                                            <input type="checkbox" id="merchant-5" name="merchant[]">
+                                                            <label for="merchant-5">Merchant E</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="item-row">
+                                                        <div class="fancy-checkbox">
+                                                            <input type="checkbox" id="merchant-6" name="merchant[]">
+                                                            <label for="merchant-6">Merchant F</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="item-row">
+                                                        <div class="fancy-checkbox">
+                                                            <input type="checkbox" id="merchant-7" name="merchant[]">
+                                                            <label for="merchant-7">Merchant G</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="item-row">
+                                                        <div class="fancy-checkbox">
+                                                            <input type="checkbox" id="merchant-8" name="merchant[]">
+                                                            <label for="merchant-8">Merchant H</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer text-left">
+                            <input type="submit" class="blue-btn" value="Save changes">
+                        </div>
+                    </form>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+
+        <div class="modal fade modal-campaign-details" tabindex="-1" role="dialog" aria-labelledby="freeitemcoupon" id="freeitemcoupon">
+            <div class="modal-dialog modal-cm" role="document">
+                <div class="modal-content">
+                    <form class="needs-validation" action=" " method="post" id="createcampaign2" novalidate>
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><img
+                                    src="images/cross-icon.svg"></button>
+                            <h4 class="modal-title" id="gridSystemModalLabel">Create Free Item Coupon</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-element">
+                                        <label>Select Item (Items with variants cannot be selected)</label>
+                                        <div class="search-i-free">
+	                                        <input type="text" name="" placeholder="Search Item name" class="w-100 search" required />
+	                                        <button><img src="images/icon-w-search.png"></button>
+	                                    </div>
+                                    </div>
+
+                                    <div class="free-coupan-list ">
+                                    	<table class="table">
+                                    		<thead>
+                                    			<tr>
+                                    				<th>Item</th>
+                                    				<th>Price</th>
+                                    				<th></th>
+                                    			</tr>
+                                    		</thead>
+                                    		<tbody>
+                                    			<tr>
+                                    				<td>This is an item name</td>
+                                    				<td>10.00</td>
+                                    				<td class="pgfncyopt">
+                                    					<div class="fancy-radio">
+				                                            <input type="radio" value="s1" name="search_result" id="search_result_1"  class="">
+				                                            <label for="search_result_1"></label>
+				                                        </div>
+                                    				</td>
+                                    			</tr>
+                                    			<tr>
+                                    				<td>This is second item result</td>
+                                    				<td>880.00</td>
+                                    				<td class="pgfncyopt">
+                                    					<div class="fancy-radio">
+				                                            <input type="radio" value="s2" name="search_result" id="search_result_2"  class="">
+				                                            <label for="search_result_2"></label>
+				                                        </div>
+                                    				</td>
+                                    			</tr>
+                                    		</tbody>
+                                    	</table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 left-part">
+                                    <div class="form-element">
+                                        <label>Is this a limited coupon?</label>
+                                        <div class="onoffswitch ">
+                                            <input type="checkbox" name="limited"
+                                                class="onoffswitch-checkbox switch-private-checkbox " id="limited">
+                                            <label class="onoffswitch-label" for="limited"> <span
+                                                    class="onoffswitch-inner"></span> <span
+                                                    class="onoffswitch-switch"></span> </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-element">
+                                        <label>Maximum Redemptions</label>
+                                        <input type="text" name="" class="w-100" id="redeem" disabled="disabled">
+                                    </div>
+
+                                    <div class="form-element">
+                                        <label>Coupon Code</label>
+                                        <input type="text" name="" class="w-100" id="coupon_code" maxlength="10 "
+                                            required />
+                                        <div class="error_msg">Coupon code already exists.</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer text-left">
+                            <input type="submit" class="blue-btn" value="Save">
+                        </div>
+                    </form>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+
+        <!-- End Start Seller popup-->
+        <div id="cover"></div>
+        <div id="coverdark"></div>
+        <script type="text/javascript">
+            $('.delivery .onoffswitch input[type="checkbox"]').click(function () {
+                if ($(this).prop("checked") == true) {
+
+                    $(".unit_options").show();
+                    $(".unit_list_outer").show();
+                } else {
+                    $(".unit_options").hide();
+                    $(".unit_list_outer").hide();
+                }
+            });
+
+            function readURL1(input1) {
+                console.log(input1.files[0]);
+                if (input1.files && input1.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        console.log(e.target);
+                        var container = jQuery(".private-setting-marketplace-logo");
+                        container.html('');
+                        var pImage = "<img src=" + e.target.result + " alt='image'>";
+                        container.append(pImage);
+                        jQuery(".browse-control-logo [name=file_name1]").val(input1.files[0]['name']);
+                    }
+                    reader.readAsDataURL(input1.files[0]);
+                }
+            }
+
+            function readURL2(input) {
+                console.log(input.files[0]);
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        jQuery(".browse-control-background [name=file_name2]").val(input.files[0]['name']);
+                    }
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+            jQuery("#myModal").on('shown.bs.modal', function () {
+                jQuery('#modaldialog').html5imageupload({});
+            });
+            /*fixed canvas size issue while edit*/
+            jQuery("#myModal").on('show.bs.modal', function () {
+                jQuery(window).resize('trigger');
+            });
+            jQuery('.model-img-crop a.download').attr('data-dismiss', 'modal');
+            jQuery('body').on('click', '.model-img-crop .download', function () {
+                var src = jQuery(this).attr('href');
+                var name = jQuery(this).attr('download');
+                jQuery(".browse-control input[name='file_name']").val(name);
+                jQuery(".cover-photo.bg-image-photo").html('');
+                jQuery(".cover-photo.bg-image-photo").append("<img src=" + src + " alt=" + name + ">");
+                jQuery("#myModal").modal("hide")
+                return false;
+            });
+            $(document).ready(function () {
+                $('#coupon_code').keypress(function (e) { var regex = new RegExp("^[a-zA-Z0-9]+$"); var str = String.fromCharCode(!e.charCode ? e.which : e.charCode); if (regex.test(str)) { return true; } e.preventDefault(); return false; });
+                $('.pr-text').keypress(function (e) { var regex = new RegExp("^[a-zA-Z0-9]+$"); var str = String.fromCharCode(!e.charCode ? e.which : e.charCode); if (regex.test(str)) { return true; } e.preventDefault(); return false; });
+                $("#btnSavePrivateSetting").click(function () {
+                    $(".private-setting-body1").css("display", "none");
+                    $(".private-setting-body2").css("display", "block");
+                });
+                $('.private-setting-click').click(function () {
+                    $(".private-setting-click.active").removeClass("active");
+                    $(".private-setting-click span.set-tick-check").removeClass("set-tick-check");
+                    $(this).addClass('active');
+                    $(this).find("span").addClass("set-tick-check");
+                });
+                $(".btn-configure").click(function () {
+                    $(".private-setting-body1").css("display", "block");
+                    $(".private-setting-body2").css("display", "none");
+                });
+            });
+
+            function hide_image_popup() {
+                jQuery("#coverdark").fadeOut();
+                jQuery("#large_image_popup").fadeOut();
+            }
+            $('ul.layout-tabs li').click(function () {
+                var tab_id = $(this).attr('data-tab');
+                $('ul.layout-tabs li').removeClass('layout-current');
+                $('.tab-content').removeClass('current');
+                $(this).addClass('layout-current');
+                $("#" + tab_id).addClass('current');
+            });
+
+            jQuery("#no-more-tables").tablesorter({
+                headers: {
+
+                    4: {
+
+                        sorter: 'dcurrency'
+
+                    }
+
+                },
+
+            });
+
+
+
+
+
+            jQuery(window).bind('scroll', function () {
+
+                jQuery(".sidebar").getNiceScroll().resize();
+
+            });
+
+
+
+            jQuery(".mobi-header .navbar-toggle").click(function (e) {
+
+                e.preventDefault();
+
+                jQuery("body").toggleClass("sidebar-toggled");
+
+            });
+
+            jQuery(".navbar-back").click(function () {
+
+                jQuery(".mobi-header .navbar-toggle").trigger('click');
+
+            });
+
+
+
+            /*nice scroll */
+
+            jQuery(".sidebar").niceScroll({
+                autohidemode: false,
+                cursorcolor: "#000",
+                cursorwidth: "6px",
+                cursorborderradius: "5px",
+                cursorborder: "1px solid transparent",
+                touchbehavior: true
+            });
+
+
+
+            jQuery(".sidebar .section-links li > a").click(function () {
+
+                jQuery(".sidebar .section-links li").removeClass('active');
+
+                jQuery(this).parents('li').addClass('active');
+
+            });
+
+            $(document).ready(function () {
+                jQuery('.btn_delete_act').click(function () {
+                    jQuery(this).parents("tr").addClass("active");
+                    jQuery('#DeleteCustomMethod').show();
+
+                    jQuery('#cover').show();
+
+                });
+
+                $('.merchant-box-head > input').keydown(function(event){
+                    if(event.keyCode == 13) {
+                        event.preventDefault();
+                        return false;
+                    }
+                });
+
+                $('body').on('hover', '.classy-merchant-box', function(){
+                    $(".merchant-box-body").getNiceScroll().resize();
+                });
+
+                $('.modal-campaign-details').on('shown.bs.modal', function () {
+                    $('.merchant-box-body').niceScroll({
+                        cursorcolor: "#000",
+                        cursorwidth: "6px",
+                        cursorborderradius: "5px",
+                        cursorborder: "1px solid transparent",
+                        touchbehavior: true,
+                        autohidemode: false
+                    })
+                })
+
+
+
+                jQuery('#popup_btnconfirm').click(function () {
+
+                    jQuery('#DeleteCustomMethod').hide();
+                    jQuery("tr.active").remove();
+                    jQuery('#cover').hide();
+
+                });
+
+
+
+
+                jQuery('#popup_btncancel,.close-popup').click(function () {
+                    jQuery("tr.active").removeClass("active");
+                    jQuery('#DeleteCustomMethod').hide();
+
+                    jQuery('#cover').hide();
+
+                });
+                var watermark = 'Members Only';
+                $('.txt-watermark').val(watermark).addClass('watermark');
+
+                $('.txt-watermark').blur(function () {
+                    if ($(this).val().length == 0) {
+                        $(this).val(watermark).addClass('watermark');
+                    }
+                });
+                $('.txt-watermark').focus(function () {
+                    if ($(this).val() == watermark) {
+                        $(this).val('').removeClass('watermark');
+                    }
+                });
+                var watermarklink = 'www.example.com';
+                $('.txt-watermark-link').val(watermarklink).addClass('watermark');
+
+                $('.txt-watermark-link').blur(function () {
+                    if ($(this).val().length == 0) {
+                        $(this).val(watermarklink).addClass('txt-watermark-link');
+                    }
+                });
+                $('.txt-watermark-link').focus(function () {
+                    if ($(this).val() == watermarklink) {
+                        $(this).val('').removeClass('txt-watermark-link');
+                    }
+                });
+
+            });
+            // Struip connect functions
+
+            function popupCoonectStrip_ok() {
+                jQuery("#cover").fadeOut();
+
+                jQuery("#connect-edit-btn").hide();
+                jQuery("#connect-save-btn").show();
+            }
+            // End stripe connect functions
+
+            // Set link stripe functions
+            function popupConfirm_close(closeid) {
+                jQuery("#cover").fadeOut();
+                jQuery("#" + closeid).fadeOut();
+            }
+
+            function popupConfirm_ok() {
+                jQuery("#cover").fadeOut();
+                jQuery("#link-stripe-account").fadeOut();
+
+                jQuery("#unit_force").prop("readonly", false);
+                jQuery("#edit-btn").hide();
+                jQuery("#save-btn").show();
+            }
+
+            function MakeUneditable() {
+                var e = false;
+                jQuery("#unit_force.required").each(function () {
+                    var val = jQuery(this).val();
+                    var attr = jQuery(this).attr('id');
+                    if (jQuery.trim(val) == '') {
+                        e = true;
+                        jQuery(this).addClass('error-con');
+                    }
+
+                });
+                if (!e) {
+                    jQuery("#unit_force").prop("readonly", true);
+                    jQuery("#save-btn").hide();
+                    jQuery("#edit-btn").show();
+                }
+
+            }
+
+            function SaveConfirm() {
+                var e = false;
+                jQuery("#unit_force .required").each(function () {
+                    var val = jQuery(this).val();
+                    var attr = jQuery(this).attr('id');
+                    if (jQuery.trim(val) == '') {
+                        e = true;
+                        jQuery(this).addClass('error-con');
+                    }
+
+                });
+                if (!e) {
+                    jQuery("#cover").fadeIn();
+                    jQuery("#link-stripe-account").fadeIn();
+                }
+            }
+            // End set live key function
+            $(window).load(function () {
+                checklimit();
+                $('body').on('change', 'input[name=discount_type]', function(){
+                    $('.sign-indicator').addClass('hide');
+                    if( $(this).val() == 'percentage' ) {
+                        $('.sign-indicator').removeClass('hide');
+                    }
+                });
+
+                
+                $('body').on('keyup', '.merchant-box-head > input', function(){
+                    var value = $.trim($(this).val()).toLowerCase();
+                    $('.body-items .item-row').filter(function(){
+                        $(this).toggle($(this).find('.fancy-checkbox label').text().toLowerCase().indexOf(value) > -1)
+                    });
+                });  
+
+                $('body').on('click', '#select-all-merchant', function(){
+                    if( $(this).is(":checked") ) {
+                        $('.merchant-box-body .body-items input[type=checkbox]').prop('checked', true);
+                    }
+                    else 
+                    {
+                        $('.merchant-box-body .body-items input[type=checkbox]').prop('checked', false);
+                    }
+                });
+
+                $(".val-change").find('input').on('input', function () {
+
+                    var value = $(this).val();
+
+                    if ((value !== '') && (value.indexOf('.') === -1)) {
+
+                        $(this).val(Math.max(Math.min(value, 100), -100));
+                    }
+
+                });
+
+
+
+                $("#limited").on("click", function () {
+                    checklimit();
+                });
+
+
+
+            });
+            function checklimit() {
+                if ($("#limited").prop("checked") == false) {
+                    $("#redeem").attr("disabled", "disabled");
+                    $("#coupon_code").removeAttr("disabled");
+
+                } else {
+                    $("#redeem").removeAttr("disabled");
+                    $("#coupon_code").attr("disabled", "disabled");
+                }
+            }
+        </script>
+        <script type="text/javascript"
+            src="https://bootstrap.arcadier.com/adminportal/images/custom-nicescroll.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
+        <script type="text/javascript">
+            (function () {
+                'use strict';
+                window.addEventListener('load', function () {
+                    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                    var forms = document.getElementsByClassName('needs-validation');
+                    // Loop over them and prevent submission
+                    var validation = Array.prototype.filter.call(forms, function (form) {
+                        form.addEventListener('submit', function (event) {
+                            if (form.checkValidity() === false) {
+                                event.preventDefault();
+                                event.stopPropagation();
+                            }
+                            form.classList.add('was-validated');
+                        }, false);
+                    });
+                }, false);
+            })();
+        </script>
+</body>
+
+</html>
