@@ -3,7 +3,7 @@ include 'callAPI.php';
 include 'admin_token.php';
 $contentBodyJson = file_get_contents('php://input');
 $content = json_decode($contentBodyJson, true);
-date_default_timezone_set($timezone_name);
+// date_default_timezone_set($timezone_name);
 $timestamp = date("d/m/Y H:i"); 
 $campaign_name =$content['campaign_name'];
 $last_updated = $content['last_updated'];
