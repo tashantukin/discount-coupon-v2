@@ -580,7 +580,8 @@ delbox.append(discountlabel);
 //SUNTEC ENHANCEMENTS
 //1. APPEND THE COUPON CODE INPUT AFTER DELIVERY COSTS
 var couponinput = "<p class='discount-total'>Discount Total <span class='pull-right'><span> - </span><span id='currencyCode'>" + mpCurrencycode + "</span>  <span id='currencySym'></span><span class='sub-total'><span id='price_amt'><span id='price_amt'></span> </span></p><div class='item-coupon-box'><div class='appand-coupon-rem'></div><div class='promocode-update'><form action=''><input type='text' name='coupon-code' id ='promocode' placeholder='PROMOCODE' class='pr-text' maxlength='10'><button type='button' class='apply-promo-btn disable' id='applycoupon'>Apply</button></form></div></div>";   
-var ordersummarybox = $('.l_box:contains("ORDER SUMMARY")');
+// var ordersummarybox = $('.l_box:contains("ORDER SUMMARY")');
+var ordersummarybox =  $('.last_stage_box').children("[class=l_box]");
 ordersummarybox.append(couponinput);
 
 //APPLY COUPON 
@@ -760,7 +761,8 @@ function showPromoCodeSuntec(){
                         delbox.append(coupondiv);
                 
                         //CALCULATE THE TOTALS 
-                        subtotal_del2=  $('.l_box  p:contains("Sub Total") .sub-total').text();
+                        subtotal_del2=  $('.l_box .sub-total').first().text();
+                        console.log('subtotal ' + subtotal_del2);
                         deliveryCharge =  $('.l_box p .delivery-costs').text();
                         subtotal_del= subtotal_del2.replace(/[^\d.-]/g, '');
                         deliveryCharge =  deliveryCharge.replace(/[^\d.-]/g, '');
@@ -842,7 +844,8 @@ function showItemCode(){
                 var delbox = $this.find('.deliver-method');
                 delbox.append(coupondiv);
                 //CALCULATE THE TOTALS 
-                subtotal_del2=  $('.l_box  p:contains("Sub Total") .sub-total').text();
+                // subtotal_del2=  $('.l_box  p:contains("Sub Total") .sub-total').text();
+                subtotal_del2=  $('.l_box .sub-total').first().text();
                 deliveryCharge =  $('.l_box p .delivery-costs').text();
                 subtotal_del= subtotal_del2.replace(/[^\d.-]/g, '');
                 deliveryCharge =  deliveryCharge.replace(/[^\d.-]/g, '');
@@ -953,7 +956,9 @@ function calculateTotal(){
    // total discount
     $('.discount-total').find('.sub-total #price_amt').text(formatter.format(total_coupon_discount));
     //Total
-    subtotal_del2=  $('.l_box  p:contains("Sub Total") .sub-total').text();
+    // subtotal_del2=  $('.l_box  p:contains("Sub Total") .sub-total').text();
+    subtotal_del2=  $('.l_box .sub-total').first().text();
+
     deliveryCharge =  $('.l_box p .delivery-costs').text();
     if (deliveryCharge == '') {
         deliveryCharge = 0;
