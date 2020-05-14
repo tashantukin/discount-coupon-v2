@@ -57,7 +57,7 @@ $subject = $invoiceId ." Tracking Information";
               <p style=\"color:#000; font-weight:bold; margin-bottom:50px;\">Hi $consumerFirstName,</p>
               <p>The item(s) below in your order <span style=\"color:#000;\">$invoiceId </span>has been dispatched to our delivery partner. To track your order delivery you can find the information below:</p>
               <p>TRACKING ID: <span style=\"color:#000;\"> $tracking_number  </span></p>
-              <p>TRACKING PAGE:  <a href=\"#\" style=\"text-decoration: none;\"> $tracking_url </a></p>
+              <p>TRACKING PAGE:  <a href=\"$tracking_url\" target=\"_blank\"style=\"text-decoration: none;\"> $tracking_url </a></p>
             </div>
             <div style=\" border-top:1px solid #000; padding-top: 10px; padding-bottom: 10px; margin-top:20px;\">
               <table border=\"0\" style=\"width:100%; color:#B3B3B3;\">
