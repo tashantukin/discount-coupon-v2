@@ -554,105 +554,108 @@ if (url.indexOf('/user/checkout/success') >= 0) {
 }
     
 if (url.indexOf('/user/order/ordersummary') >= 0) {
+if($('.register-link').length){
+        //do not show coupon feature
+    }else {
+  
+            //copy each orderguid per merchant box
+        var orderguid = $('#orderGuids').val().split(",");
+        //remove duplicate orderguid in case there are multiple items
+        var orderguids = [];
+        $.each(orderguid, function(i, el){
+            if($.inArray(el, orderguids) === -1) orderguids.push(el);
+        });
 
-    //copy each orderguid per merchant box
-var orderguid = $('#orderGuids').val().split(",");
-//remove duplicate orderguid in case there are multiple items
-var orderguids = [];
-$.each(orderguid, function(i, el){
-    if($.inArray(el, orderguids) === -1) orderguids.push(el);
-});
+        $('.charge_box').attr('orderid',"");
+            $(".mearchant_box:not(.hasguid)").each(function(i){  
+                    // console.log(item);
+                $(this).find('.charge_box').attr('orderid',orderguids[i]);
+                $(this).addClass('hasguid');
+        });
 
-$('.charge_box').attr('orderid',"");
-    $(".mearchant_box:not(.hasguid)").each(function(i){  
-            // console.log(item);
-        $(this).find('.charge_box').attr('orderid',orderguids[i]);
-        $(this).addClass('hasguid');
-});
-
- getOrderTotals();
+        getOrderTotals();
 
 
-var discountlabel = "<label class='lbl-coupon'>Discount Coupon</label>";
-var delbox = $('.mearchant_box .deliver-method');
-delbox.append(discountlabel);
+        var discountlabel = "<label class='lbl-coupon'>Discount Coupon</label>";
+        var delbox = $('.mearchant_box .deliver-method');
+        delbox.append(discountlabel);
 
-//SUNTEC ENHANCEMENTS
-//1. APPEND THE COUPON CODE INPUT AFTER DELIVERY COSTS
-var couponinput = "<p class='discount-total'>Discount Total <span class='pull-right'><span> - </span><span id='currencyCode'>" + mpCurrencycode + "</span>  <span id='currencySym'></span><span class='sub-total'><span id='price_amt'><span id='price_amt'></span> </span></p><div class='item-coupon-box'><div class='appand-coupon-rem'></div><div class='promocode-update'><form action=''><input type='text' name='coupon-code' id ='promocode' placeholder='PROMOCODE' class='pr-text' maxlength='10'><button type='button' class='apply-promo-btn disable' id='applycoupon'>Apply</button></form></div></div>";   
-// var ordersummarybox = $('.l_box:contains("ORDER SUMMARY")');
-var ordersummarybox =  $('.last_stage_box').children("[class=l_box]");
-ordersummarybox.append(couponinput);
+        //SUNTEC ENHANCEMENTS
+        //1. APPEND THE COUPON CODE INPUT AFTER DELIVERY COSTS
+        var couponinput = "<p class='discount-total'>Discount Total <span class='pull-right'><span> - </span><span id='currencyCode'>" + mpCurrencycode + "</span>  <span id='currencySym'></span><span class='sub-total'><span id='price_amt'><span id='price_amt'></span> </span></p><div class='item-coupon-box'><div class='appand-coupon-rem'></div><div class='promocode-update'><form action=''><input type='text' name='coupon-code' id ='promocode' placeholder='PROMOCODE' class='pr-text' maxlength='10'><button type='button' class='apply-promo-btn disable' id='applycoupon'>Apply</button></form></div></div>";   
+        // var ordersummarybox = $('.l_box:contains("ORDER SUMMARY")');
+        var ordersummarybox =  $('.last_stage_box').children("[class=l_box]");
+        ordersummarybox.append(couponinput);
 
-//APPLY COUPON 
-$('body').on('click','#applycoupon', function(){
-    $('#couponhidden').remove();
-        promocode =  $('#promocode').val().toUpperCase();
-    getCouponDetailssuntec();
-      
-});
-//delivery select box
-$('.sel_del_method').on('change', function() {
-    calculateTotal();
-});
+        //APPLY COUPON 
+        $('body').on('click','#applycoupon', function(){
+            $('#couponhidden').remove();
+                promocode =  $('#promocode').val().toUpperCase();
+            getCouponDetailssuntec();
+            
+        });
+        //delivery select box
+        $('.sel_del_method').on('change', function() {
+            calculateTotal();
+        });
 
-//REMOVE COUPON 
+        //REMOVE COUPON 
 
-$('body').on('click','.remove-coupon', function(){
-    var $this = $(this);
-    var itemcouponbox =   $this.parents('.item-coupon-box');
-    var discountcode =  $('.coupon-code', itemcouponbox).text();
-    console.info('discount code '+  discountcode);
-    if($this.parents('.item-coupon-box').hasClass('withitempromo')){
-    //    var thisdiv =  $this.parents('.mearchant_box').find('.pr_detail');
-    var merchantcouponbox =  $this.parents('.mearchant_box');
-      $('.pr_detail',merchantcouponbox).each(function(){
-           console.info('inside pr details');
-        if ($(this).is('.hasitempromo')) {
-            var code = $(this).attr('couponcode');
-            console.info('code ' + code);
-            if (code == discountcode) {
-            $(this).removeClass("hasitempromo");
-            $('#discounttag',$(this)).remove();
-           }
-        }
-       })
-       
-       //re compute the discount total for 'merchant promo'
-       //TODO: FOR OPTIMIZATION
-       var merchantbox = $this.parents('.mearchant_box');
-        if (merchantbox.find('.withmerchantpromo')) {
-            $('.item-coupon-box', merchantbox).each(function(){ 
-                console.log('recomputing');
-                if ($(this).is('.withmerchantpromo')) {
-                    var itembox = $(this);
-                    var totalcostmerchant = 0;
-                    var qty = 0;
-                    $(".pr_detail:not(.hasitempromo)", merchantbox).each(function(){
-                        var total =  $(this).find('.price_tag').text().replace(/[^\d.-]/g, '');
-                        var qty1 =  $(this).find('.qty').text().replace(/[^\d.-]/g, '');
-                        total = total * qty1;
-                        qty = qty + parseFloat(qty1);
-                        totalcostmerchant =  totalcostmerchant + parseFloat(total);
-                        var discount_type =  itembox.attr("discounttype");
-                        var discount_value = itembox.attr("discountval");
-                        var coupon_value = "";
-                        (discount_type == "Percentage") ? coupon_value =  parseFloat(calculatePercentage(discount_value,totalcostmerchant)) :  coupon_value = discount_value * qty;
-                        $('.sub-total #price_amt', itembox).text(formatter.format(coupon_value));
-                    });
+        $('body').on('click','.remove-coupon', function(){
+            var $this = $(this);
+            var itemcouponbox =   $this.parents('.item-coupon-box');
+            var discountcode =  $('.coupon-code', itemcouponbox).text();
+            console.info('discount code '+  discountcode);
+            if($this.parents('.item-coupon-box').hasClass('withitempromo')){
+            //    var thisdiv =  $this.parents('.mearchant_box').find('.pr_detail');
+            var merchantcouponbox =  $this.parents('.mearchant_box');
+            $('.pr_detail',merchantcouponbox).each(function(){
+                console.info('inside pr details');
+                if ($(this).is('.hasitempromo')) {
+                    var code = $(this).attr('couponcode');
+                    console.info('code ' + code);
+                    if (code == discountcode) {
+                    $(this).removeClass("hasitempromo");
+                    $('#discounttag',$(this)).remove();
+                }
                 }
             })
+            
+            //re compute the discount total for 'merchant promo'
+            //TODO: FOR OPTIMIZATION
+            var merchantbox = $this.parents('.mearchant_box');
+                if (merchantbox.find('.withmerchantpromo')) {
+                    $('.item-coupon-box', merchantbox).each(function(){ 
+                        console.log('recomputing');
+                        if ($(this).is('.withmerchantpromo')) {
+                            var itembox = $(this);
+                            var totalcostmerchant = 0;
+                            var qty = 0;
+                            $(".pr_detail:not(.hasitempromo)", merchantbox).each(function(){
+                                var total =  $(this).find('.price_tag').text().replace(/[^\d.-]/g, '');
+                                var qty1 =  $(this).find('.qty').text().replace(/[^\d.-]/g, '');
+                                total = total * qty1;
+                                qty = qty + parseFloat(qty1);
+                                totalcostmerchant =  totalcostmerchant + parseFloat(total);
+                                var discount_type =  itembox.attr("discounttype");
+                                var discount_value = itembox.attr("discountval");
+                                var coupon_value = "";
+                                (discount_type == "Percentage") ? coupon_value =  parseFloat(calculatePercentage(discount_value,totalcostmerchant)) :  coupon_value = discount_value * qty;
+                                $('.sub-total #price_amt', itembox).text(formatter.format(coupon_value));
+                            });
+                        }
+                    })
+
+                }
+        }  
+        //remove coupon and re compute total
+            $this.parents('.coupon-con').remove();
+            calculateTotal();
+            updateOrders_suntec();
+        });
 
         }
-   }  
-   //remove coupon and re compute total
-    $this.parents('.coupon-con').remove();
-    calculateTotal();
-    updateOrders_suntec();
-});
-
-}
-
+    }
 })
 //1
 function getCouponDetailssuntec(){ 
