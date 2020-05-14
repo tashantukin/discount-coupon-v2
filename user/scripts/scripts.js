@@ -600,11 +600,24 @@ $('.sel_del_method').on('change', function() {
 
 $('body').on('click','.remove-coupon', function(){
     var $this = $(this);
+    var itemcouponbox =   $this.parents('.item-coupon-box');
+    var discountcode =  $('.coupon-code', itemcouponbox).text();
+    console.info('discount code '+  discountcode);
     if($this.parents('.item-coupon-box').hasClass('withitempromo')){
-       var thisdiv =  $this.parents('.mearchant_box').find('.pr_detail');
-       if (thisdiv.is('.hasitempromo')) {
-        thisdiv.removeClass("hasitempromo");
-       }
+    //    var thisdiv =  $this.parents('.mearchant_box').find('.pr_detail');
+    var merchantcouponbox =  $this.parents('.mearchant_box');
+      $('.pr_detail',merchantcouponbox).each(function(){
+           console.info('inside pr details');
+        if ($(this).is('.hasitempromo')) {
+            var code = $(this).attr('couponcode');
+            console.info('code ' + code);
+            if (code == discountcode) {
+            $(this).removeClass("hasitempromo");
+            $('#discounttag',$(this)).remove();
+           }
+        }
+       })
+       
        //re compute the discount total for 'merchant promo'
        //TODO: FOR OPTIMIZATION
        var merchantbox = $this.parents('.mearchant_box');
@@ -823,6 +836,11 @@ function showItemCode(){
 
                 if ($itemcoupon == itemguid) {
                     $(this).addClass('hasitempromo');  
+                    //add for validation when user removed the coupon
+                    $(this).attr('couponcode', couponcode);
+                    var discounttag = "<span class='coupon-code' id ='discounttag'>Discount Applied</span>";
+                    $('.price_tag', $(this)).after(discounttag);
+                    $('.price_tag', $(this)).css('margin-bottom','7px');
                     //get the item qty
                     itemqty = $(this).find('.qty').text().replace(/[^\d.-]/g, '');
                     //validate if order qty > available coupon left
