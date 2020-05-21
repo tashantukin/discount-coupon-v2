@@ -871,6 +871,8 @@ function showPromoCodeSuntec(){
     //2. APPEND THE COUPON DIV FOR EACH MERCHANT BOX
     var coupondiv= "<div class='item-coupon-box' discounttype='" + discounttype + "', discountval='" + discountVal + "', discountqty='" + couponqty + "', islimited='" + isLimited + "', couponid='" + couponId + "', couponleft'" + couponqty + "'><div class='appand-coupon'><div class='coupon-con'><span class='coupon-code' >PROMOCODE</span><span class='pull-right'> <span id='currencySym'></span><span class='sub-total'><span id='price_amt'></span> </span> <i title='Remove' class='fa fa-times remove-coupon'></i> </span></div></div></div>";
     if(merchants != null) {
+        var notvalid = 0;
+        var counters =  0;
         merchants.forEach(function(element) {
             var merchanttotalcost = 0;
             $(".mearchant_box").each(function(){
@@ -926,9 +928,14 @@ function showPromoCodeSuntec(){
                         
                         calculateTotal(); 
                     }
-                 }
-                
+                 }else {
+                    notvalid++;
+                }
+                counters++
              });
+             if(notvalid == counters)  {
+                returnError('Invalid');
+            }  
             
         });
 
