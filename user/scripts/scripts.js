@@ -28,6 +28,8 @@ var bulkdel;
 var isExists=0;
 var isValid = 0;
 var totaldiscountcheckout=0;
+var expired_coupons = [];
+var existingcount = 0;
 
 //order history -BUYER
 function getDiscountValue(){
@@ -634,13 +636,13 @@ if($('.register-link').length){
                             $(".pr_detail:not(.hasitempromo)", merchantbox).each(function(){
                                 var total =  $(this).find('.price_tag').text().replace(/[^\d.-]/g, '');
                                 var qty1 =  $(this).find('.qty').text().replace(/[^\d.-]/g, '');
-                                total = total * qty1;
+                                // total = total * qty1;
                                 qty = qty + parseFloat(qty1);
                                 totalcostmerchant =  totalcostmerchant + parseFloat(total);
                                 var discount_type =  itembox.attr("discounttype");
                                 var discount_value = itembox.attr("discountval");
                                 var coupon_value = "";
-                                (discount_type == "Percentage") ? coupon_value =  parseFloat(calculatePercentage(discount_value,totalcostmerchant)) :  coupon_value = discount_value * qty;
+                                (discount_type == "Percentage") ? coupon_value =  parseFloat(calculatePercentage(discount_value,totalcostmerchant)) :  coupon_value = discount_value;
                                 $('.sub-total #price_amt', itembox).text(formatter.format(coupon_value));
                             });
                         }
@@ -654,7 +656,70 @@ if($('.register-link').length){
             updateOrders_suntec();
         });
 
+        //enter key
+        $('#promocode').keypress(function(event){
+            console.log('press enter');
+            var keycode = (event.keyCode ? event.keyCode : event.which);
+            if(keycode == '13'){
+                $('#couponhidden').remove();
+                promocode =  $('#promocode').val().toUpperCase();
+                //  getCouponDetailssuntec();
+            }
+        });
+
+        //PROCEED BUTTON
+        // var confirmModal  = "<div class='popup-area cart-checkout-confirm' id ='plugin-popup'><div class='wrapper'> <div class='title-area text-capitalize'><h1>Please removed already expired coupons.</h1></div><div class='content-area'><span id ='main'><span id='addtext'> </span></div><div class='btn-area'>  <a  class='add-cart-btn' id='btn-ok'>OK</a></div></div></div>";
+        // $('.footer').after(confirmModal);
+
+        //  $('.full-btn-procced').prop("onclick", null).off("click").on('click', function(event){
+        //     event.stopImmediatePropagation();
+        //       if ($('.mearchant_box').find('.coupon-con')) {
+        //             if (!$(".full-btn-procced").prop("disabled")) {
+                    
+        //                 $(this).clone().appendTo(".full-btn-procced").addClass('clone');
+        //                 $('.clone').removeClass('full-btn-procced');
+
+        //                 $(".full-btn-procced").hide();
+        //                 $('.clone').addClass('full-btn-procced').removeAttr("disable");
+        //                 //  buttonclone.prop( "onclick", null );
+
+        //             }
+        //          }
+        // //    $('.full-btn-procced').off('click').on('click', function(event) {
+
+
+        //      event.stopImmediatePropagation();
+        //     if (existingcount >= 1){ 
+        //         console.info('existingcount ' . existingcount);
+        //        validateifCouponExpired(event);
+        //         console.log('expired ' + expired_coupons);
+        //        expired_coupons.length > 0 ? event.stopPropagation() : '';
+
+        //        console.info('expired ' . expired_coupons);
+
+        //     //   else {
+        //        // $('#btn-checkout').prop("onclick", null).off("click").on('click', function(event){ 
+        //         // $(this).on("click", orderNewDelivery.updateOrderNewDelivery(this));
+        //         //});
+        //         // $(this).trigger("click");
+        //         //  $(this).click();
+        //     //   }
+               
+        //     }
+        //     // else {
+        //     //     $(this).on("click", orderNewDelivery.updateOrderNewDelivery(this));
+        //     //     //});
+        //     //     $(this).trigger("click");
+        //     // }
+          
+        // });
+
+        $('#plugin-popup #btn-ok').click(function(){
+            $("#plugin-popup").fadeOut();
+            $("#cover").fadeOut();
+          }); 
         }
+
     }
 })
 //1
@@ -662,7 +727,6 @@ function getCouponDetailssuntec(){
     promocode =  $('#promocode').val().toUpperCase();
 	var data = { 'promocode': promocode }; 
     var apiUrl = packagePaths + '/get_coupon_discount.php';
-    console.log('api url ' + apiUrl);
     $.ajax({
         url: apiUrl,
         method: 'POST',
@@ -734,11 +798,74 @@ function validateifcouponexists(couponcode){
       var coupon_code =  $(this).find('.coupon-code').text();
 
       coupon_code.toUpperCase() == couponcode ?  count++ : '';  
-
+           
     });
-    count > 0 ?   isExists = 1  :  isExists = 0;
- 
+    count > 0 ?   isExists = 1  :  isExists = 0, existingcount++ ;
+  
 }
+
+function validateifCouponExpired(event){
+   
+    $('#coupons').length > 0 ? $('#coupons').remove() : '';
+    var count = 0;
+    if($('.mearchant_box .item-coupon-box .coupon-con').length > 0 ){ 
+        $('.mearchant_box .item-coupon-box').each(function(){ 
+            var coupon_code =  $(this).find('.coupon-code').text();
+            var data = { 'promocode': coupon_code }; 
+            var apiUrl = packagePaths + '/get_coupon_discount.php';
+            console.log('api url ' + apiUrl);
+            $.ajax({
+                url: apiUrl,
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(data),
+                success: function(result) {
+                  var coupondetails = $.parseJSON(result);
+                  couponcode  =  coupondetails.result[0].CouponCode;
+                  maxRedeem =    coupondetails.result[0].MaxRedeem;
+                  couponqty =    coupondetails.result[0].Quantity;
+                  couponId =     coupondetails.result[0].Id; 
+                  couponleft =    maxRedeem - couponqty;
+                  console.log('itemcoupon ' + $itemcoupon);
+
+               //   maxRedeem == couponqty ? expired_coupons.push(couponcode) : '';
+                },
+                error: function(jqXHR, status, err) {
+                },
+                complete: function(result) {
+                     maxRedeem == couponqty ? expired_coupons.push(couponcode) : '';
+                    if (expired_coupons.length > 0) {
+
+                        event.stopImmediatePropagation();
+                        expired_coupons.forEach(function (item, index) {
+                            var coupon = "<span id='coupons'>" + item + "</span>";
+                            $('.content-area').append(coupon);
+                        });
+            
+                        jQuery("#plugin-popup").fadeIn();
+                        jQuery("#cover").fadeIn();
+                        jQuery("#plugin-popup").niceScroll({ 
+                            cursorcolor: "#999999",
+                            cursorwidth:"4px",
+                            cursorborderradius:"0px",
+                            horizrailenabled:false,
+                            cursorborder: "1px solid #999999"
+                        });
+                        //expired_coupons = [];
+                       
+                         
+                      }
+                }
+            });
+                 
+      
+          });
+
+
+    }
+   
+}
+
 function showPromoCodeSuntec(){
     mpCurrencycode = $('#currencyCode').val();
     //2. APPEND THE COUPON DIV FOR EACH MERCHANT BOX
@@ -762,7 +889,9 @@ function showPromoCodeSuntec(){
                 $(".pr_detail:not(.hasitempromo)",$(this)).each(function(){
                     var total =  $(this).find('.price_tag').text().replace(/[^\d.-]/g, '');
                     var qty2 =  $(this).find('.qty').text().replace(/[^\d.-]/g, '');
-                    total = total * qty2;
+                    //remove quantity - do not multiply itemx to qty for merchant discounts
+                    // total = total * qty2;
+
                     totalpermerchant =  totalpermerchant + parseFloat(total);
                     counter++;
                 });
@@ -907,13 +1036,14 @@ function showItemCode(){
                                             //subtotal of each item
                                             var qty1 =  $(this).find('.qty').text().replace(/[^\d.-]/g, '');
                                         
-                                            total = total * qty1;
+                                            //total = total * qty1;
                                             qty = qty + parseFloat(qty1);
                                             totalcostmerchant =  totalcostmerchant + parseFloat(total);
                                             var discount_type =  itembox.attr("discounttype");
                                             var discount_value = itembox.attr("discountval");
                                             var coupon_value = "";
-                                            (discount_type == "Percentage") ? coupon_value =  parseFloat(calculatePercentage(discount_value,totalcostmerchant)) :  coupon_value = discount_value * qty;
+                                            //removed the qty from  computation
+                                            (discount_type == "Percentage") ? coupon_value =  parseFloat(calculatePercentage(discount_value,totalcostmerchant)) :  coupon_value = discount_value;
                                             $('.sub-total #price_amt', itembox).text(formatter.format(coupon_value));
                                             console.info('should re compute the price from this part');
                 

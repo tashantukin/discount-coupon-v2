@@ -286,3 +286,54 @@ span.coupon-msg {
   padding:10px 0; 
 }
 #send-delivery-track-info { font-size: 14px; font-weight: 700; margin-top: 5px; display: inline-block;}
+
+.cart-checkout-confirm-popup {
+  width: 480px;
+  height: auto;
+  border: none;
+  top: 30%;
+}
+
+.cart-checkout-confirm .title-area h1 {
+  font-size: 17px;
+  font-weight: bold;
+  color: #000000;
+}
+
+.cart-checkout-confirm .content-area {
+  font-size: 14px;
+  line-height: 1.57;
+  color: #000000;
+}
+
+.cart-checkout-confirm .btn-area {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 50px;
+}
+
+.cart-checkout-confirm .btn-area a {
+  width: auto;
+  min-width: 150px;
+  margin: 0;
+  font-size: 17px;
+  text-transform: uppercase;
+}
+
+.cart-checkout-confirm .btn-area .btn-black-cmn {
+  border: solid 1px #000000;
+  background-color: transparent;
+  color: #000000;
+}
+
+.cart-checkout-confirm .btn-area .add-cart-btn {
+  border: solid 1px transparent;
+  background-color: #617CAB;
+  color: #ffffff;
+}
+
+.cart-checkout-confirm .btn-area .add-cart-btn1 {
+  border: solid 1px transparent;
+  background-color: rgba(240, 60, 15, 0.849);
+  color: #ffffff;
+}
