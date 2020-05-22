@@ -584,16 +584,18 @@ if($('.register-link').length){
 
         //SUNTEC ENHANCEMENTS
         //1. APPEND THE COUPON CODE INPUT AFTER DELIVERY COSTS
-        var couponinput = "<p class='discount-total'>Discount Total <span class='pull-right'><span> - </span><span id='currencyCode'>" + mpCurrencycode + "</span>  <span id='currencySym'></span><span class='sub-total'><span id='price_amt'><span id='price_amt'></span> </span></p><div class='item-coupon-box'><div class='appand-coupon-rem'></div><div class='promocode-update'><form action=''><input type='text' name='coupon-code' id ='promocode' placeholder='PROMOCODE' class='pr-text' maxlength='10'><button type='button' class='apply-promo-btn disable' id='applycoupon'>Apply</button></form></div></div>";   
+        var couponinput = "<p class='discount-total'>Discount Total <span class='pull-right'><span> - </span><span id='currencyCode'>" + mpCurrencycode + "</span>  <span id='currencySym'></span><span class='sub-total'><span id='price_amt'><span id='price_amt'></span> </span></p><div class='item-coupon-box'><div class='appand-coupon-rem'></div><div class='promocode-update'><form action=''><input type='text' name='coupon-code' id ='promocode' placeholder='PROMOCODE' class='pr-text' maxlength='10'><input type='text' name='coupon-code2' id ='promocode2' placeholder='PROMOCODE' class='pr-text' maxlength='10'><button type='button' class='apply-promo-btn disable' id='applycoupon'>Apply</button></form></div></div>";   
         // var ordersummarybox = $('.l_box:contains("ORDER SUMMARY")');
         var ordersummarybox =  $('.last_stage_box').children("[class=l_box]");
         ordersummarybox.append(couponinput);
+        $('#promocode2').hide();
 
         //APPLY COUPON 
         $('body').on('click','#applycoupon', function(){
             $('#couponhidden').remove();
                 promocode =  $('#promocode').val().toUpperCase();
             getCouponDetailssuntec();
+
             
         });
         //delivery select box
@@ -663,56 +665,47 @@ if($('.register-link').length){
             if(keycode == '13'){
                 $('#couponhidden').remove();
                 promocode =  $('#promocode').val().toUpperCase();
-                //  getCouponDetailssuntec();
+                  getCouponDetailssuntec();
             }
         });
 
-        //PROCEED BUTTON
-        // var confirmModal  = "<div class='popup-area cart-checkout-confirm' id ='plugin-popup'><div class='wrapper'> <div class='title-area text-capitalize'><h1>Please removed already expired coupons.</h1></div><div class='content-area'><span id ='main'><span id='addtext'> </span></div><div class='btn-area'>  <a  class='add-cart-btn' id='btn-ok'>OK</a></div></div></div>";
-        // $('.footer').after(confirmModal);
+        //PROCEED BUTTO
+        var confirmModal  = "<div class='popup-area cart-checkout-confirm' id ='plugin-popup'><div class='wrapper'> <div class='title-area'><h1>Please remove already expired coupons.</h1></div><div class='content-area'><span id ='main'><span id='addtext'> </span></div><div class='btn-area'>  <a  class='add-cart-btn' id='btn-ok'>OK</a></div></div></div>";
+        $('.footer').after(confirmModal);
 
-        //  $('.full-btn-procced').prop("onclick", null).off("click").on('click', function(event){
-        //     event.stopImmediatePropagation();
-        //       if ($('.mearchant_box').find('.coupon-con')) {
-        //             if (!$(".full-btn-procced").prop("disabled")) {
-                    
-        //                 $(this).clone().appendTo(".full-btn-procced").addClass('clone');
-        //                 $('.clone').removeClass('full-btn-procced');
+            //event.stopImmediatePropagation();
+            $('.full-btn-procced:not(.original)').prop("onclick", null).off("click").on('click', function(event){ 
+            expired_coupons.length = [];
+            validateifCouponExpired();
+            console.log('expired ' + expired_coupons);
+            });
+        //    $('.full-btn-procced').off('click').on('click', function(event) {
 
-        //                 $(".full-btn-procced").hide();
-        //                 $('.clone').addClass('full-btn-procced').removeAttr("disable");
-        //                 //  buttonclone.prop( "onclick", null );
+            //  event.stopImmediatePropagation();
+            // if (existingcount >= 1){ 
+            //     console.info('existingcount ' . existingcount);
+            //    validateifCouponExpired(event);
+            //     console.log('expired ' + expired_coupons);
+            //    expired_coupons.length > 0 ? event.stopPropagation() : '';
 
-        //             }
-        //          }
-        // //    $('.full-btn-procced').off('click').on('click', function(event) {
+            //    console.info('expired ' . expired_coupons);
 
-
-        //      event.stopImmediatePropagation();
-        //     if (existingcount >= 1){ 
-        //         console.info('existingcount ' . existingcount);
-        //        validateifCouponExpired(event);
-        //         console.log('expired ' + expired_coupons);
-        //        expired_coupons.length > 0 ? event.stopPropagation() : '';
-
-        //        console.info('expired ' . expired_coupons);
-
-        //     //   else {
-        //        // $('#btn-checkout').prop("onclick", null).off("click").on('click', function(event){ 
-        //         // $(this).on("click", orderNewDelivery.updateOrderNewDelivery(this));
-        //         //});
-        //         // $(this).trigger("click");
-        //         //  $(this).click();
-        //     //   }
+            // //   else {
+            //    // $('#btn-checkout').prop("onclick", null).off("click").on('click', function(event){ 
+            //     // $(this).on("click", orderNewDelivery.updateOrderNewDelivery(this));
+            //     //});
+            //     // $(this).trigger("click");
+            //     //  $(this).click();
+            // //   }
                
-        //     }
-        //     // else {
-        //     //     $(this).on("click", orderNewDelivery.updateOrderNewDelivery(this));
-        //     //     //});
-        //     //     $(this).trigger("click");
-        //     // }
+            // }
+            // else {
+            //     $(this).on("click", orderNewDelivery.updateOrderNewDelivery(this));
+            //     //});
+            //     $(this).trigger("click");
+            // }
           
-        // });
+       
 
         $('#plugin-popup #btn-ok').click(function(){
             $("#plugin-popup").fadeOut();
@@ -804,7 +797,7 @@ function validateifcouponexists(couponcode){
   
 }
 
-function validateifCouponExpired(event){
+function validateifCouponExpired(){
    
     $('#coupons').length > 0 ? $('#coupons').remove() : '';
     var count = 0;
@@ -836,7 +829,7 @@ function validateifCouponExpired(event){
                      maxRedeem == couponqty ? expired_coupons.push(couponcode) : '';
                     if (expired_coupons.length > 0) {
 
-                        event.stopImmediatePropagation();
+                       // event.stopImmediatePropagation(); 
                         expired_coupons.forEach(function (item, index) {
                             var coupon = "<span id='coupons'>" + item + "</span>";
                             $('.content-area').append(coupon);
@@ -854,6 +847,18 @@ function validateifCouponExpired(event){
                         //expired_coupons = [];
                        
                          
+                      }else{
+                       $('.full-btn-procced:not(.clone)').on('click', function(event){
+                            // $(".full-btn-procced").on("click", orderNewDelivery.updateOrderNewDelivery(this));
+                            // var link =  $(".full-btn-procced").attr('data-url');
+                            // console.log(link);
+                           
+                            // $(".full-btn-procced").attr('href', '#');
+                           // $(".full-btn-procced").attr('data-url', link);
+                            $('.full-btn-procced:not(.clone)').click();
+                       });
+                         
+                        //$('.full-btn-procced').trigger("click");
                       }
                 }
             });
@@ -1191,6 +1196,28 @@ function updateOrders_suntec() {
             }
         });
     })
+
+    try {
+        if ( $('.coupon-con').length) {
+
+            if ( !$('.clone').length) {
+                $(".full-btn-procced").clone().prependTo('.btn-area').addClass('clone');
+                $(".full-btn-procced:not(.clone)").hide();
+                $(".full-btn-procced:not(.clone)").addClass('original');
+                // $('.clone').prop("onclick", null);
+             }
+
+        }
+    }
+    catch(err) {
+        
+    }
+
+
+
+
+
+
 }
 
 function getOrderTotals(){
