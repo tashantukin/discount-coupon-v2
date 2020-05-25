@@ -695,10 +695,10 @@ if($('.register-link').length){
         $('.footer').after(confirmModal);
 
             //event.stopImmediatePropagation();
-            $('.full-btn-procced').prop("onclick", null).off("click").on('click', function(event){ 
+            $('.original').prop("onclick", null).off("click").on('click', function(event){ 
                 // $('.full-btn-procced').click(function() {
                 // $('.clone').prop("onclick", null).off("click").on('click', function(event){ 
-           // if ($('coupon-con').length){
+         if ($('coupon-con').length){
             
       //     return false;
             expired_coupons.length = [];
@@ -706,10 +706,10 @@ if($('.register-link').length){
             console.log('expired ' + expired_coupons);
           
         
-           // }else {
-             //   console.info('in else');
-             //   $('.clone').trigger("click");
-           // }    
+           }else {
+               console.info('in else');
+               $('.clone').trigger("click");
+           }    
            });   
           
        
@@ -868,7 +868,7 @@ function validateifCouponExpired(){
                            // $(".full-btn-procced").attr('data-url', link);
                             // $('.full-btn-procced:not(.clone)').click();
                      //  });
-                         
+                         $('clone').removeClass('full-btn-procced');
                         $('.clone').trigger("click");
                       }
                 }
