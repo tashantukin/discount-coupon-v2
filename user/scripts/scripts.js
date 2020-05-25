@@ -28,8 +28,9 @@ var bulkdel;
 var isExists=0;
 var isValid = 0;
 var totaldiscountcheckout=0;
-var expired_coupons = [];
+
 var existingcount = 0;
+
 
 //order history -BUYER
 function getDiscountValue(){
@@ -654,7 +655,7 @@ if($('.register-link').length){
                 }
         }  
         //remove coupon and re compute total
-            $this.parents('.coupon-con').remove();
+            $this.parents('.item-coupon-box').remove();
             calculateTotal();
             updateOrders_suntec();
         });
@@ -698,14 +699,16 @@ if($('.register-link').length){
             $('.original').prop("onclick", null).off("click").on('click', function(event){ 
                 // $('.full-btn-procced').click(function() {
                 // $('.clone').prop("onclick", null).off("click").on('click', function(event){ 
-         if ($('coupon-con').length){
+         if ($('.coupon-con').length){
             
       //     return false;
-            expired_coupons.length = [];
+           // expired_coupons.length = [];
             validateifCouponExpired();
-            console.log('expired ' + expired_coupons);
+           
+
+
+
           
-        
            }else {
                console.info('in else');
                $('.clone').trigger("click");
@@ -731,6 +734,7 @@ function getCouponDetailssuntec(){
         method: 'POST',
         contentType: 'application/json',
         data: JSON.stringify(data),
+        
         success: function(result) {
             var coupondetails = $.parseJSON(result);
             if (coupondetails.result.length == 0) {
@@ -809,9 +813,12 @@ function validateifcouponexists(couponcode){
 
 function validateifCouponExpired(){
    
-    $('#coupons').length > 0 ? $('#coupons').remove() : '';
-    var count = 0;
+  
+    $('#coupons').length > 0 ? $('#coupons, #break').remove()  : '';
+  
     if($('.mearchant_box .item-coupon-box .coupon-con').length > 0 ){ 
+        var expired_coupons = [];
+        var counterror = 0;
         $('.mearchant_box .item-coupon-box').each(function(){ 
             var coupon_code =  $(this).find('.coupon-code').text();
             var data = { 'promocode': coupon_code }; 
@@ -829,53 +836,81 @@ function validateifCouponExpired(){
                   couponqty =    coupondetails.result[0].Quantity;
                   couponId =     coupondetails.result[0].Id; 
                   couponleft =    maxRedeem - couponqty;
-                  console.log('itemcoupon ' + $itemcoupon);
+                  console.log('itemcoupon ' + couponcode);
+               
 
                //   maxRedeem == couponqty ? expired_coupons.push(couponcode) : '';
                 },
                 error: function(jqXHR, status, err) {
                 },
                 complete: function(result) {
-                     maxRedeem == couponqty ? expired_coupons.push(couponcode) : '';
-                    if (expired_coupons.length > 0) {
-                        $('#coupons').length > 0 ? $('#coupons').remove() : '';
-                       // event.stopImmediatePropagation(); 
-                        expired_coupons.forEach(function (item, index) {
-                            var coupon = "<span id='coupons'>" + item + "</span> <br>";
-                            $('.content-area').append(coupon);
-                        });
-            
-                        jQuery("#plugin-popup").fadeIn();
-                        jQuery("#cover").fadeIn();
-                        jQuery("#plugin-popup").niceScroll({ 
-                            cursorcolor: "#999999",
-                            cursorwidth:"4px",
-                            cursorborderradius:"0px",
-                            horizrailenabled:false,
-                            cursorborder: "1px solid #999999"
-                        });
-                        //expired_coupons = [];
-                       
-                         
-                      }else{
-                          console.info('else');
-                      // $('.full-btn-procced:not(.clone)').on('click', function(event){
-                            // $(".full-btn-procced").on("click", orderNewDelivery.updateOrderNewDelivery(this));
-                            // var link =  $(".full-btn-procced").attr('data-url');
-                            // console.log(link);
-                           
-                            // $(".full-btn-procced").attr('href', '#');
-                           // $(".full-btn-procced").attr('data-url', link);
-                            // $('.full-btn-procced:not(.clone)').click();
-                     //  });
-                         $('clone').removeClass('full-btn-procced');
-                        $('.clone').trigger("click");
-                      }
+                    console.log('pushing');
+                    console.info('maxredeem ' + maxRedeem + ' ' +  'qty ' + couponqty);
+                    maxRedeem == couponqty ? (expired_coupons.push(couponcode), counterror++) : '';
+
                 }
             });
                  
       
           });
+          var callAjax= true;
+          $(document).ajaxStop(function(){
+            if (callAjax){
+
+            console.log('count ' + counterror);
+            console.log(expired_coupons);
+
+
+            if (counterror > 0) {
+  
+                console.info('in expired ' + expired_coupons );
+                $('#coupons').length > 0 ? $('#coupons, #break').remove() : '';
+               // event.stopImmediatePropagation(); 
+                
+                jQuery("#plugin-popup").fadeIn();
+                jQuery("#cover").fadeIn();
+                jQuery("#plugin-popup").niceScroll({ 
+                    cursorcolor: "#999999",
+                    cursorwidth:"4px",
+                    cursorborderradius:"0px",
+                    horizrailenabled:false,
+                    cursorborder: "1px solid #999999"
+                });
+                    expired_coupons.forEach(function (item, index) {
+                        var coupon = "<span id='coupons'>" + item + "</span> <br id='break'>";
+                        $('.content-area').append(coupon);
+                    });
+    
+                
+                //expired_coupons = [];
+               
+              }
+
+        
+              else{
+                
+               console.info('else in ajax stop');
+               $('.clone').trigger("click");
+               callAjax= false;   
+              
+              }
+
+            }    
+            });
+           
+
+
+          //.promise().done( function(){ 
+              
+     
+          
+        
+        
+       // } );
+
+
+
+         
 
 
     }
