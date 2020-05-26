@@ -683,7 +683,6 @@ if($('.register-link').length){
                     
                   
                   }
-     
             // }
        //  }
          catch(err) {
@@ -704,10 +703,6 @@ if($('.register-link').length){
       //     return false;
            // expired_coupons.length = [];
             validateifCouponExpired();
-           
-
-
-
           
            }else {
                console.info('in else');
@@ -734,6 +729,7 @@ function getCouponDetailssuntec(){
         method: 'POST',
         contentType: 'application/json',
         data: JSON.stringify(data),
+        global: false,
         
         success: function(result) {
             var coupondetails = $.parseJSON(result);
@@ -853,50 +849,162 @@ function validateifCouponExpired(){
                  
       
           });
-          var callAjax= true;
-          $(document).ajaxStop(function(){
-            if (callAjax){
-
-            console.log('count ' + counterror);
-            console.log(expired_coupons);
-
-
-            if (counterror > 0) {
-  
-                console.info('in expired ' + expired_coupons );
-                $('#coupons').length > 0 ? $('#coupons, #break').remove() : '';
-               // event.stopImmediatePropagation(); 
-                
-                jQuery("#plugin-popup").fadeIn();
-                jQuery("#cover").fadeIn();
-                jQuery("#plugin-popup").niceScroll({ 
-                    cursorcolor: "#999999",
-                    cursorwidth:"4px",
-                    cursorborderradius:"0px",
-                    horizrailenabled:false,
-                    cursorborder: "1px solid #999999"
-                });
-                    expired_coupons.forEach(function (item, index) {
-                        var coupon = "<span id='coupons'>" + item + "</span> <br id='break'>";
-                        $('.content-area').append(coupon);
-                    });
-    
-                
-                //expired_coupons = [];
-               
-              }
 
         
-              else{
-                
-               console.info('else in ajax stop');
-               $('.clone').trigger("click");
-               callAjax= false;   
-              
-              }
+          
+      //    $(document).ajaxStop(function(){
 
-            }    
-            });
+
+            var callAjax= true;
+            $(document).ajaxStop(function(){
+              if (callAjax){
+  
+              console.log('count ' + counterror);
+              console.log(expired_coupons);
+
+              if (counterror > 0) {
+    
+                  console.info('in expired ' + expired_coupons );
+                  $('#coupons').length > 0 ? $('#coupons, #break').remove() : '';
+                 // event.stopImmediatePropagation(); 
+                  
+                  jQuery("#plugin-popup").fadeIn();
+                  jQuery("#cover").fadeIn();
+                  jQuery("#plugin-popup").niceScroll({ 
+                      cursorcolor: "#999999",
+                      cursorwidth:"4px",
+                      cursorborderradius:"0px",
+                      horizrailenabled:false,
+                      cursorborder: "1px solid #999999"
+                  });
+                      expired_coupons.forEach(function (item, index) {
+                          var coupon = "<span id='coupons'>" + item + "</span> <br id='break'>";
+                          $('.content-area').append(coupon);
+                      });
+      
+                  expired_coupons = [];
+                  counterror = 0;
+                 
+                }
+
+                else{
+                 
+                $("#plugin-popup").fadeOut();
+                $("#cover").fadeOut();
+                 console.info('else in ajax stop');
+                 $('.clone').trigger("click");
+                 callAjax= false;   
+                
+                }
+  
+              }    
+              });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            // var callAjax = true;
+
+            // if (callAjax){
+
+            // if (counterror > 0) {
+            //     // callAjax = true;
+            //         console.log('count ' + counterror);
+            //         console.log(expired_coupons);
+        
+        
+            //       //  if (counterror > 0) {
+          
+            //             console.info('in expired ' + expired_coupons );
+            //             $('#coupons').length > 0 ? $('#coupons, #break').remove() : '';
+            //            // event.stopImmediatePropagation(); 
+                        
+            //             jQuery("#plugin-popup").fadeIn();
+            //             jQuery("#cover").fadeIn();
+            //             jQuery("#plugin-popup").niceScroll({ 
+            //                 cursorcolor: "#999999",
+            //                 cursorwidth:"4px",
+            //                 cursorborderradius:"0px",
+            //                 horizrailenabled:false,
+            //                 cursorborder: "1px solid #999999"
+            //             });
+            //                 expired_coupons.forEach(function (item, index) {
+            //                     var coupon = "<span id='coupons'>" + item + "</span> <br id='break'>";
+            //                     $('.content-area').append(coupon);
+            //                 });
+            
+                        
+            //             expired_coupons = [];
+            //             counterror = 0;
+                       
+            //          // }
+        
+            //          // else{
+                        
+            //         //    console.info('else in ajax stop');
+            //         //    $('.clone').trigger("click");
+            //         //    callAjax= false;   
+            //         //   }
+         
+            //         }  else {
+            //             console.info('on trigger click');
+            //             $('.clone').trigger("click");
+            //             callAjax = false;
+            //             // event.stopImmediatePropagation();
+            //             // $('.clone').unbind("ajaxStop");
+            //         }   
+
+
+            // }else {
+            //     // console.info('on trigger click');
+            //   //  $('.clone').trigger("click");
+            //     callAjax = false;
+            //     // event.stopImmediatePropagation();
+            //     // $('.clone').unbind("ajaxStop");
+            // }
+
+
+
+
+
+
+            
+       //     });
            
 
 
@@ -1235,6 +1343,7 @@ function updateOrders_suntec() {
             method: 'POST',
             contentType: 'application/json',
             data: JSON.stringify(data),
+            global: false,
             success: function(result) {
             },
             error: function(jqXHR, status, err) {
@@ -1263,6 +1372,7 @@ function getOrderTotals(){
             method: 'POST',
             contentType: 'application/json',
             data: JSON.stringify(data),
+            global: false,
             success: function(result) {
                 var orderTotal = JSON.parse(result)
                 orderTotal.result.length == 0 ? '' :  total = orderTotal.result; $this.attr('total', total);
