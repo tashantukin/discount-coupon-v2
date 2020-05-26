@@ -884,7 +884,7 @@ function validateifCouponExpired(){
       
                   expired_coupons = [];
                   counterror = 0;
-                 
+                  callAjax= false;   
                 }
 
                 else{
