@@ -31,7 +31,6 @@ var totaldiscountcheckout=0;
 
 var existingcount = 0;
 
-
 //order history -BUYER
 function getDiscountValue(){
     var invoiceNumber = pathname.split('=')[1]; 
@@ -622,7 +621,8 @@ if($('.register-link').length){
                     console.info('code ' + code);
                     if (code == discountcode) {
                     $(this).removeClass("hasitempromo");
-                    $('#discounttag',$(this)).remove();
+                    //FOR DISCOUNT APPLIED LABEL TAG
+                    // $('#discounttag',$(this)).remove();
                 }
                 }
             })
@@ -853,7 +853,6 @@ function validateifCouponExpired(){
         
           
       //    $(document).ajaxStop(function(){
-
 
             var callAjax= true;
             $(document).ajaxStop(function(){
@@ -1136,9 +1135,10 @@ function showItemCode(){
                     $(this).addClass('hasitempromo');  
                     //add for validation when user removed the coupon
                     $(this).attr('couponcode', couponcode);
+                    //DISCOUNT APPLIED LABEL
                     var discounttag = "<span class='coupon-code' id ='discounttag'>Discount Applied</span>";
-                    $('.price_tag', $(this)).after(discounttag);
-                    $('.price_tag', $(this)).css('margin-bottom','7px');
+                    // $('.price_tag', $(this)).after(discounttag);
+                    // $('.price_tag', $(this)).css('margin-bottom','7px');
                     //get the item qty
                     itemqty = $(this).find('.qty').text().replace(/[^\d.-]/g, '');
                     //validate if order qty > available coupon left
