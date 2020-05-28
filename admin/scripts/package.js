@@ -319,7 +319,7 @@ function saveCampaignDetails() {
 
                 toastr.success('Campaign details successfully saved.');
                 location.reload(); 
-                clearFields();
+                clearFieldsItem();
             },
             error: function(jqXHR, status, err) {
                // toastr.error('Error!');
@@ -336,6 +336,14 @@ function saveCampaignDetails() {
         $('#d-val').val('');
        
         }
+
+    function clearFieldsItem(){
+        $('#keyword').val('');
+        $('#coupon_codeitem').val('');
+        $('#redeemitem').val('');
+        $('#dval_item').val('');
+        $("#limiteditem").prop("checked", false);
+    }
     function deletePage() {
         var data = { 'campaignId' : campaign_id,'userId': userId};
         // console.log(pagedids);
@@ -521,7 +529,7 @@ function saveCampaignDetails() {
             success: function(result) {
                 toastr.success('Campaign details successfully updated.');
                 location.reload(); 
-                clearFields();
+                clearFieldsItem();
                
             },
             error: function(jqXHR, status, err) {
@@ -633,6 +641,7 @@ function saveCampaignDetails() {
            }           
         });
 
+
         $('#createcampaign .close').click(function() {
             $('#limitedoption').show();
             clearFields();
@@ -641,6 +650,18 @@ function saveCampaignDetails() {
             //
           });
 
+          
+        $('#createcampaign2 .close').click(function() {
+            $('#limiteitem').show();
+            clearFieldsItem();
+            $("#itemstable > tbody").empty();
+         //   $('#msg').remove();
+
+            //
+          });
+
+
+        
 
 
   //delete the page contents
