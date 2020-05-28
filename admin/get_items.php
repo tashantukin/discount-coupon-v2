@@ -15,7 +15,13 @@ $userId = $result['ID'];
 
 //get the item details
 if ($keyword) {
-$url =  $baseUrl . '/api/v2/items?keywords=' . $keyword;
+
+    $data = array('keywords'=> $keyword
+   );    
+   
+$search = http_build_query($data);
+
+$url =  $baseUrl . '/api/v2/items?'. $search;
 $itemDetails = callAPI("GET", $admin_token['access_token'], $url, false);
 echo json_encode(['result' => $itemDetails['Records']]);
 }

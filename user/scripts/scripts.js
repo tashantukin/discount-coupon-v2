@@ -596,8 +596,6 @@ if($('.register-link').length){
                 promocode =  $('#promocode').val().toUpperCase();
             getCouponDetailssuntec();
 
-          
-            
         });
         //delivery select box
         $('.sel_del_method').on('change', function() {
