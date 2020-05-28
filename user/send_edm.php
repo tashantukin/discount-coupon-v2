@@ -43,6 +43,15 @@ $subject = $invoiceId ." Tracking Information";
       $consumerEmail =  $result['Orders'][0]['ConsumerDetail']['Email'];
       $consumerLastName = $result['Orders'][0]['ConsumerDetail']['LastName'];
       $consumerFirstName = $result['Orders'][0]['ConsumerDetail']['FirstName'];
+      //delivery address
+      $consumeraddressName = $result['Orders'][0]['DeliveryToAddress']['Name'];  
+      $consumeraddressLine1 = $result['Orders'][0]['DeliveryToAddress']['Line1'];  
+      $consumeraddressLine2 = !empty($result['Orders'][0]['DeliveryToAddress']['Line2']) ? $result['Orders'][0]['DeliveryToAddress']['Line2'] : '';  
+      $consumeraddressState = $result['Orders'][0]['DeliveryToAddress']['State'];  
+      $consumeraddressCity= $result['Orders'][0]['DeliveryToAddress']['City']; 
+      $consumeraddressCountry = $result['Orders'][0]['DeliveryToAddress']['Country'];  
+      $consumeraddressPostCode = $result['Orders'][0]['DeliveryToAddress']['PostCode'];  
+
       $date = date('d/m/Y H:i', $result['Orders'][0]['CreatedDateTime']);
      
       $data = [
@@ -104,6 +113,18 @@ $subject = $invoiceId ." Tracking Information";
               </tbody>
               </table>
             </div>
+
+            <div style="margin-top:20px; margin-bottom:10px">
+              <div style="color:#000; font-weight:bold;">Delivery Address :</div>
+              <div><?php echo  $consumeraddressName ?></div>
+              <div><?php echo  $consumeraddressLine1 . ' ' . $consumeraddressLine2  ?></div>
+              <div><?php echo  $consumeraddressState?></div>
+              <div><?php echo  $consumeraddressCity?></div>
+              <div><?php echo  $consumeraddressCountry ?></div>
+              <div><?php echo  $consumeraddressPostCode ?></div></td>
+            </div>
+
+
             <div style="margin-top:50px; margin-bottom:50px">Login to your Suntec+ App to view your order </div>
             <div style="margin-bottom:50px;">
               <p>Regards,<br />
