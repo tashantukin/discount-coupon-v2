@@ -1121,9 +1121,11 @@ function showItemCode(){
                 var total =  $(this).find('.price_tag').text().replace(/[^\d.-]/g, '');
                 var qty =  $(this).find('.qty').text().replace(/[^\d.-]/g, '');
                 //validate total order qty vs coupon available for redeem
-                qty  >= couponleft ? qty = couponleft : '';
+                if(isLimited == 1) {
+                    qty  >= couponleft ? qty = couponleft : '';
+                }
                 total = total * qty;
-              
+            
                 itemguid = $(this).find('input[name="item-guid"]').val();
                 if (itemguid.indexOf($itemcoupon) > -1){
                     i =  itemguid;
@@ -1140,12 +1142,14 @@ function showItemCode(){
                     //get the item qty
                     itemqty = $(this).find('.qty').text().replace(/[^\d.-]/g, '');
                     //validate if order qty > available coupon left
-                    if(itemqty  >= couponleft) {
-                        itemqty = couponleft;
-                        returnError('Excess Coupon');
-                        $(this).attr('couponqty',itemqty);
-                        console.info('itemqtty ' + itemqty);
-                    }   
+                    if(isLimited == 1) { // if the coupon is limited only
+                        if(itemqty  >= couponleft) {
+                            itemqty = couponleft;
+                            returnError('Excess Coupon');
+                            $(this).attr('couponqty',itemqty);
+                            console.info('itemqtty ' + itemqty);
+                        }   
+                    }
                    
                     totalpermerchant =  totalpermerchant + parseFloat(total);
                 }else {

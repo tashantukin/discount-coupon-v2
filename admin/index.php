@@ -491,7 +491,7 @@ $(document).ready(function() {
         "info":     false,
         "searching" :true,
         "pagingType": "first_last_numbers",
-        "columnDefs": [{ orderable: false, targets: [5] }]
+        "columnDefs": [{ orderable: false, targets: [6] }]
         }
     );
 

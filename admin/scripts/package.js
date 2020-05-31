@@ -650,7 +650,6 @@ function saveCampaignDetails() {
             //
           });
 
-          
         $('#createcampaign2 .close').click(function() {
             $('#limiteitem').show();
             clearFieldsItem();
