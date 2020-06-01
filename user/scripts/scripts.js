@@ -694,18 +694,14 @@ if($('.register-link').length){
 
             //event.stopImmediatePropagation();
             $('.original').prop("onclick", null).off("click").on('click', function(event){ 
-                // $('.full-btn-procced').click(function() {
-                // $('.clone').prop("onclick", null).off("click").on('click', function(event){ 
-         if ($('.coupon-con').length){
+                if ($('.coupon-con').length){
+        
+                validateifCouponExpired();
             
-      //     return false;
-           // expired_coupons.length = [];
-            validateifCouponExpired();
-          
-           }else {
-               console.info('in else');
-               $('.clone').trigger("click");
-           }    
+                }else {
+                console.info('in else');
+                $('.clone').trigger("click");
+                }    
            });   
           
        
@@ -847,8 +843,7 @@ function validateifCouponExpired(){
                  
           });
 
-        
-          
+      
       //    $(document).ajaxStop(function(){
 
             var callAjax= true;
@@ -895,127 +890,6 @@ function validateifCouponExpired(){
   
               }    
               });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            // var callAjax = true;
-
-            // if (callAjax){
-
-            // if (counterror > 0) {
-            //     // callAjax = true;
-            //         console.log('count ' + counterror);
-            //         console.log(expired_coupons);
-        
-        
-            //       //  if (counterror > 0) {
-          
-            //             console.info('in expired ' + expired_coupons );
-            //             $('#coupons').length > 0 ? $('#coupons, #break').remove() : '';
-            //            // event.stopImmediatePropagation(); 
-                        
-            //             jQuery("#plugin-popup").fadeIn();
-            //             jQuery("#cover").fadeIn();
-            //             jQuery("#plugin-popup").niceScroll({ 
-            //                 cursorcolor: "#999999",
-            //                 cursorwidth:"4px",
-            //                 cursorborderradius:"0px",
-            //                 horizrailenabled:false,
-            //                 cursorborder: "1px solid #999999"
-            //             });
-            //                 expired_coupons.forEach(function (item, index) {
-            //                     var coupon = "<span id='coupons'>" + item + "</span> <br id='break'>";
-            //                     $('.content-area').append(coupon);
-            //                 });
-            
-                        
-            //             expired_coupons = [];
-            //             counterror = 0;
-                       
-            //          // }
-        
-            //          // else{
-                        
-            //         //    console.info('else in ajax stop');
-            //         //    $('.clone').trigger("click");
-            //         //    callAjax= false;   
-            //         //   }
-         
-            //         }  else {
-            //             console.info('on trigger click');
-            //             $('.clone').trigger("click");
-            //             callAjax = false;
-            //             // event.stopImmediatePropagation();
-            //             // $('.clone').unbind("ajaxStop");
-            //         }   
-
-
-            // }else {
-            //     // console.info('on trigger click');
-            //   //  $('.clone').trigger("click");
-            //     callAjax = false;
-            //     // event.stopImmediatePropagation();
-            //     // $('.clone').unbind("ajaxStop");
-            // }
-
-
-
-
-
-
-            
-       //     });
-           
-
-
-          //.promise().done( function(){ 
-              
-     
-          
-        
-        
-       // } );
-
-
-
-         
-
 
     }
    

@@ -538,7 +538,6 @@ function saveCampaignDetails() {
         });
     }
 
-
     $(document).ready(function() {
 
         //limit the value to 100% max if discount type is percentage
@@ -659,9 +658,6 @@ function saveCampaignDetails() {
 
             //
           });
-
-
-        
 
 
   //delete the page contents
