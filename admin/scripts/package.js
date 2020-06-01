@@ -595,10 +595,11 @@ function saveCampaignDetails() {
                 else if ($('#d-val').val() == "" ){
                   $('#d-val').css('border','1px solid red');
                 }
-                else if (!$('#redeem').is(':disabled'))  
+                else if (!$('#redeem').is(':disabled') && !$('#coupon_code').is(':disabled'))  
                 {   
                     $('#redeem').val() == "" ? $('#redeem').css('border','1px solid red') : ''
                 }
+               
                 else if ($boxes.length < 1) {
                     $('#merchanterror').text('Please select a merchant.').css('color', 'red');
                 }
@@ -624,7 +625,7 @@ function saveCampaignDetails() {
                 else if ($('#coupon_codeitem').val() == "" ) {
                   $('#coupon_codeitem').css('border','1px solid red');
                 } 
-                else if (!$('#redeemitem').is(':disabled'))  
+                else if (!$('#redeemitem').is(':disabled') && !$('#coupon_codeitem').is(':disabled') )  
                 {   
                     $('#redeemitem').val() == "" ? $('#redeemitem').css('border','1px solid red') : ''
                 }
