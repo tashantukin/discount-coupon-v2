@@ -826,13 +826,13 @@ function validateifCouponExpired(){
                 success: function(result) {
                   var coupondetails = $.parseJSON(result);
                   couponcode  =  coupondetails.result[0].CouponCode;
+                  couponEnabled =  coupondetails.result[0].IsEnabled;
                   maxRedeem =    coupondetails.result[0].MaxRedeem;
                   couponqty =    coupondetails.result[0].Quantity;
                   couponId =     coupondetails.result[0].Id; 
                   couponleft =    maxRedeem - couponqty;
                   console.log('itemcoupon ' + couponcode);
                
-
                //   maxRedeem == couponqty ? expired_coupons.push(couponcode) : '';
                 },
                 error: function(jqXHR, status, err) {
@@ -840,12 +840,11 @@ function validateifCouponExpired(){
                 complete: function(result) {
                     console.log('pushing');
                     console.info('maxredeem ' + maxRedeem + ' ' +  'qty ' + couponqty);
-                    maxRedeem == couponqty ? (expired_coupons.push(couponcode), counterror++) : '';
-
+                        //validate if the coupon iw disabled also
+                        maxRedeem == couponqty || couponEnabled == 0 ? (expired_coupons.push(couponcode), counterror++) : '';
                 }
             });
                  
-      
           });
 
         
@@ -1121,7 +1120,7 @@ function showItemCode(){
                 var total =  $(this).find('.price_tag').text().replace(/[^\d.-]/g, '');
                 var qty =  $(this).find('.qty').text().replace(/[^\d.-]/g, '');
                 //validate total order qty vs coupon available for redeem
-                if(isLimited == 1) {
+                if(isLimited == 1) { //validate only if the coupon has Limited redemption
                     qty  >= couponleft ? qty = couponleft : '';
                 }
                 total = total * qty;
