@@ -112,11 +112,11 @@ function searchItem(keyword,itemguid){
                         var hasvariants =  item.HasChildItems;
                         console.log(hasvariants);
                         var disabled;
-                         (hasvariants == true) ?
+                        //  (hasvariants == true) ?
 
-                            disabled = 'disabled' :   disabled = '';
+                        //     disabled = 'disabled' :   disabled = '';
                             
-                            if (!hasvariants == true) {
+                          //  if (!hasvariants == true) {
                             itemPrice = $('#currencyCode').val() +  formatter.format(itemPrice);     
                             var markup = "<tr id='eachitem'><td>" + name + "</td><td id='itemid'>" + itemId + "</td>  <td id='itemprice' pricevalue='"+item.Price+"'>" + itemPrice + "</td> <td class='pgfncyopt'><div class='fancy-radio'> <input type='radio' value='s1' name='search_result' class='itemradio' " + disabled +"> <label id=radiolabel></label> </div> </td> </tr>";
                             $("table #items").append(markup);
@@ -133,7 +133,7 @@ function searchItem(keyword,itemguid){
                             });
                             
                                 $("#itemstable #itemid").hide();
-                        }
+                       // }
                     })
                 }
         

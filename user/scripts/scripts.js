@@ -999,7 +999,7 @@ function showItemCode(){
                 }
                 total = total * qty;
             
-                itemguid = $(this).find('input[name="item-guid"]').val();
+                itemguid = $(this).find('input[name="item-parent-guid"]').val();
                 if (itemguid.indexOf($itemcoupon) > -1){
                     i =  itemguid;
                 }
