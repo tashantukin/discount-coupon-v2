@@ -989,6 +989,7 @@ function showItemCode(){
                 var totalpermerchant = 0; 
                 var itemguid;
                 var itemqty;
+                var $fixqty =  $(this).attr('qty');
             //get only the amount of items without existing item coupon
             $(".pr_detail:not(.hasitempromo)", $(this)).each(function(){
                 var total =  $(this).find('.price_tag').text().replace(/[^\d.-]/g, '');
@@ -1043,7 +1044,7 @@ function showItemCode(){
                 deliveryCharge = deliveryCharge.replace(/-/g, "");
                 deliveryCharge = parseFloat(deliveryCharge);
                 //validate the discout type if Fixed or percentage
-                (discounttype == "Percentage") ? couponvalue =  parseFloat(calculatePercentage(discountVal,totalpermerchant)) :  couponvalue = discountVal * itemqty;
+                (discounttype == "Percentage") ? couponvalue =  parseFloat(calculatePercentage(discountVal,totalpermerchant)) :  couponvalue = discountVal * $fixqty;
                 merchanttotalcost =  merchanttotalcost + couponvalue;
                 $('.coupon-con #currencySym:last', $(this)).text('-' + mpCurrencycode);
                 $('.coupon-code:last', $(this)).text(couponcode);
@@ -1250,7 +1251,8 @@ function getOrderTotals(){
             global: false,
             success: function(result) {
                 var orderTotal = JSON.parse(result)
-                orderTotal.result.length == 0 ? '' :  total = orderTotal.result; $this.attr('total', total);
+                orderTotal.result.length == 0 ? '' : total = orderTotal.result; $this.attr('total', total);
+                orderTotal.result.length == 0 ? '' : totalqty =  orderTotal.totalqty; $this.attr('qty', totalqty); 
             },
             error: function(jqXHR, status, err) {
                 toastr.error('Error!');

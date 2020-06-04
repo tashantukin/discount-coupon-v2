@@ -25,5 +25,10 @@ $url = $baseUrl . '/api/v2/users/'. $userId . '/orders/' . $order_guid;
 $paymentGateways = callAPI("GET", $admin_token['access_token'], $url, false);
 
 $subtotal = $paymentGateways['Total'];
-echo json_encode(['result' => $subtotal]);
+$quantity = 0;
+foreach($paymentGateways['CartItemDetails'] as $itemqty) {
+    $qty = $itemqty['Quantity'];
+    $quantity =  $quantity + $qty;
+}
+echo json_encode(['result' => $subtotal, 'totalqty' => $quantity]);
 ?>

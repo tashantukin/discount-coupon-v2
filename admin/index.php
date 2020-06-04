@@ -327,7 +327,7 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="form-element">
-                                        <label>Select Item (Items with variants cannot be selected)</label>
+                                        <label>Select Item</label>
                                         <div class="search-i-free">
 	                                        <input type="text" name="" placeholder="Search Item name" class="w-100 search" required id="keyword" />
 	                                        <button id ="search"><img src="images/icon-w-search.png"></button>
@@ -487,7 +487,7 @@ $(document).ready(function() {
         // "paging":   false,
         "order": [[ 1, "desc" ]],
         "lengthMenu": [[20], [20]],
-        // "ordering": false,
+        //  "ordering": true,
         "info":     false,
         "searching" :true,
         "pagingType": "first_last_numbers",
