@@ -116,7 +116,7 @@
                                                     $discount_type = $coupon_discout_type == 'Percentage' ? $discount_type =  $coupon_discount . '%' : $discount_type = number_format($coupon_discount,2);
                                    
                                                     echo  "<td id = 'campaignname' value = $coupon_item>" . $campaign_name . "</td>";
-                                                    echo "<td>" .  $date . "</td>";
+                                                    echo "<td class='sorting_1'>" .  $date . "</td>";
                                                     echo "<td>" .  $coupon_code . "</td>";
                                                     echo  "<td>". $discount_type . "</td>";
                                                     echo  "<td>". $merchanttno  . "</td>";
@@ -512,8 +512,6 @@ $(document).ready(function() {
 
     });
      
-
-
     $('#coupon_code').keypress(function(e) { var regex = new RegExp("^[a-zA-Z0-9]+$"); var str = String.fromCharCode(!e.charCode ? e.which : e.charCode); if (regex.test(str)) { return true; } e.preventDefault(); return false; });
    // $('#coupon_code').input(function(e) { var regex = new RegExp("^[a-zA-Z0-9]+$"); var str = String.fromCharCode(!e.charCode ? e.which : e.charCode); if (regex.test(str)) { return true; } e.preventDefault(); return false; });
     $('.pr-text').keypress(function(e) { var regex = new RegExp("^[a-zA-Z0-9]+$"); var str = String.fromCharCode(!e.charCode ? e.which : e.charCode); if (regex.test(str)) { return true; } e.preventDefault(); return false; });
@@ -654,6 +652,18 @@ $(document).ready(function() {
 waitForElement('#pagination-insert',function(){
 var pagination  = $('#campaigntable_paginate');
 $('#pagination-insert').append(pagination);
+
+
+$(".sorting_1").each(function() {
+    var times = moment($(this).text(),'DD/MM/YYYY').format("YYYYMMDDHHMMSS");
+    // var times = moment($(this).text(),'DD/MM/YYYY').format("YYYYMMDD");
+    $(this).attr('data-sort', times);
+})
+
+
+
+
+
 
 });
 
