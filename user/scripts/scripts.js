@@ -454,7 +454,7 @@ $(document).ready(function() {
         var invoiceNumber = $('.ordr-dtls-invoiceid:contains("INVOICE ID")').clone().children().remove().end().text();
         var senddeliveryinfo = "<div><a href='#' id='send-delivery-track-info'>Send Delivery Tracking Info</a></div>";
         var imgLink =   "https://" + hostname + "/user/plugins/" + packageId + "/images/cross-icon.svg"; 
-        var senddelinfomodal = "<div class='popup  popup-area mx-350 popup-delivery-tracking' id='DeliveryTrackingInfo'><div class='wrapper'> <a href='' class='close-popup'><img src="+ imgLink + "></a><div class='content-area'> <div class='form-element'><label>Tracking Number</label><input type='text' class='w-100' id='trackingnumber' required /></div><div class='form-element'><label>Tracking URL</label><input type='text' id= 'trackingurl' class='w-100 tracking-url' required /> </div> </div> <div class='btn-area text-center smaller'><input type='button' value='Send Email' class='btn-black' id='sendEmail'> <div class='clearfix'> <span id ='status'> </span></div></div></div></div><div class='modal-overlay'></div><div id='cover'></div>";
+        var senddelinfomodal = "<div class='popup  popup-area mx-350 popup-delivery-tracking' id='DeliveryTrackingInfo'><div class='wrapper'> <a href='' class='close-popup'><img src="+ imgLink + "></a><div class='content-area'> <div class='form-element'><label>Tracking Number</label><input type='text' class='w-100' id='trackingnumber' required /></div><div class='form-element'><label>Tracking Info</label><input type='text' id= 'trackingurl' class='w-100 tracking-url' required /> </div> </div> <div class='btn-area text-center smaller'><input type='button' value='Send Email' class='btn-black' id='sendEmail'> <div class='clearfix'> <span id ='status'> </span></div></div></div></div><div class='modal-overlay'></div><div id='cover'></div>";
         $('.footer').after(senddelinfomodal);
 
         $('.ordr-dtls-buyer-infoind').find('.order-status-dropdown-sec').after(senddeliveryinfo);
@@ -474,12 +474,12 @@ $(document).ready(function() {
         $('#sendEmail').on("click", function(e){
             e.preventDefault();
             var url = $.trim($(".tracking-url").val());
-            $(".tracking-url").addClass('error-con');
-            if(isUrlValid(url) ) {
+          // // $(".tracking-url").addClass('error-con');
+          //  if(isUrlValid(url) ) {
             $(".tracking-url").removeClass('error-con');
             sendEDM(invoiceNumber);
             
-            }
+          //  }
             });
         function isUrlValid(url) {
         return /^(https?|s?ftp):\/\/(((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:)*@)?(((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5]))|((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?)(:\d*)?)(\/((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)+(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*)?)?(\?((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|[\uE000-\uF8FF]|\/|\?)*)?(#((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|\/|\?)*)?$/i.test(url);
