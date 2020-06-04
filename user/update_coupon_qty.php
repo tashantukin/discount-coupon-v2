@@ -78,7 +78,6 @@ foreach($result['Orders'] as $orders){
             echo json_encode(['qty' => $coupon_quantity ]);    
             }
            
-            
             echo json_encode(['in array' => $couponname ]);        
             $coupon_details = array(array('Name' => 'CouponCode', 'Value' => $couponname));
             $url =  $baseUrl . '/api/v2/plugins/'. getPackageID() .'/custom-tables/Coupon';

@@ -577,7 +577,6 @@ if($('.register-link').length){
 
         getOrderTotals();
 
-
         var discountlabel = "<label class='lbl-coupon'>Discount Coupon</label>";
         var delbox = $('.mearchant_box .deliver-method');
         delbox.append(discountlabel);
@@ -644,7 +643,7 @@ if($('.register-link').length){
                                 var discount_type =  itembox.attr("discounttype");
                                 var discount_value = itembox.attr("discountval");
                                 var coupon_value = "";
-                                (discount_type == "Percentage") ? coupon_value =  parseFloat(calculatePercentage(discount_value,totalcostmerchant)) :  coupon_value = discount_value;
+                                (discount_type == "Percentage") ? coupon_value =  parseFloat(calculatePercentage(discount_value,totalcostmerchant)) :  coupon_value = discount_value * qty;
                                 $('.sub-total #price_amt', itembox).text(formatter.format(coupon_value));
                             });
                         }
@@ -679,7 +678,6 @@ if($('.register-link').length){
                       $('.clone').removeClass('.full-btn-procced');
                      $(".full-btn-procced:not(.original)").hide();
                     
-                  
                   }
             // }
        //  }
@@ -1085,7 +1083,7 @@ function showItemCode(){
                                             var discount_value = itembox.attr("discountval");
                                             var coupon_value = "";
                                             //removed the qty from  computation
-                                            (discount_type == "Percentage") ? coupon_value =  parseFloat(calculatePercentage(discount_value,totalcostmerchant)) :  coupon_value = discount_value;
+                                            (discount_type == "Percentage") ? coupon_value =  parseFloat(calculatePercentage(discount_value,totalcostmerchant)) :  coupon_value = discount_value * qty;
                                             $('.sub-total #price_amt', itembox).text(formatter.format(coupon_value));
                                             console.info('should re compute the price from this part');
                 
@@ -1127,7 +1125,6 @@ function calculateTotal(){
         var merchantdiscount;
         var $merchantbox =  $(this);
         $('.item-coupon-box', $(this)).each(function() {
-            
             var itembox = $(this);
             merchantdiscount = $(this).find('.coupon-con .sub-total #price_amt').text().replace(/[^\d.-]/g, '');
             
@@ -1229,12 +1226,6 @@ function updateOrders_suntec() {
     })
 
  
-    
-
-
-
-
-
 }
 
 function getOrderTotals(){
