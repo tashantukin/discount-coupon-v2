@@ -610,11 +610,11 @@ $(document).ready(function() {
                     
             } else {
                     redeem.removeAttr("disabled");
-                    couponcode.attr("disabled", "disabled");
+                    // couponcode.attr("disabled", "disabled");
                     //GENERATE RANDOM COUPON CODE
-                    var randcoupon =  Math.random().toString(36).substr(2, 10);
-                    randcouponstring = randcoupon.toUpperCase();
-                    couponcode.val(randcouponstring);
+                    // var randcoupon =  Math.random().toString(36).substr(2, 10);
+                    // randcouponstring = randcoupon.toUpperCase();
+                    // couponcode.val(randcouponstring);
                 }
         }
         </script>
