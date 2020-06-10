@@ -594,9 +594,10 @@ function saveCampaignDetails() {
                 else if ($('#d-val').val() == "" ){
                   $('#d-val').css('border','1px solid red');
                 }
-                else if (!$('#redeem').is(':disabled') && !$('#coupon_code').is(':disabled'))  
-                {   
-                    $('#redeem').val() == "" ? $('#redeem').css('border','1px solid red') : ''
+                // else if (!$('#redeem').is(':disabled') && !$('#coupon_code').is(':disabled'))  
+                else if ( $('#redeem').val() == "" && $('#limited').is(":checked"))  
+                {   console.log('cond 2')
+                 $('#redeem').css('border','1px solid red');
                 }
                
                 else if ($boxes.length < 1) {

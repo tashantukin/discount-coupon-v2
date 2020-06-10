@@ -45,6 +45,7 @@
                                     <tr>
                                         <th>Campaign Name</th>
                                         <th>Last Updated</th>
+                                        <th class="sorting_2"  style='visibility:hidden'>Last Updated1</th>
                                         <th>Coupon Code</th>
                                         <th>Discount Value</th>
                                         <th>Merchants</th>
@@ -105,6 +106,7 @@
                                                     date_default_timezone_set($timezone_name);
 
                                                     $date = date('d/m/Y H:i', $last_updated);
+                                                    $date1 = date('Ymd', $last_updated);
                                                     if($coupon_enabled == 1){
                                                         error_log('index '. $coupon_enabled);
                                                        $checked = "checked = checked";
@@ -117,6 +119,7 @@
                                    
                                                     echo  "<td id = 'campaignname' value = $coupon_item>" . $campaign_name . "</td>";
                                                     echo "<td class='sorting_1'>" .  $date . "</td>";
+                                                    echo "<td class='sorting_2' style='visibility:hidden'>" .  $date1 . "</td>";
                                                     echo "<td>" .  $coupon_code . "</td>";
                                                     echo  "<td>". $discount_type . "</td>";
                                                     echo  "<td>". $merchanttno  . "</td>";
@@ -481,17 +484,60 @@ $('#redeem, #redeemitem').keyup(function(e){
     });
                                 
 $(document).ready(function() {
-        
+    jQuery.extend( jQuery.fn.dataTableExt.oSort, {
+    "formatted-num-pre": function ( a ) {
+        a = (a === "-" || a === "") ? 0 : a.replace( /[^\d\-\.]/g, "" );
+        return parseFloat( a );
+    },
+ 
+    "formatted-num-asc": function ( a, b ) {
+        return a - b;
+    },
+ 
+    "formatted-num-desc": function ( a, b ) {
+        return b - a;
+    }
+} );
+
         $('#campaigntable').DataTable(
         {
         // "paging":   false,
-        "order": [[ 1, "desc" ]],
+        order: [2, 'desc'],
+        // aaSorting: [[2, 'desc']],
         "lengthMenu": [[20], [20]],
         //  "ordering": true,
         "info":     false,
         "searching" :true,
         "pagingType": "first_last_numbers",
-        "columnDefs": [{ orderable: false, targets: [6] }]
+        // "columnDefs" : [{"targets": 1, "type": "date-euro"}],
+        // "order": [[ 1, "desc" ]]    
+        //   "bInfo": true
+        columnDefs: [{  "orderable": false, 'targets': [1] },
+        {
+            'targets': [2], "visible": false
+        }]
+        // {
+        //    targets: [1],
+        //    type: 'date' // Don't use this with the datetime-moment plugin
+        //  }
+    
+    //     columnDefs: [
+    //    { type: 'date', targets: 1 }
+    //    ]
+    // bSortable: true
+//     "aoColumns": [
+
+//     {"sType": "date"}
+
+// ]
+    // aoColumnDefs: [
+    //        // { "aTargets": [ 0 ], "bSortable": true },
+    //         { "aTargets": [ 1 ], "bSortable": true }
+    //         // { "aTargets": [ 2 ], "bSortable": true },
+    //         // { "aTargets": [ 3 ], "bSortable": false }
+    //     ]
+        // "columnDefs": [{ type: 'date', orderable: true, targets: [1] }]
+        // order: [1, 'desc']
         }
     );
 
@@ -511,6 +557,50 @@ $(document).ready(function() {
         // https://datatables.net/forums/discussion/9204/custom-class-on-search-input
 
     });
+
+//     waitForElement('.sorting_1',function(){
+//     //     $(".sorting_1").each(function() {
+//     // var times = moment($(this).text(),'DD/MM/YYYY').format("DD/MM/YYYY HH:MM");
+//     // $(this).attr('data-sort', times);
+//     // $(this).text(times);
+//     $(".sorting_1").each(function() {
+//     var times = moment($(this).text(),'DD/MM/YYYY').format("YYYYMMDDHHMMSS");
+//     $(this).attr('data-sort', times);
+//     var changeText = moment($(this).text(),'DD/MM/YYYY').format("DD/MM/YYYY HH:MM");
+//     $(this).text(changeText );
+// })
+
+
+
+
+// })
+
+// $.fn.dataTable.moment = function ( format, locale ) {
+//     var types = $.fn.dataTable.ext.type;
+ 
+//     // Add type detection
+//     types.detect.unshift( function ( d ) {
+//         return moment( d, format, locale, true ).isValid() ?
+//             'moment-'+format :
+//             null;
+//     } );
+ 
+//     // Add sorting method - use an integer for the sorting
+//     types.order[ 'moment-'+format+'-pre' ] = function ( d ) {
+//         return moment( d, format, locale, true ).unix();
+//     };
+// };
+
+
+    // $(".sorting_1").each(function() {
+    //     var times = moment($(this).text(),'DD/MM/YYYY')format('DD/MM/YYYY mm:ss');
+   	// // var times = moment($(this).text(),'DDMMYYYYhhmm').format("DDMMYYYYhhmm");
+    //      $(this).attr('data-sort', times);
+    //  })
+    // })
+
+
+
      
     $('#coupon_code').keypress(function(e) { var regex = new RegExp("^[a-zA-Z0-9]+$"); var str = String.fromCharCode(!e.charCode ? e.which : e.charCode); if (regex.test(str)) { return true; } e.preventDefault(); return false; });
    // $('#coupon_code').input(function(e) { var regex = new RegExp("^[a-zA-Z0-9]+$"); var str = String.fromCharCode(!e.charCode ? e.which : e.charCode); if (regex.test(str)) { return true; } e.preventDefault(); return false; });
@@ -539,7 +629,6 @@ $(document).ready(function() {
         });
 
     
-
             jQuery('.btn_delete_act').click(function() {
             var page_id = $(this).attr('dir');
 
@@ -654,21 +743,73 @@ var pagination  = $('#campaigntable_paginate');
 $('#pagination-insert').append(pagination);
 
 
-$(".sorting_1").each(function() {
-    var times = moment($(this).text(),'DD/MM/YYYY').format("YYYYMMDDHHMMSS");
-    // var times = moment($(this).text(),'DD/MM/YYYY').format("YYYYMMDD");
-    $(this).attr('data-sort', times);
-})
-
-
-
-
-
+// $(".sorting_1").each(function() {
+//     // var times = moment($(this).text(),'DD/MM/YYYY').format("YYYYMMDDHHMMSS");
+//     var times = moment($(this).text(),'DD/MM/YYYY').format("YYYYMMDD");
+//     $(this).attr('data-sort', times);
+// })
 
 });
+
+$('#campaigntable .th:contains("Last Updated")').click(function() {
+    //  $(".sorting_1").each(function() {
+    //     var times = moment($(this).text(),'DD/MM/YYYY')format('DD/MM/YYYY mm:ss');
+   	// // var times = moment($(this).text(),'d/m/Y H:i').format("YYYYMMDDHHMMSS");
+    //      $(this).attr('data-sort', times);
+    //  })
+//     $(".sorting_1").each(function() {
+//     var times = moment($(this).text(),'DD/MM/YYYY').format("DD/MM/YYYY HH:MM");
+//     $(this).attr('data-sort', times);
+//     $(this).text(times);
+// })
+// $(".sorting_1").each(function() {
+//     var times = moment($(this).text(),'DD/MM/YYYY').format("YYYYMMDDHHMMSS");
+//     $(this).attr('data-sort', times);
+//     var changeText = moment($(this).text(),'DD/MM/YYYY').format("DD/MM/YYYY HH:MM");
+//     $(this).text(changeText );
+// });
+
+});
+
+// code added for sorting purpose start
+    
+   
+    // $.fn.dataTable.moment = function ( format, locale ) {
+    //     var types = $.fn.dataTable.ext.type;
+     
+    //     // Add type detection
+    //     types.detect.unshift( function ( d ) {
+    //         return moment( d, format, locale, true ).isValid() ?
+    //             'moment-'+format :
+    //             null;
+    //     } );
+     
+    //     // Add sorting method - use an integer for the sorting
+    //     types.order[ 'moment-'+format+'-pre' ] = function ( d ) {
+    //         return moment( d, format, locale, true ).unix();
+    //     };
+    // };
+   
+
+
+// $('#campaigntable th:contains("Last Updated")').trigger("click");
+// console.log('clicked');
+var date2 = $('#campaigntable th:contains("Last Updated1")');
+// $('#campaigntable th:contains("Last Updated")').click(function(e) {
+//     e.stopImmediatePropagation();
+//    date2.trigger('click');
+// });
+// $('.sorting_2').css('width', 0px);
+
 
 </script>
 <script type="text/javascript" src="scripts/package.js"></script>
 <script type="text/javascript" src="scripts/pagination.js"></script>
 <script type="text/javascript" src="scripts/jquery.dataTables.js"></script>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.js"></script>
+<script src="//cdn.datatables.net/plug-ins/1.10.20/sorting/datetime-moment.js"></script> -->
+    
+<!-- <script type="text/javascript" src="//cdn.datatables.net/plug-ins/1.10.11/sorting/date-eu.js"></script>
+<script type="text/javascript" src="//cdn.datatables.net/plug-ins/1.10.21/sorting/datetime-moment.js"></script> -->
+
 <!-- end footer --> 
