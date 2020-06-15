@@ -625,10 +625,16 @@ function saveCampaignDetails() {
                 else if ($('#coupon_codeitem').val() == "" ) {
                   $('#coupon_codeitem').css('border','1px solid red');
                 } 
-                else if (!$('#redeemitem').is(':disabled') && !$('#coupon_codeitem').is(':disabled') )  
-                {   
-                    $('#redeemitem').val() == "" ? $('#redeemitem').css('border','1px solid red') : ''
+                // else if (!$('#redeemitem').is(':disabled') && !$('#coupon_codeitem').is(':disabled') )  
+                // {   
+                //     $('#redeemitem').val() == "" ? $('#redeemitem').css('border','1px solid red') : ''
+                // }
+                else if ( $('#redeemitem').val() == "" && $('#limiteditem').is(":checked"))  
+                {   console.log('cond 2')
+                 $('#redeemitem').css('border','1px solid red');
                 }
+
+
                 else if ($('#dval_item').val() == "" ){
                   $('#dval_item').css('border','1px solid red');
                 }

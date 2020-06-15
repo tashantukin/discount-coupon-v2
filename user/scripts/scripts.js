@@ -515,6 +515,46 @@ $(document).ready(function() {
         }
     }
 
+    //CSV EXPORT
+    if (url.indexOf('/user/manage/orders') >= 0) {
+        //link to show modal
+        // var exportcsvlink = "<div><a href='#' id='send-delivery-track-info' class='export'>Export CSV </a></div>";
+        // $('.item-search-btn').after(exportcsvlink);
+
+        // //modal
+        // var confirmModal  = "<div class='popup-area cart-checkout-confirm' id ='plugin-popup'><div class='wrapper'> <div class='title-area'><h1>Select Date Range</h1></div><div class='content-area'><span id ='main'> <a href='' id='link' target = '_blank'>Export CSV</a> <a href='' id='link2' target = '_blank'></a>  <div class='col-md-6'><div id='reportrange' style='background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%'><i class='fa fa-calendar'></i>&nbsp; <span></span> <i class='fa fa-caret-down'></i></div></div> </div><div class='btn-area'> <a class='add-cart-btn' id='btn-ok'>OK</a></div></div></div>";
+    //     <a href="" id="link" target = '_blank'>Export CSV</a>
+    //     <a href='' id='link2' target = '_blank'></a>
+    //     <div class='col-md-6'>
+    //     <div id='reportrange' style='background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%'>
+    //        <i class='fa fa-calendar'></i>&nbsp;
+    //        <span></span> <i class='fa fa-caret-down'></i>
+    //    </div>
+    //    </div>
+      
+        // $('.footer').after(confirmModal);
+
+        // $('#plugin-popup #btn-ok').click(function(){
+        //     $("#plugin-popup").fadeOut();
+        //     $("#cover").fadeOut();
+        //   }); 
+
+        //   $('.export').click(function(){
+        //     jQuery("#plugin-popup").fadeIn();
+        //           jQuery("#cover").fadeIn();
+        //           jQuery("#plugin-popup").niceScroll({ 
+        //               cursorcolor: "#999999",
+        //               cursorwidth:"4px",
+        //               cursorborderradius:"0px",
+        //               horizrailenabled:false,
+        //               cursorborder: "1px solid #999999"
+        //           });
+        //   }); 
+
+    }
+
+
+
 //SPACETIME
 //NOTE: Page URL may vary. depending on the payment method you use. This one is for payment gateways other than cod.
 if (url.indexOf('/user/checkout/success') >= 0) {
