@@ -56,7 +56,7 @@ $subject = $invoiceId ." Tracking Information";
      
       $data = [
           'From' => $merchantEmail,
-          'To' =>  $consumerEmail, //'nmfnavarro@gmail.com'
+          'To' =>  $consumerEmail, 
           'Subject' => $subject,
           
         'Body' => "<html><body><div style=\"max-width:700px; width:100%; margin:0 auto; border:1px solid #ddd; color:#999; font-size:16px; font-family:sans-serif;  line-height:25px;\">
@@ -64,7 +64,7 @@ $subject = $invoiceId ." Tracking Information";
             <div style=\"text-align:center; margin-bottom:50px;\"> <img src=\" $mplogo\" style=\"max-width:200px;\" /> </div>
             <div>
               <p style=\"color:#000; font-weight:bold; margin-bottom:50px;\">Hi $consumerFirstName,</p>
-              <p>The item(s) below in your order <span style=\"color:#000;\">$invoiceId </span>has been dispatched to our delivery partner. To track your order delivery you can find the information below:</p>
+              <p>Your order is now on its way. We have dispatched your order <span style=\"color:#000;\">$invoiceId.</span> To track your delivery, please use the tracking information as below:</p>
               <p>TRACKING ID: <span style=\"color:#000;\"> $tracking_number  </span></p>
               <p>TRACKING PAGE:  <a href=\"$tracking_url\" target=\"_blank\"style=\"text-decoration: none;\"> $tracking_url </a></p>
             </div>
