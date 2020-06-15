@@ -28,8 +28,12 @@ var bulkdel;
 var isExists=0;
 var isValid = 0;
 var totaldiscountcheckout=0;
-
 var existingcount = 0;
+var startDate;
+var firstdate;
+var lastdate;
+var file_name_start;
+var file_name_end;
 
 //order history -BUYER
 function getDiscountValue(){
@@ -517,42 +521,136 @@ $(document).ready(function() {
 
     //CSV EXPORT
     if (url.indexOf('/user/manage/orders') >= 0) {
-        //link to show modal
-        // var exportcsvlink = "<div><a href='#' id='send-delivery-track-info' class='export'>Export CSV </a></div>";
-        // $('.item-search-btn').after(exportcsvlink);
+       var popup = "<div class='popup-area popup-export-csv'><div class='wrapper'><div class='title-area'><h1 class='text-uppercase'>Export Orders</h1><div class='pull-right'> <a class='lb-close'></a></div><div class='clearfix'></div></div><div class='popup-content-area'><div class='form-inline'><label for='timestamp'>Timestamp</label> <div class='form-group'><input type='text' class='export-date-from form-control' id='export-date-from' /></div></div></div><div class='popup-footer'><div class='txn-note'>The CSV can only support up to 1000 transactions per export, with the latest transactions 1000 transactions of the selected date range shown first.</div><div class='popup-cta'><a href='' class='btn btn-black disabled' id='export' target= '_blank'>Export CSV</a> <a href='' id='link2' target= '_blank'></a></div> </div> </div> </div>";
+       $('.footer').after(popup);
+       var exportButton = "<a class='btn-red btn-export-csv'>Export CSV</a>";
+       var cover =  "<div id='cover' style='display: none;'></div>";
+       $('.footer').after(cover);
+       $('.action-btns').prepend(exportButton);
 
-        // //modal
-        // var confirmModal  = "<div class='popup-area cart-checkout-confirm' id ='plugin-popup'><div class='wrapper'> <div class='title-area'><h1>Select Date Range</h1></div><div class='content-area'><span id ='main'> <a href='' id='link' target = '_blank'>Export CSV</a> <a href='' id='link2' target = '_blank'></a>  <div class='col-md-6'><div id='reportrange' style='background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%'><i class='fa fa-calendar'></i>&nbsp; <span></span> <i class='fa fa-caret-down'></i></div></div> </div><div class='btn-area'> <a class='add-cart-btn' id='btn-ok'>OK</a></div></div></div>";
-    //     <a href="" id="link" target = '_blank'>Export CSV</a>
-    //     <a href='' id='link2' target = '_blank'></a>
-    //     <div class='col-md-6'>
-    //     <div id='reportrange' style='background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%'>
-    //        <i class='fa fa-calendar'></i>&nbsp;
-    //        <span></span> <i class='fa fa-caret-down'></i>
-    //    </div>
-    //    </div>
+      //DATE RANGE FILTER
+      var start = moment().subtract(29, 'days');
+      var end = moment();
+
+        // function cb(start, end) {
+        //     $('#export-date-from').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+        // }
+        function cb(start, end) {
+            //setTimeout(function () {
+                $('#export-date-from').val(start.format('DD/MM/YYYY') + ' - ' + end.format('DD/MM/YYYY'));
+            //}, 100);
+        }
+
+        $('#export-date-from').daterangepicker({
+            "maxSpan": {
+            "months": 3
+            },
+            minDate: moment().startOf('hour').subtract(3,'months'),
+            maxDate: moment().startOf('hour').add(3, 'months'),
+            // autoUpdateInput: true,
+            startDate: start,
+            endDate: end,
+            ranges: {
+                'Today': [moment(), moment()],
+                'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                'This Month': [moment().startOf('month'), moment().endOf('month')],
+                'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+            }
+        },function(start, end, label) {
+        console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+        //for file name with date
+        file_name_start = start.format('YYYY-MM-DD');
+        file_name_end = end.format('YYYY-MM-DD');
+
+        firstdate  = moment(start, 'YYYY.MM.DD').unix();
+        console.log('first ' + firstdate);
+        lastdate =  moment(end, 'YYYY.MM.DD').unix();
+        console.log('lst ' + lastdate);
+
+        createCSV(firstdate,lastdate);
+
+        }, cb);
+
+        cb(start, end);
+
+        $('#export-date-from').on('apply.daterangepicker', function(ev, picker) {
+            $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
+        });
+       
+
+       $(".btn-export-csv").on("click" , function(){
+    //    $('body').on('click', '.btn-export-csv', function () {
+       
+        var $this = $(this);
+        var $popup = $('.popup-export-csv');
+        var $overlay = $('#cover');
+
+        $overlay.fadeIn();
+        $popup.fadeIn();
+    });
+
+   
+    $('.popup-export-csv .lb-close').on('click',  function () {
+        
+        // close popup
+        var $popup = $('.popup-export-csv');
+        var $overlay = $('#cover');
+
+        $overlay.fadeOut();
+        $popup.fadeOut();
+    });
+
+    $('#export').on('click', function () {
+        if(!$(this).hasClass("disabled")){
+
+            $(this).attr('download',file_name_start + '_' + file_name_end + '_Items.csv');
+            $('#link2').attr('download',file_name_start + '_' + file_name_end + '_Orders.csv');
+            // $("#link2").click();
+            document.getElementById("link2").click();
+
+            // close popup
+            var $popup = $('.popup-export-csv');
+            var $overlay = $('#cover');
+
+            $overlay.fadeOut();
+            $popup.fadeOut();
+            $(this).addClass('disabled');
+        }
+    });
+
+ $("#export").attr({
+    'href' : packagePaths + '/downloads?file=item.csv&contentType=text/csv',
+    'target' : '_blank'
+  });
+
+  $("#link2").attr({
+    'href' : packagePaths + '/downloads?file=invoice.csv&contentType=text/csv',
+    'target' : '_blank'
+  });
+
+
+    function createCSV(start, end){
+        var data = { 'startdate': start, 'enddate' : end}; 
+        var apiUrl = packagePaths + '/get_trans.php';
+        $.ajax({
+            url: apiUrl,
+            method: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            success: function(result) {
+              console.log('csv created');
+              $('#export').removeClass('disabled');
+            },
+            error: function(jqXHR, status, err) {
+                toastr.error('Error!');
+            }
+        });
       
-        // $('.footer').after(confirmModal);
-
-        // $('#plugin-popup #btn-ok').click(function(){
-        //     $("#plugin-popup").fadeOut();
-        //     $("#cover").fadeOut();
-        //   }); 
-
-        //   $('.export').click(function(){
-        //     jQuery("#plugin-popup").fadeIn();
-        //           jQuery("#cover").fadeIn();
-        //           jQuery("#plugin-popup").niceScroll({ 
-        //               cursorcolor: "#999999",
-        //               cursorwidth:"4px",
-        //               cursorborderradius:"0px",
-        //               horizrailenabled:false,
-        //               cursorborder: "1px solid #999999"
-        //           });
-        //   }); 
+      }
 
     }
-
 
 
 //SPACETIME

@@ -338,3 +338,54 @@ span.coupon-msg {
   background-color: rgba(240, 60, 15, 0.849);
   color: #ffffff;
 }
+
+
+/* for export csv */
+.popup-export-csv .form-group {
+  position: relative;
+}
+
+.popup-export-csv .form-group .form-control {
+  border-radius: 0;
+  min-width: 200px;
+}
+
+.popup-export-csv .form-group + .form-group {
+  margin-left: 40px;
+}
+
+.popup-export-csv .popup-footer {
+  display: flex;
+  align-items: center;
+}
+
+.popup-export-csv .popup-footer .btn {
+  margin-top: 0;
+}
+
+.popup-export-csv .popup-footer .popup-cta {
+  margin-left: 20px;
+}
+
+.popup-export-csv .popup-content-area {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.popup-export-csv .form-group label {
+  display: block;
+  margin-bottom: 2px;
+}
+
+.popup-export-csv .popup-content-area .form-inline > label {
+  margin-bottom: 0;
+  margin-right: 10px;
+}
+
+.daterangepicker {
+  z-index: 99999;
+}
+
+.popup-export-csv {
+  z-index: 11111 !important;
+}
