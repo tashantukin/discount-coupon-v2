@@ -775,7 +775,7 @@ if($('.register-link').length){
                             $(".pr_detail:not(.hasitempromo)", merchantbox).each(function(){
                                 var total =  $(this).find('.price_tag').text().replace(/[^\d.-]/g, '');
                                 var qty1 =  $(this).find('.qty').text().replace(/[^\d.-]/g, '');
-                                // total = total * qty1;
+                                total = total * qty1;
                                 qty = qty + parseFloat(qty1);
                                 totalcostmerchant =  totalcostmerchant + parseFloat(total);
                                 var discount_type =  itembox.attr("discounttype");
@@ -1056,8 +1056,8 @@ function showPromoCodeSuntec(){
                 $(".pr_detail:not(.hasitempromo)",$(this)).each(function(){
                     var total =  $(this).find('.price_tag').text().replace(/[^\d.-]/g, '');
                     var qty2 =  $(this).find('.qty').text().replace(/[^\d.-]/g, '');
-                    //remove quantity - do not multiply itemx to qty for merchant discounts
-                    // total = total * qty2;
+                    // remove quantity - do not multiply itemx to qty for merchant discounts
+                    total = total * qty2;
 
                     totalpermerchant =  totalpermerchant + parseFloat(total);
                     counter++;
@@ -1214,7 +1214,7 @@ function showItemCode(){
                                             //subtotal of each item
                                             var qty1 =  $(this).find('.qty').text().replace(/[^\d.-]/g, '');
                                         
-                                            //total = total * qty1;
+                                            total = total * qty1;
                                             qty = qty + parseFloat(qty1);
                                             totalcostmerchant =  totalcostmerchant + parseFloat(total);
                                             var discount_type =  itembox.attr("discounttype");
