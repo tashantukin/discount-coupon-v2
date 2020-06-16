@@ -521,7 +521,7 @@ $(document).ready(function() {
 
     //CSV EXPORT
     if (url.indexOf('/user/manage/orders') >= 0) {
-       var popup = "<div class='popup-area popup-export-csv'><div class='wrapper'><div class='title-area'><h1 class='text-uppercase'>Export Orders</h1><div class='pull-right'> <a class='lb-close'></a></div><div class='clearfix'></div></div><div class='popup-content-area'><div class='form-inline'><label for='timestamp'>Timestamp</label> <div class='form-group'><input type='text' class='export-date-from form-control' id='export-date-from' /></div></div></div><div class='popup-footer'><div class='txn-note'>The CSV can only support up to 1000 transactions per export, with the latest transactions 1000 transactions of the selected date range shown first.</div><div class='popup-cta'><a href='' class='btn btn-black disabled' id='export' target= '_blank'>Export CSV</a> <a href='' id='link2' target= '_blank'></a></div> </div> </div> </div>";
+       var popup = "<div class='popup-area popup-export-csv'><div class='wrapper'><div class='title-area'><h1 class='text-uppercase'>Export Orders</h1><div class='pull-right'> <a class='lb-close'></a></div><div class='clearfix'></div></div><div class='popup-content-area'><div class='form-inline'><label for='timestamp'>Timestamp</label> <div class='form-group'><input type='text' class='export-date-from form-control' id='export-date-from' /></div></div></div><div class='popup-footer'><div class='txn-note'>The CSV can only support up to 1000 transactions per export, with the latest transactions 1000 transactions of the selected date range shown first.</div><div class='popup-cta'><a href='' class='btn btn-black disabled' id='export' target= '_blank'>Export CSV</a> <a href='' id='link2' target= '_blank'></a> <span id='exportmsg'></span></div> </div> </div> </div>";
        $('.footer').after(popup);
        var exportButton = "<a class='btn-red btn-export-csv'>Export CSV</a>";
        var cover =  "<div id='cover' style='display: none;'></div>";
@@ -560,6 +560,7 @@ $(document).ready(function() {
             }
         },function(start, end, label) {
         console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+        $('#exportmsg').text('Exporting...');
         //for file name with date
         file_name_start = start.format('YYYY-MM-DD');
         file_name_end = end.format('YYYY-MM-DD');
@@ -595,6 +596,7 @@ $(document).ready(function() {
     $('.popup-export-csv .lb-close').on('click',  function () {
         
         // close popup
+        $('#exportmsg').text('');
         var $popup = $('.popup-export-csv');
         var $overlay = $('#cover');
 
@@ -617,6 +619,7 @@ $(document).ready(function() {
             $overlay.fadeOut();
             $popup.fadeOut();
             $(this).addClass('disabled');
+            $('#exportmsg').text('');
         }
     });
 
@@ -642,6 +645,7 @@ $(document).ready(function() {
             success: function(result) {
               console.log('csv created');
               $('#export').removeClass('disabled');
+              $('#exportmsg').text('Ready to download.');
             },
             error: function(jqXHR, status, err) {
                 toastr.error('Error!');
