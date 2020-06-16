@@ -1125,11 +1125,12 @@ function showItemCode(){
                 var totalpermerchant = 0; 
                 var itemguid;
                 var itemqty;
+                // var qty;
                 var $fixqty =  $(this).attr('qty');
             //get only the amount of items without existing item coupon
             $(".pr_detail:not(.hasitempromo)", $(this)).each(function(){
                 var total =  $(this).find('.price_tag').text().replace(/[^\d.-]/g, '');
-                var qty =  $(this).find('.qty').text().replace(/[^\d.-]/g, '');
+                var  qty =  $(this).find('.qty').text().replace(/[^\d.-]/g, '');
                 //validate total order qty vs coupon available for redeem
                 if(isLimited == 1) { //validate only if the coupon has Limited redemption
                     qty  >= couponleft ? qty = couponleft : '';
@@ -1180,7 +1181,7 @@ function showItemCode(){
                 deliveryCharge = deliveryCharge.replace(/-/g, "");
                 deliveryCharge = parseFloat(deliveryCharge);
                 //validate the discout type if Fixed or percentage
-                (discounttype == "Percentage") ? couponvalue =  parseFloat(calculatePercentage(discountVal,totalpermerchant)) :  couponvalue = discountVal * $fixqty;
+                (discounttype == "Percentage") ? couponvalue =  parseFloat(calculatePercentage(discountVal,totalpermerchant)) :  couponvalue = discountVal * itemqty;
                 merchanttotalcost =  merchanttotalcost + couponvalue;
                 $('.coupon-con #currencySym:last', $(this)).text('-' + mpCurrencycode);
                 $('.coupon-code:last', $(this)).text(couponcode);
