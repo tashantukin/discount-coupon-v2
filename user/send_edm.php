@@ -125,10 +125,12 @@ $subject = $invoiceId ." Tracking Information";
             </div>
 
 
-            <div style="margin-top:50px; margin-bottom:50px">Login to your Suntec+ App to view your order </div>
+            <div style="margin-top:50px; margin-bottom:50px"> To view Suntec+ points, please download and login into Suntec+ App.</div>
             <div style="margin-bottom:50px;">
-              <p>Regards,<br />
-               <?php echo $mpname ?></p>
+              
+            <p style="margin-bottom:1px;">If you have any queries, please contact us at,</p>
+            <a href="mailto:sunteccity@apmasia.com.sg">sunteccity@apmasia.com.sg</a>
+              
             </div>
           </div>
         </div>
