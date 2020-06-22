@@ -1069,6 +1069,7 @@ function showPromoCodeSuntec(){
                 console.log('totalpermechant ' + totalpermerchant);
 
                 if (element == merchantid) {
+                    $('#msg').remove();
                     //if exists, append each coupon to each merchant box
                     var $this = $(this);
                     $(".pr_detail", $(this)).addClass('hasmerchantpromo');  
@@ -1097,11 +1098,14 @@ function showPromoCodeSuntec(){
                         
                         calculateTotal(); 
                     }
+                    // return false;
                  }else {
                     notvalid++;
                 }
-                counters++
+                counters++;
              });
+             console.info('notvalid ' + notvalid);
+             console.info('counter ' + counters);
              if(notvalid == counters)  {
                 returnError('Invalid');
             }  

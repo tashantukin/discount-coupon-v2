@@ -67,7 +67,6 @@ function getDiscountValue(orderguid,$this){
     });
 }
 
-
 function waitForElement(elementPath, callBack){
 	window.setTimeout(function(){
 	if($(elementPath).length){
