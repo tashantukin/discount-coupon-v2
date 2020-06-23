@@ -125,8 +125,8 @@ $subject = "The Suntec Shopping Festival - Order Delivery";
               <div><?php echo  $consumeraddressPostCode ?></div></td>
             </div>
 
-
-            <div style="margin-top:50px; margin-bottom:50px"> To view Suntec+ points, please download and login into <a href="http://onelink.to/me2uny">Suntec+ App</a>.</div>
+            <div style="margin-top:20px; margin-bottom:50px">To know how much Suntec+ points you have earned from this transaction, please tap on "transactions" within the Suntec+ App to find out more!</div>
+            <!-- <div style="margin-top:50px; margin-bottom:50px"> To view Suntec+ points, please download and login into <a href="http://onelink.to/me2uny">Suntec+ App</a>.</div> -->
               
             <p style="margin-bottom:1px;">If you have any queries, please contact us at,</p>
             <a href="mailto:sunteccity@apmasia.com.sg">sunteccity@apmasia.com.sg</a>
