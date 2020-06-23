@@ -93,7 +93,6 @@ function searchItem(keyword,itemguid){
                             radiolabel.attr('for',id);
                     
                 });
-                    
                     $("#itemstable #itemid").hide();
 
             }else {

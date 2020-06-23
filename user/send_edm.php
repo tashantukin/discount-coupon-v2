@@ -35,7 +35,7 @@ $marketplaceInfo = callAPI("GET", null, $url, false);
 $mplogo =   $marketplaceInfo['LogoUrl'];
 $mpname =   $marketplaceInfo['Name'];
 $mplink =   substr($mplogo,0, strpos($mplogo,"/images"));
-$subject = $invoiceId ." Tracking Information";
+$subject = "The Suntec Shopping Festival - Order Delivery";
 
 //if ($status == 'Order Confirmation' || $status == 'Pending Stock') {
     //send EDM
@@ -59,7 +59,8 @@ $subject = $invoiceId ." Tracking Information";
           'To' =>  $consumerEmail, 
           'Subject' => $subject,
           
-        'Body' => "<html><body><div style=\"max-width:700px; width:100%; margin:0 auto; border:1px solid #ddd; color:#999; font-size:16px; font-family:sans-serif;  line-height:25px;\">
+        'Body' => "<html>
+        <body><div style=\"max-width:700px; width:100%; margin:0 auto; border:1px solid #ddd; color:#999; font-size:16px; font-family:sans-serif;  line-height:25px;\">
           <div style=\"padding:15px;\">
             <div style=\"text-align:center; margin-bottom:50px;\"> <img src=\" $mplogo\" style=\"max-width:200px;\" /> </div>
             <div>
@@ -125,8 +126,7 @@ $subject = $invoiceId ." Tracking Information";
             </div>
 
 
-            <div style="margin-top:50px; margin-bottom:50px"> To view Suntec+ points, please download and login into Suntec+ App.</div>
-            <div style="margin-bottom:50px;">
+            <div style="margin-top:50px; margin-bottom:50px"> To view Suntec+ points, please download and login into <a href="http://onelink.to/me2uny">Suntec+ App</a>.</div>
               
             <p style="margin-bottom:1px;">If you have any queries, please contact us at,</p>
             <a href="mailto:sunteccity@apmasia.com.sg">sunteccity@apmasia.com.sg</a>
