@@ -35,7 +35,7 @@ $marketplaceInfo = callAPI("GET", null, $url, false);
 $mplogo =   $marketplaceInfo['LogoUrl'];
 $mpname =   $marketplaceInfo['Name'];
 $mplink =   substr($mplogo,0, strpos($mplogo,"/images"));
-$subject = "The Suntec Shopping Festival - Order Delivery";
+$subject = "Suntec+ eMall - Order Delivery";
 
 //if ($status == 'Order Confirmation' || $status == 'Pending Stock') {
     //send EDM
@@ -67,7 +67,7 @@ $subject = "The Suntec Shopping Festival - Order Delivery";
               <p style=\"color:#000; font-weight:bold; margin-bottom:50px;\">Hi $consumerFirstName,</p>
               <p>Your order is now on its way. We have dispatched your order <span style=\"color:#000;\">$invoiceId.</span> To track your delivery, please use the tracking information as below:</p>
               <p>TRACKING ID: <span style=\"color:#000;\"> $tracking_number  </span></p>
-              <p>TRACKING PAGE:  <a href=\"$tracking_url\" target=\"_blank\"style=\"text-decoration: none;\"> $tracking_url </a></p>
+              <p>TRACKING INFO:  <a href=\"$tracking_url\" target=\"_blank\"style=\"text-decoration: none;\"> $tracking_url </a></p>
             </div>
             <div style=\" border-top:1px solid #000; padding-top: 10px; padding-bottom: 10px; margin-top:20px;\">
               <table border=\"0\" style=\"width:100%; color:#B3B3B3;\">
@@ -129,7 +129,7 @@ $subject = "The Suntec Shopping Festival - Order Delivery";
             <!-- <div style="margin-top:50px; margin-bottom:50px"> To view Suntec+ points, please download and login into <a href="http://onelink.to/me2uny">Suntec+ App</a>.</div> -->
               
             <p style="margin-bottom:1px;">If you have any queries, please contact us at,</p>
-            <a href="mailto:sunteccity@apmasia.com.sg">sunteccity@apmasia.com.sg</a>
+            <a href="mailto:sunteccity@apmasia.com.sg">rewards@sunteccity.com.sg</a>
               
             </div>
           </div>
