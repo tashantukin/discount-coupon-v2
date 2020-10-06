@@ -10,22 +10,22 @@ $tracking_url = $content['trackingURL'];
 $baseUrl = getMarketplaceBaseUrl();
 $admin_token = getAdminToken();
 $userToken = $_COOKIE["webapitoken"];
-$url = $baseUrl . '/api/v2/users/'; 
+$url = $baseUrl . '/api/v2/users/';
 $result = callAPI("GET", $userToken, $url, false);
 $userId = $result['ID'];
 
-$url = $baseUrl . '/api/v2/users/'; 
+$url = $baseUrl . '/api/v2/users/';
 $result = callAPI("GET", $admin_token['access_token'], $url, false);
 error_log('admin ' . json_encode($result));
 $admin_id = $result['ID'];
 error_log('admin id ' . $admin_id);
 
 //get the order id from invoice number
-$url =  $baseUrl . '/api/v2/merchants/' . $userId  .'/transactions/'. $invoice_number;
+$url =  $baseUrl . '/api/v2/merchants/' . $userId  . '/transactions/' . $invoice_number;
 $result = callAPI("GET", $admin_token['access_token'], $url, false);
 //save the fulfilment status by obtained order id
- $orderId = $result['Orders'][0]['ID'];
- $invoiceId = $result['InvoiceNo'];
+$orderId = $result['Orders'][0]['ID'];
+$invoiceId = $result['InvoiceNo'];
 
 //for MP LOGO
 // Query to get marketplace id
@@ -34,32 +34,34 @@ $marketplaceInfo = callAPI("GET", null, $url, false);
 
 $mplogo =   $marketplaceInfo['LogoUrl'];
 $mpname =   $marketplaceInfo['Name'];
-$mplink =   substr($mplogo,0, strpos($mplogo,"/images"));
+$mplink =   substr($mplogo, 0, strpos($mplogo, "/images"));
 $subject = "Suntec+ eMall - Order Delivery";
 
 //if ($status == 'Order Confirmation' || $status == 'Pending Stock') {
-    //send EDM
-      $merchantEmail =  $result['Orders'][0]['MerchantDetail']['Email'];
-      $consumerEmail =  $result['Orders'][0]['ConsumerDetail']['Email'];
-      $consumerLastName = $result['Orders'][0]['ConsumerDetail']['LastName'];
-      $consumerFirstName = $result['Orders'][0]['ConsumerDetail']['FirstName'];
-      //delivery address
-      $consumeraddressName = $result['Orders'][0]['DeliveryToAddress']['Name'];  
-      $consumeraddressLine1 = $result['Orders'][0]['DeliveryToAddress']['Line1'];  
-      $consumeraddressLine2 = !empty($result['Orders'][0]['DeliveryToAddress']['Line2']) ? $result['Orders'][0]['DeliveryToAddress']['Line2'] : '';  
-      $consumeraddressState = $result['Orders'][0]['DeliveryToAddress']['State'];  
-      $consumeraddressCity= $result['Orders'][0]['DeliveryToAddress']['City']; 
-      $consumeraddressCountry = $result['Orders'][0]['DeliveryToAddress']['Country'];  
-      $consumeraddressPostCode = $result['Orders'][0]['DeliveryToAddress']['PostCode'];  
+//send EDM
+$merchantEmail =  $result['Orders'][0]['MerchantDetail']['Email'];
+$consumerEmail =  $result['Orders'][0]['ConsumerDetail']['Email'];
+$consumerLastName = $result['Orders'][0]['ConsumerDetail']['LastName'];
+$consumerFirstName = $result['Orders'][0]['ConsumerDetail']['FirstName'];
+//delivery address
+$consumeraddressName = $result['Orders'][0]['DeliveryToAddress']['Name'];
+$consumeraddressLine1 = $result['Orders'][0]['DeliveryToAddress']['Line1'];
+$consumeraddressLine2 = !empty($result['Orders'][0]['DeliveryToAddress']['Line2']) ? $result['Orders'][0]['DeliveryToAddress']['Line2'] : '';
+$consumeraddressState = $result['Orders'][0]['DeliveryToAddress']['State'];
+$consumeraddressCity = $result['Orders'][0]['DeliveryToAddress']['City'];
+$consumeraddressCountry = $result['Orders'][0]['DeliveryToAddress']['Country'];
+$consumeraddressPostCode = $result['Orders'][0]['DeliveryToAddress']['PostCode'];
 
-      $date = date('d/m/Y H:i', $result['Orders'][0]['CreatedDateTime']);
-     
-      $data = [
-          'From' => $merchantEmail,
-          'To' =>  $consumerEmail, 
-          'Subject' => $subject,
-          
-        'Body' => "<html>
+$date = date('d/m/Y H:i', $result['Orders'][0]['CreatedDateTime']);
+
+$data = [
+  'From' => $merchantEmail,
+  'To' =>  $consumerEmail,
+  'Subject' => $subject,
+
+
+
+  'Body' => "<html>
         <body><div style=\"max-width:700px; width:100%; margin:0 auto; border:1px solid #ddd; color:#999; font-size:16px; font-family:sans-serif;  line-height:25px;\">
           <div style=\"padding:15px;\">
             <div style=\"text-align:center; margin-bottom:50px;\"> <img src=\" $mplogo\" style=\"max-width:200px;\" /> </div>
@@ -86,63 +88,66 @@ $subject = "Suntec+ eMall - Order Delivery";
                     <th style=\"text-align: right; padding: 10px\">Price</th>
                   </tr>
                 </thead>
-                <tbody style=\"color: #999\">"];
-                ?>
-             
+                <tbody style=\"color: #999\">"
+];
+?>
 
-              <?php
-              ob_start(); 
-              foreach ($result['Orders'][0]['CartItemDetails'] as $orders) {
-                  $price = $orders['ItemDetail']['Price'];
-                  $qty =  $orders['Quantity'];
-                  $currencycode = $orders['ItemDetail']['CurrencyCode'];
-                  $total = number_format($price * $qty);
-                ?>
-                
-                <tr>  
-                 <td style="padding: 10px;"> <?php echo $orders['ItemDetail']['Name'];  ?> </td>
-                <td style="padding: 10px;"><?php echo $qty; ?></td>
-                <td style='text-align: right; padding: 10px;'><?php echo  $currencycode . ' ' . $total ?></td>
-                </tr>
-               
-                <?php 
-                
-              } 
-                
-              ?>
-            
-              </tbody>
-              </table>
-            </div>
 
-            <div style="margin-top:20px; margin-bottom:10px">
-              <div style="color:#000; font-weight:bold;">Delivery Address :</div>
-              <div><?php echo  $consumeraddressName ?></div>
-              <div><?php echo  $consumeraddressLine1 . ' ' . $consumeraddressLine2  ?></div>
-              <div><?php echo  $consumeraddressState?></div>
-              <div><?php echo  $consumeraddressCity?></div>
-              <div><?php echo  $consumeraddressCountry ?></div>
-              <div><?php echo  $consumeraddressPostCode ?></div></td>
-            </div>
+<?php
+ob_start();
+foreach ($result['Orders'][0]['CartItemDetails'] as $orders) {
+  $price = $orders['ItemDetail']['Price'];
+  $qty =  $orders['Quantity'];
+  $currencycode = $orders['ItemDetail']['CurrencyCode'];
+  $total = number_format($price * $qty);
+?>
 
-            <div style="margin-top:20px; margin-bottom:50px">To know how much Suntec+ points you have earned from this transaction, please tap on "transactions" within the Suntec+ App to find out more!</div>
-            <!-- <div style="margin-top:50px; margin-bottom:50px"> To view Suntec+ points, please download and login into <a href="http://onelink.to/me2uny">Suntec+ App</a>.</div> -->
-              
-            <p style="margin-bottom:1px;">If you have any queries, please contact us at,</p>
-            <a href="mailto:sunteccity@apmasia.com.sg">rewards@sunteccity.com.sg</a>
-              
-            </div>
-          </div>
-        </div>
-        </body></html>
-       <?php
-       $my_var = ob_get_contents();
-       $data['Body'] .= $my_var;
-       ob_end_flush();
-       join(" ",$data['Body']); 
-      $url =  $baseUrl . '/api/v2/admins/' . $admin_id .'/emails';
-      $sendEDM = callAPI("POST", $admin_token['access_token'], $url, $data);
-      echo json_encode(['result' => $sendEDM]);        
+  <tr>
+    <td style="padding: 10px;"> <?php echo $orders['ItemDetail']['Name'];  ?> </td>
+    <td style="padding: 10px;"><?php echo $qty; ?></td>
+    <td style='text-align: right; padding: 10px;'><?php echo  $currencycode . ' ' . $total ?></td>
+  </tr>
 
-     ?>
+<?php
 
+}
+
+?>
+
+</tbody>
+</table>
+</div>
+
+<div style="margin-top:20px; margin-bottom:10px">
+  <div style="color:#000; font-weight:bold;">Delivery Address :</div>
+  <div><?php echo  $consumeraddressName ?></div>
+  <div><?php echo  $consumeraddressLine1 . ' ' . $consumeraddressLine2  ?></div>
+  <div><?php echo  $consumeraddressState ?></div>
+  <div><?php echo  $consumeraddressCity ?></div>
+  <div><?php echo  $consumeraddressCountry ?></div>
+  <div><?php echo  $consumeraddressPostCode ?></div>
+  </td>
+</div>
+
+<div style="margin-top:20px; margin-bottom:50px">To know how much Suntec+ points you have earned from this transaction, please tap on "transactions" within the Suntec+ App to find out more!</div>
+<!-- <div style="margin-top:50px; margin-bottom:50px"> To view Suntec+ points, please download and login into <a href="http://onelink.to/me2uny">Suntec+ App</a>.</div> -->
+
+<p style="margin-bottom:1px;">If you have any queries, please contact us at,</p>
+<a href="mailto:sunteccity@apmasia.com.sg">rewards@sunteccity.com.sg</a>
+
+</div>
+</div>
+</div>
+</body>
+
+</html>
+<?php
+$my_var = ob_get_contents();
+$data['Body'] .= $my_var;
+ob_end_flush();
+join(" ", $data['Body']);
+$url =  $baseUrl . '/api/v2/admins/' . $admin_id . '/emails';
+$sendEDM = callAPI("POST", $admin_token['access_token'], $url, $data);
+echo json_encode(['result' => $sendEDM]);
+
+?>
