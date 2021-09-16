@@ -1033,3 +1033,14 @@ padding: 6px 12px;
   .noinput {
   border: 1px solid red;
   }
+
+  #campaigntable_filter input {
+    color: #c2c2c2;
+    border: solid 1px #979797;
+    z-index: 99;
+    border-radius: 0px;
+    height: 35px;
+  }
+
+
+

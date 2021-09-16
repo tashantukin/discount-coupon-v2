@@ -37,7 +37,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    
                     <div class="panel-box ">
                         <div class="blsl-list-tblsec1">
                             <table id ="campaigntable" class="sortable">
@@ -157,6 +157,7 @@
                         </div>
                     </div>
                 </div>
+            </div>
             <div class="col-md-12"> 
             <nav class="text-center" aria-label="Page navigation">
               <ul class="pagination justify-content-center">

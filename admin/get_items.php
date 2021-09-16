@@ -9,6 +9,8 @@ $itemguid = $content['itemguid'];
 $baseUrl = getMarketplaceBaseUrl();
 $admin_token = getAdminToken();
 $userToken = $_COOKIE["webapitoken"];
+
+
 $url = $baseUrl . '/api/v2/users/'; 
 $result = callAPI("GET", $userToken, $url, false);
 $userId = $result['ID'];

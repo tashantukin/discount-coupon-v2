@@ -16,7 +16,18 @@
 
     const formatter = new Intl.NumberFormat('en-US', {
         minimumFractionDigits: 2
-      })
+    })
+    
+
+    function waitForElement(elementPath, callBack) {
+        window.setTimeout(function() {
+            if ($(elementPath).length) {
+                callBack(elementPath, $(elementPath));
+            } else {
+                waitForElement(elementPath, callBack);
+            }
+        }, 500)
+    }
     function setTimezone(){
         var timezone_offset_minutes = new Date().getTimezoneOffset();
         timezone_offset_minutes = timezone_offset_minutes == 0 ? 0 : -timezone_offset_minutes;
@@ -538,6 +549,20 @@ function saveCampaignDetails() {
     }
 
     $(document).ready(function() {
+
+
+        //custom search button
+        waitForElement('#campaigntable_filter input', function ()
+        {
+            // $("#campaigntable_filter").html($('#campaigntable_filter input'));
+            $('#campaigntable_filter input').attr('placeholder', 'Search');
+            $('#campaigntable_filter input').css('margin-left', '20px');
+            $('#campaigntable_filter input').addClass('form-control');
+            $('#campaigntable_filter label').css('color','white'); //hide the search label
+
+        });
+
+
 
         //limit the value to 100% max if discount type is percentage
         $('#d-val').on('input', function () {
