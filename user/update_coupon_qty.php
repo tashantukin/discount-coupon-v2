@@ -17,16 +17,7 @@ $userId = $result['ID'];
 //get the discount value
 $url =  $baseUrl . '/api/v2/admins/' . $userId .'/transactions/'. $order_guid;
 $result = callAPI("GET", $admin_token['access_token'], $url, false);
-//error_log('invoice info' . json_encode($result));
-//$orderId = $result['Orders'][0]['ID'];
 
-// $order_exists = array(array('Name' => 'OrderId', "Operator" => "in",'Value' => $orderId));
-// $url =  $baseUrl . '/api/v2/plugins/'. getPackageID() .'/custom-tables/Orders';
-// $couponDetails =  callAPI("POST", $admin_token['access_token'], $url, $order_exists);
-//  $rec = json_encode($couponDetails['Records']);
-//     if ($rec == '[]') {
-       
-//     }else{
 $redeemed =[];
 foreach($result['Orders'] as $orders){
     $orderId = $orders['ID'];
@@ -45,7 +36,6 @@ foreach($result['Orders'] as $orders){
         $curr_coupon_code = $couponDetails['Records'][0]['CouponCode'];
         echo json_encode(['couponcode' => $curr_coupon_code]);
         //loop here on coupon code array
-      //  $curr_coupon_code = str_replace('"', '', $curr_coupon_code); 
         $curr_orderid = str_replace('"', '', $curr_order_id); 
 
         //update the status of the coupon in orders.

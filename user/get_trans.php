@@ -25,8 +25,6 @@ $url = $baseUrl . '/api/v2/users/';
 $result = callAPI("GET", $userToken, $url, false);
 $userId = $result['ID'];
 
-$temp_id ='875bf3b8-95c7-4df0-ab25-383b879e6165'; //bpdiana0613.test
-// $temp_id = '5e812d60-73ef-4411-a016-867f496fbc0b';
 //get all invoice info
 $url =  $baseUrl . '/api/v2/merchants/' . $userId .'/transactions?pageSize=1000&startDate='. $startDate .'&endDate=' .$enddate;
 // print_r($url);
@@ -112,19 +110,6 @@ foreach($result['Records'] as $orders) {
 fclose($fh);
 // rename('item.csv', $rename);
 fclose($fh_items);
-// rename('invoice.csv', $rename);
-
-// Timestamp ok
-// Buyer display name	ok 
-// Buyer Email	ok
-// Payment Status ok
-// Order Status	 ok 
-// Shipping Method	ok
-// Order Sub-total	ok
-// Shipping Costs	ok
-// Discounts	ok
-// Admin Fees	ok
-// Grand Total	ok
 
 ?>
 

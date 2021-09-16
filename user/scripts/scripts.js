@@ -17,13 +17,7 @@
     var coupon;
     var couponcode, merchants, discounttype;
     var errorType;
-    var promocode,
-      isEnabled,
-      isLimited,
-      discountVal,
-      maxRedeem,
-      isInvalid,
-      couponId;
+    var promocode, isEnabled, isLimited,discountVal,maxRedeem, isInvalid, couponId
     var currentSubtotal;
     var mpCurrencycode = $("#currencyCode").val();
     var deliveryCharge, currentTotal;
@@ -538,12 +532,6 @@
         console.log(invoiceNumberMerchant);
 
 
-        // var invoiceNumber = $('.ordr-dtls-invoiceid .innvoice-id')
-        //   .clone()
-        //   .children()
-        //   .remove()
-        //   .end()
-        //   .text();
         var senddeliveryinfo =
           "<div><a href='#' id='send-delivery-track-info'>Send Delivery Tracking Info</a></div>";
         var imgLink =
@@ -581,12 +569,10 @@
         {
           e.preventDefault();
           var url = $.trim($(".tracking-url").val());
-          // // $(".tracking-url").addClass('error-con');
-          //  if(isUrlValid(url) ) {
+          
           $(".tracking-url").removeClass("error-con");
           sendEDM(invoiceNumberMerchant);
 
-          //  }
         });
         function isUrlValid(url)
         {
@@ -650,9 +636,6 @@
         var start = moment().subtract(29, "days");
         var end = moment();
 
-        // function cb(start, end) {
-        //     $('#export-date-from').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-        // }
         function cb(start, end)
         {
           //setTimeout(function () {
@@ -729,8 +712,7 @@
 
         $(".btn-export-csv").on("click", function ()
         {
-          //    $('body').on('click', '.btn-export-csv', function () {
-
+         
           var $this = $(this);
           var $popup = $(".popup-export-csv");
           var $overlay = $("#cover");
@@ -761,7 +743,7 @@
               "download",
               file_name_start + "_" + file_name_end + "_Orders.csv"
             );
-            // $("#link2").click();
+            
             document.getElementById("link2").click();
 
             // close popup
@@ -828,10 +810,6 @@
             decrementCouponBespoke();
           });
         });
-        // checkRedeemStatus();
-        // waitForElement('#couponhidden',function(){
-        // decrementCoupon();
-        // })
       }
 
       //BESPOKE
@@ -899,7 +877,7 @@
           {
             $("#couponhidden").remove();
             promocode = $("#promocode").val().toUpperCase();
-            getCouponDetailssuntec();
+            getCouponDetailsV2();
           });
           //delivery select box
           $(".sel_del_method").on("change", function ()
@@ -992,7 +970,7 @@
             if (keycode == "13") {
               $("#couponhidden").remove();
               promocode = $("#promocode").val().toUpperCase();
-              getCouponDetailssuntec();
+              getCouponDetailsV2();
             }
           });
 
@@ -1042,7 +1020,7 @@
       }
     });
     //1
-    function getCouponDetailssuntec()
+    function getCouponDetailsV2()
     {
       promocode = $("#promocode").val().toUpperCase();
       var data = { promocode: promocode };
@@ -1083,7 +1061,6 @@
               '<input type="hidden" class="coupon-msg" id="couponhidden"></span>';
             $(".page-package").append(couponspan);
             validateifcouponexists(promocode);
-            console.log("exists " + isExists);
             if (isValid == 1) {
               console.log("waiting");
               if (isExists == 1) {
@@ -1096,7 +1073,7 @@
               } else {
                 //show coupons
                 if (merchants != null) {
-                  showPromoCodeSuntec();
+                  showPromoCodeV2();
                 }
                 if ($itemcoupon != null) {
                   showItemCode();
@@ -1105,9 +1082,6 @@
             }
           }
         },
-        // complete: function(result){
-
-        //   },
         error: function (jqXHR, status, err) { },
       });
     }
@@ -1151,15 +1125,12 @@
               couponqty = coupondetails.result[0].Quantity;
               couponId = coupondetails.result[0].Id;
               couponleft = maxRedeem - couponqty;
-              console.log("itemcoupon " + couponcode);
-
-              //   maxRedeem == couponqty ? expired_coupons.push(couponcode) : '';
+              
             },
             error: function (jqXHR, status, err) { },
             complete: function (result)
             {
-              console.log("pushing");
-              console.info("maxredeem " + maxRedeem + " " + "qty " + couponqty);
+             
               //validate if the coupon iw disabled also
               maxRedeem == couponqty || couponEnabled == 0
                 ? (expired_coupons.push(couponcode), counterror++)
@@ -1168,19 +1139,15 @@
           });
         });
 
-        //    $(document).ajaxStop(function(){
 
         var callAjax = true;
         $(document).ajaxStop(function ()
         {
           if (callAjax) {
-            console.log("count " + counterror);
-            console.log(expired_coupons);
 
             if (counterror > 0) {
               console.info("in expired " + expired_coupons);
               $("#coupons").length > 0 ? $("#coupons, #break").remove() : "";
-              // event.stopImmediatePropagation();
 
               jQuery("#plugin-popup").fadeIn();
               jQuery("#cover").fadeIn();
@@ -1204,7 +1171,6 @@
             } else {
               $("#plugin-popup").fadeOut();
               $("#cover").fadeOut();
-              console.info("else in ajax stop");
               $(".clone").trigger("click");
               callAjax = false;
             }
@@ -1213,7 +1179,7 @@
       }
     }
 
-    function showPromoCodeSuntec()
+    function showPromoCodeV2()
     {
       mpCurrencycode = $("#currencyCode").val();
       //2. APPEND THE COUPON DIV FOR EACH MERCHANT BOX
@@ -1991,9 +1957,7 @@
           '<div class="ordr-dtls-trans-line" id="coupon_ordetails"><span id="couponvalue"></span></div>';
         $(".ordr-dtls-trans-info").append(promo);
         var total = $(".ordr-dtls-trans-line:first").text();
-        console.log(total);
         total1 = total.replace(/[^\d.-]/g, "");
-        console.log(total1);
 
         $("#coupon_ordetails").css("display", "inline");
         var discount =

@@ -29,21 +29,9 @@ $couponDetails =  callAPI("POST", $admin_token['access_token'], $url, $order_exi
  $rec = json_encode($couponDetails['Records']);
  
     if ($rec == '[]') {
-        error_log('no, i dont exists,');
-        //echo json_encode(['result' => $couponDetails['Records']]);
-        
-
+       
     }else{
 
-    //     foreach($couponDetails['Records'] as $orders){
-      
-    //     $curr_order_id = $orders['Id'];
-    //     $curr_status = $orders['Status'];
-
-    //     echo json_encode(['result' => $couponDetails['Records'][0]['Status']]);
-
-
-    // }
       //get the current status of the transaction invoice
         $curr_order_id = json_encode($couponDetails['Records'][0]['Id']);
         $curr_status =  json_encode($couponDetails['Records'][0]['Status']);

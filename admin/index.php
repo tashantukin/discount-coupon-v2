@@ -517,28 +517,7 @@ $(document).ready(function() {
         {
             'targets': [2], "visible": false
         }]
-        // {
-        //    targets: [1],
-        //    type: 'date' // Don't use this with the datetime-moment plugin
-        //  }
-    
-    //     columnDefs: [
-    //    { type: 'date', targets: 1 }
-    //    ]
-    // bSortable: true
-//     "aoColumns": [
-
-//     {"sType": "date"}
-
-// ]
-    // aoColumnDefs: [
-    //        // { "aTargets": [ 0 ], "bSortable": true },
-    //         { "aTargets": [ 1 ], "bSortable": true }
-    //         // { "aTargets": [ 2 ], "bSortable": true },
-    //         // { "aTargets": [ 3 ], "bSortable": false }
-    //     ]
-        // "columnDefs": [{ type: 'date', orderable: true, targets: [1] }]
-        // order: [1, 'desc']
+   
         }
     );
 
@@ -559,50 +538,6 @@ $(document).ready(function() {
 
     });
 
-//     waitForElement('.sorting_1',function(){
-//     //     $(".sorting_1").each(function() {
-//     // var times = moment($(this).text(),'DD/MM/YYYY').format("DD/MM/YYYY HH:MM");
-//     // $(this).attr('data-sort', times);
-//     // $(this).text(times);
-//     $(".sorting_1").each(function() {
-//     var times = moment($(this).text(),'DD/MM/YYYY').format("YYYYMMDDHHMMSS");
-//     $(this).attr('data-sort', times);
-//     var changeText = moment($(this).text(),'DD/MM/YYYY').format("DD/MM/YYYY HH:MM");
-//     $(this).text(changeText );
-// })
-
-
-
-
-// })
-
-// $.fn.dataTable.moment = function ( format, locale ) {
-//     var types = $.fn.dataTable.ext.type;
- 
-//     // Add type detection
-//     types.detect.unshift( function ( d ) {
-//         return moment( d, format, locale, true ).isValid() ?
-//             'moment-'+format :
-//             null;
-//     } );
- 
-//     // Add sorting method - use an integer for the sorting
-//     types.order[ 'moment-'+format+'-pre' ] = function ( d ) {
-//         return moment( d, format, locale, true ).unix();
-//     };
-// };
-
-
-    // $(".sorting_1").each(function() {
-    //     var times = moment($(this).text(),'DD/MM/YYYY')format('DD/MM/YYYY mm:ss');
-   	// // var times = moment($(this).text(),'DDMMYYYYhhmm').format("DDMMYYYYhhmm");
-    //      $(this).attr('data-sort', times);
-    //  })
-    // })
-
-
-
-     
     $('#coupon_code').keypress(function(e) { var regex = new RegExp("^[a-zA-Z0-9]+$"); var str = String.fromCharCode(!e.charCode ? e.which : e.charCode); if (regex.test(str)) { return true; } e.preventDefault(); return false; });
    // $('#coupon_code').input(function(e) { var regex = new RegExp("^[a-zA-Z0-9]+$"); var str = String.fromCharCode(!e.charCode ? e.which : e.charCode); if (regex.test(str)) { return true; } e.preventDefault(); return false; });
     $('.pr-text').keypress(function(e) { var regex = new RegExp("^[a-zA-Z0-9]+$"); var str = String.fromCharCode(!e.charCode ? e.which : e.charCode); if (regex.test(str)) { return true; } e.preventDefault(); return false; });
@@ -744,73 +679,23 @@ var pagination  = $('#campaigntable_paginate');
 $('#pagination-insert').append(pagination);
 
 
-// $(".sorting_1").each(function() {
-//     // var times = moment($(this).text(),'DD/MM/YYYY').format("YYYYMMDDHHMMSS");
-//     var times = moment($(this).text(),'DD/MM/YYYY').format("YYYYMMDD");
-//     $(this).attr('data-sort', times);
-// })
 
 });
 
 $('#campaigntable .th:contains("Last Updated")').click(function() {
-    //  $(".sorting_1").each(function() {
-    //     var times = moment($(this).text(),'DD/MM/YYYY')format('DD/MM/YYYY mm:ss');
-   	// // var times = moment($(this).text(),'d/m/Y H:i').format("YYYYMMDDHHMMSS");
-    //      $(this).attr('data-sort', times);
-    //  })
-//     $(".sorting_1").each(function() {
-//     var times = moment($(this).text(),'DD/MM/YYYY').format("DD/MM/YYYY HH:MM");
-//     $(this).attr('data-sort', times);
-//     $(this).text(times);
-// })
-// $(".sorting_1").each(function() {
-//     var times = moment($(this).text(),'DD/MM/YYYY').format("YYYYMMDDHHMMSS");
-//     $(this).attr('data-sort', times);
-//     var changeText = moment($(this).text(),'DD/MM/YYYY').format("DD/MM/YYYY HH:MM");
-//     $(this).text(changeText );
-// });
+    
 
 });
 
-// code added for sorting purpose start
-    
-   
-    // $.fn.dataTable.moment = function ( format, locale ) {
-    //     var types = $.fn.dataTable.ext.type;
-     
-    //     // Add type detection
-    //     types.detect.unshift( function ( d ) {
-    //         return moment( d, format, locale, true ).isValid() ?
-    //             'moment-'+format :
-    //             null;
-    //     } );
-     
-    //     // Add sorting method - use an integer for the sorting
-    //     types.order[ 'moment-'+format+'-pre' ] = function ( d ) {
-    //         return moment( d, format, locale, true ).unix();
-    //     };
-    // };
-   
-
-
-// $('#campaigntable th:contains("Last Updated")').trigger("click");
-// console.log('clicked');
+/
 var date2 = $('#campaigntable th:contains("Last Updated1")');
-// $('#campaigntable th:contains("Last Updated")').click(function(e) {
-//     e.stopImmediatePropagation();
-//    date2.trigger('click');
-// });
-// $('.sorting_2').css('width', 0px);
+
 
 
 </script>
 <script type="text/javascript" src="scripts/package.js"></script>
 <script type="text/javascript" src="scripts/pagination.js"></script>
 <script type="text/javascript" src="scripts/jquery.dataTables.js"></script>
-<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.js"></script>
-<script src="//cdn.datatables.net/plug-ins/1.10.20/sorting/datetime-moment.js"></script> -->
-    
-<!-- <script type="text/javascript" src="//cdn.datatables.net/plug-ins/1.10.11/sorting/date-eu.js"></script>
-<script type="text/javascript" src="//cdn.datatables.net/plug-ins/1.10.21/sorting/datetime-moment.js"></script> -->
+
 
 <!-- end footer --> 

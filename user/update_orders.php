@@ -53,12 +53,12 @@ error_log($total_with_discount);
         'DiscountAmount' =>  $total_with_discount,
     ],
 ];    
-    error_log(json_encode($data));
+    
     //update the current total;
     $url =  $baseUrl . '/api/v2/admins/'. $admin_id .'/orders';
-    error_log('orders url ' . $url);
+   
     $updateOrders =  callAPI("POST", $admin_token['access_token'], $url, $data); 
-    error_log('update response ' . json_encode($updateOrders)); //no response means success
+   
 
     //============================================================*******************save the coupon to custom fields
 // Query to get marketplace id
@@ -79,14 +79,13 @@ $curr_order_id = json_encode($couponDetails['Records'][0]['Id']);
 $curr_orderid = str_replace('"', '', $curr_order_id); 
 
     if ($rec == '[]') {
-        error_log('not exists,');
+       
         $couponCode = '';
         $order_details = array('OrderId' => $order_guid, 'CouponCode' => $coupon_name, 'DiscountValue' => $discountTotal, 'DiscountPercentage' => $coupon_value);
         //3. Save the Coupon details along with the fetched campaign ID
         $url =  $baseUrl . '/api/v2/plugins/'. getPackageID() .'/custom-tables/Orders/rows';
         $result =  callAPI("POST",$admin_token['access_token'], $url, $order_details);
-        error_log($url);
-        error_log(json_encode($result));
+       
      
     }else{
         //update 

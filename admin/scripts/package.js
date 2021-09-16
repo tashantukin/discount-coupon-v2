@@ -108,9 +108,8 @@ function searchItem(keyword,itemguid){
 
             }else {
 
-                console.log(itemDetails + 'else' );
                 if (itemDetails.result.length == 0 || result == null)  {
-                // alert('not found');            
+                          
                 }else{
                     $('#itemstable tbody').empty(); //empty the former results
                 
@@ -122,11 +121,7 @@ function searchItem(keyword,itemguid){
                         var hasvariants =  item.HasChildItems;
                         console.log(hasvariants);
                         var disabled;
-                        //  (hasvariants == true) ?
-
-                        //     disabled = 'disabled' :   disabled = '';
-                            
-                          //  if (!hasvariants == true) {
+                       
                             itemPrice = $('#currencyCode').val() +  formatter.format(itemPrice);     
                             var markup = "<tr id='eachitem'><td>" + name + "</td><td id='itemid'>" + itemId + "</td>  <td id='itemprice' pricevalue='"+item.Price+"'>" + itemPrice + "</td> <td class='pgfncyopt'><div class='fancy-radio'> <input type='radio' value='s1' name='search_result' class='itemradio' " + disabled +"> <label id=radiolabel></label> </div> </td> </tr>";
                             $("table #items").append(markup);
@@ -143,7 +138,7 @@ function searchItem(keyword,itemguid){
                             });
                             
                                 $("#itemstable #itemid").hide();
-                       // }
+                       
                     })
                 }
         
@@ -318,7 +313,6 @@ function saveCampaignDetails() {
         var itemId = $('input[name=search_result]:checked').attr('id');
         console.log(discountType);
         var data = { 'campaign_name': $('#keyword').val(), 'Item': itemId , 'last_updated': timezone_offset_minutes, 'coupon_code': $('#coupon_codeitem').val(), 'isLimited': ifLimited, 'isEnabled': '1', 'discount_value': $('#dval_item').val(), 'max_redeem': $('#redeemitem').val(),'merchants': null, 'discountType': discountType };
-        console.log(data);
         var apiUrl = packagePath + '/save_details.php';
         $.ajax({
             url: apiUrl,
@@ -414,7 +408,7 @@ function saveCampaignDetails() {
                     }
                     //added merchants feature
                     merchants = JSON.parse(discountDetails1.result[0].Merchants);
-                    console.log(merchants);
+                  
                     if(merchants != null) {
                         merchants.forEach(function(element) {
                             var $boxes = $('input[name=merchant]');
@@ -554,7 +548,7 @@ function saveCampaignDetails() {
         //custom search button
         waitForElement('#campaigntable_filter input', function ()
         {
-            // $("#campaigntable_filter").html($('#campaigntable_filter input'));
+          
             $('#campaigntable_filter input').attr('placeholder', 'Search');
             $('#campaigntable_filter input').css('margin-left', '20px');
             $('#campaigntable_filter input').addClass('form-control');
@@ -591,7 +585,7 @@ function saveCampaignDetails() {
         discounttype('input[name=discount_type_item]');
         discounttype('input[name=discount_type]');
 
-        // input[name=discount_type_item],input[name=discount_type]
+       
         function discounttype(el){
             $('body').on('change', el, function(){
                 $('.sign-indicator').addClass('hide');
@@ -618,7 +612,7 @@ function saveCampaignDetails() {
                 else if ($('#d-val').val() == "" ){
                   $('#d-val').css('border','1px solid red');
                 }
-                // else if (!$('#redeem').is(':disabled') && !$('#coupon_code').is(':disabled'))  
+                
                 else if ( $('#redeem').val() == "" && $('#limited').is(":checked"))  
                 {   console.log('cond 2')
                  $('#redeem').css('border','1px solid red');
@@ -649,10 +643,7 @@ function saveCampaignDetails() {
                 else if ($('#coupon_codeitem').val() == "" ) {
                   $('#coupon_codeitem').css('border','1px solid red');
                 } 
-                // else if (!$('#redeemitem').is(':disabled') && !$('#coupon_codeitem').is(':disabled') )  
-                // {   
-                //     $('#redeemitem').val() == "" ? $('#redeemitem').css('border','1px solid red') : ''
-                // }
+                
                 else if ( $('#redeemitem').val() == "" && $('#limiteditem').is(":checked"))  
                 {   console.log('cond 2')
                  $('#redeemitem').css('border','1px solid red');
@@ -685,9 +676,7 @@ function saveCampaignDetails() {
             $('#limiteitem').show();
             clearFieldsItem();
             $("#itemstable > tbody").empty();
-         //   $('#msg').remove();
-
-            //
+         
           });
 
 
@@ -700,7 +689,7 @@ function saveCampaignDetails() {
   $("#campaigntable").on('click', '#edit', function() {
 
     var itemid =  $(this).parents('tr').find('#campaignname').attr('value');
-    console.log(itemid);
+   
     if (itemid) {
     // get the current row
     // campaign id for campaign name
