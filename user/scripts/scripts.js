@@ -525,12 +525,25 @@
         }
         //tracking plugin
         // var invoiceNumber = $('.ordr-dtls-invoiceid:contains("INVOICE ID")')
-        var invoiceNumber = $('.ordr-dtls-invoiceid .innvoice-id')
+        var invoiceNumberMerchant = $(
+          '.ordr-dtls-invoiceid:contains("INVOICE ID")'
+        )
           .clone()
           .children()
           .remove()
           .end()
           .text();
+        invoiceNumberMerchant = invoiceNumberMerchant.replace(/[\. ,:-]+/g, "");
+        invoiceNumberMerchant = invoiceNumberMerchant.trim();
+        console.log(invoiceNumberMerchant);
+
+
+        // var invoiceNumber = $('.ordr-dtls-invoiceid .innvoice-id')
+        //   .clone()
+        //   .children()
+        //   .remove()
+        //   .end()
+        //   .text();
         var senddeliveryinfo =
           "<div><a href='#' id='send-delivery-track-info'>Send Delivery Tracking Info</a></div>";
         var imgLink =
@@ -571,7 +584,7 @@
           // // $(".tracking-url").addClass('error-con');
           //  if(isUrlValid(url) ) {
           $(".tracking-url").removeClass("error-con");
-          sendEDM(invoiceNumber);
+          sendEDM(invoiceNumberMerchant);
 
           //  }
         });
