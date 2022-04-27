@@ -30,6 +30,9 @@ $now = new DateTime($timezone_name);
 echo $now->format('Y-m-d H:i:s');    // MySQL datetime format
 $dates = $now->getTimestamp(); 
 
+$valid_start = $content['valid-start'];
+$valid_end = $content['valid-end'];
+
 $baseUrl = getMarketplaceBaseUrl();
 $admin_token = getAdminToken();
 $customFieldPrefix = getCustomFieldPrefix();
@@ -40,7 +43,7 @@ $marketplaceInfo = callAPI("GET", null, $url, false);
 $url = $baseUrl . '/api/developer-packages/custom-fields?packageId=' . getPackageID();
 $packageCustomFields = callAPI("GET", null, $url, false);
 
-    $coupon_details = array('CouponCode' => $coupon_code, 'isLimited' => $isLimited, 'isEnabled' => $isEnabled, 'MaxRedeem' => $max_redeem,  'DiscountValue' => $discount_value,'Merchants'=> $merchants,'DiscountType'=> $discount_type, 'Items' => $item);
+    $coupon_details = array('CouponCode' => $coupon_code, 'isLimited' => $isLimited, 'isEnabled' => $isEnabled, 'MaxRedeem' => $max_redeem,  'DiscountValue' => $discount_value,'Merchants'=> $merchants,'DiscountType'=> $discount_type, 'Items' => $item, 'valid_end_date' => $valid_end, 'valid_start_date' => $valid_start);
     $url =  $baseUrl . '/api/v2/plugins/'. getPackageID() .'/custom-tables/Coupon/rows/'. $coupon_id;
     $result =  callAPI("PUT",$admin_token['access_token'], $url, $coupon_details);
     error_log(json_encode($result));

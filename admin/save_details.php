@@ -16,6 +16,9 @@ $merchants = $content['merchants'];
 $discount_type = $content['discountType'];
 $item = $content['Item'];
 
+$valid_start = $content['valid-start'];
+$valid_end = $content['valid-end'];
+
 //TIMEZONE
 $tz = date_default_timezone_get();
 $timezone_name = timezone_name_from_abbr("", $last_updated*60, false);
@@ -46,7 +49,7 @@ $url =  $baseUrl . '/api/v2/plugins/'. getPackageID() .'/custom-tables/Campaign/
 $result =  callAPI("POST",$admin_token['access_token'], $url, $campaign_details);
 //2. Get the generated campaign ID 
 $campaign_id =  $result['Id'];
-$coupon_details = array('CouponCode' => $coupon_code, 'isLimited' => $isLimited, 'isEnabled' => $isEnabled, 'MaxRedeem' => $max_redeem,  'Quantity'=> '0','DiscountValue' => $discount_value,'CampaignId'=> $campaign_id, 'Merchants'=> $merchants, 'DiscountType'=> $discount_type, 'Items' => $item);
+$coupon_details = array('CouponCode' => $coupon_code, 'isLimited' => $isLimited, 'isEnabled' => $isEnabled, 'MaxRedeem' => $max_redeem,  'Quantity'=> '0','DiscountValue' => $discount_value,'CampaignId'=> $campaign_id, 'Merchants'=> $merchants, 'DiscountType'=> $discount_type, 'Items' => $item, 'valid_end_date' => $valid_end, 'valid_start_date' => $valid_start);
 //3. Save the Coupon details along with the fetched campaign ID
 $url =  $baseUrl . '/api/v2/plugins/'. getPackageID() .'/custom-tables/Coupon/rows';
 $result =  callAPI("POST",$admin_token['access_token'], $url, $coupon_details);

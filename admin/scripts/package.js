@@ -12,7 +12,9 @@
     var timezone_offset_minutes = new Date().getTimezoneOffset();
     timezone_offset_minutes = timezone_offset_minutes == 0 ? 0 : -timezone_offset_minutes;
     var rrpStatus,ifLimited;
-    var id,ids;
+    var id, ids;
+    var firstdate, lastdate;
+
 
     const formatter = new Intl.NumberFormat('en-US', {
         minimumFractionDigits: 2
@@ -284,7 +286,7 @@ function saveCampaignDetails() {
        //get the discount type
         var discountType = $('input[name=discount_type]:checked').parent().text().trim();
         console.log(discountType);
-        var data = { 'campaign_name': $('#campaign_name').val(), 'last_updated': timezone_offset_minutes, 'coupon_code': $('#coupon_code').val(), 'isLimited': ifLimited, 'isEnabled': '1', 'discount_value': $('#d-val').val(), 'max_redeem': $('#redeem').val(),'merchants': JSON.stringify(merchantlist), 'discountType': discountType };
+        var data = { 'campaign_name': $('#campaign_name').val(), 'last_updated': timezone_offset_minutes, 'coupon_code': $('#coupon_code').val(), 'isLimited': ifLimited, 'isEnabled': '1', 'discount_value': $('#d-val').val(), 'max_redeem': $('#redeem').val(),'merchants': JSON.stringify(merchantlist), 'discountType': discountType, "valid-start": firstdate, 'valid-end' : lastdate};
         var apiUrl = packagePath + '/save_details.php';
         $.ajax({
             url: apiUrl,
@@ -312,7 +314,7 @@ function saveCampaignDetails() {
         var discountType = $('input[name=discount_type_item]:checked').parent().text().trim();
         var itemId = $('input[name=search_result]:checked').attr('id');
         console.log(discountType);
-        var data = { 'campaign_name': $('#keyword').val(), 'Item': itemId , 'last_updated': timezone_offset_minutes, 'coupon_code': $('#coupon_codeitem').val(), 'isLimited': ifLimited, 'isEnabled': '1', 'discount_value': $('#dval_item').val(), 'max_redeem': $('#redeemitem').val(),'merchants': null, 'discountType': discountType };
+        var data = { 'campaign_name': $('#keyword').val(), 'Item': itemId , 'last_updated': timezone_offset_minutes, 'coupon_code': $('#coupon_codeitem').val(), 'isLimited': ifLimited, 'isEnabled': '1', 'discount_value': $('#dval_item').val(), 'max_redeem': $('#redeemitem').val(),'merchants': null, 'discountType': discountType, "valid-start": firstdate, 'valid-end' : lastdate };
         var apiUrl = packagePath + '/save_details.php';
         $.ajax({
             url: apiUrl,
@@ -392,6 +394,42 @@ function saveCampaignDetails() {
                    islimited = discountDetails1.result[0].IsLimited; 
                    redeemable =  discountDetails1.result[0].MaxRedeem;
                    discounttype = discountDetails1.result[0].DiscountType;
+
+                    start_date = discountDetails1.result[0].valid_start_date;
+                    end_date = discountDetails1.result[0].valid_end_date;
+                    const startDate = start_date != null ? moment.unix(start_date).format("DD/MM/YYYY") : new Date(); 
+                    console.log({startDate})
+                    const endDate = end_date != null ? moment.unix(end_date).format("DD/MM/YYYY") : new Date();  
+
+                       $('.vp-range').each(function(){
+                var $this = $(this);
+                $this.daterangepicker({
+                    "timePicker": true,
+                    "parentEl": $this.data('parent'),
+                    "startDate": startDate,
+                     "endDate" : endDate,
+                    locale: {
+                        format: 'DD/MM/YYYY hh:mm'
+                    }
+                }, function (start, end, label)
+                {
+                    // start = picker.startDate.format("DD/MM/YYYY");
+                    // end = picker.endDate.format("DD/MM/YYYY");
+                    // $(this).val(
+                    // picker.startDate.format("DD/MM/YYYY") +
+                    // " - " +
+                    // picker.endDate.format("DD/MM/YYYY")
+                    // );
+            
+                     $(this).addClass("filled");
+                    console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
+                    firstdate = moment(start, "DD/MM/YYYY").unix();
+                    console.log("first " + firstdate);
+                    lastdate = moment(end, "DD/MM/YYYY").unix();
+                    console.log("lst " + lastdate);
+                });
+            })
+
                    if (discounttype == 'Fixed') {
                     $("#fix").prop("checked", true);
                     $('.sign-indicator').addClass('hide');
@@ -450,6 +488,62 @@ function saveCampaignDetails() {
                 redeemable =  discountDetails1.result[0].MaxRedeem;
                 discounttype = discountDetails1.result[0].DiscountType;
 
+                  start_date = discountDetails1.result[0].valid_start_date;
+                    end_date = discountDetails1.result[0].valid_end_date;
+                    const startDate = start_date != null ? moment.unix(start_date).format("DD/MM/YYYY") : new Date(); 
+                    console.log({startDate})
+                    const endDate = end_date != null ? moment.unix(end_date).format("DD/MM/YYYY") : new Date();  
+
+                
+                     $('.vp-range').each(function(){
+                var $this = $(this);
+                $this.daterangepicker({
+                    "timePicker": true,
+                    "parentEl": $this.data('parent'),
+                    "startDate": startDate,
+                     "endDate" : endDate,
+                    locale: {
+                        format: 'DD/MM/YYYY hh:mm'
+                    }
+                }, function (start, end, label)
+                {
+                    // start = picker.startDate.format("DD/MM/YYYY");
+                    // end = picker.endDate.format("DD/MM/YYYY");
+                    // $(this).val(
+                    // picker.startDate.format("DD/MM/YYYY") +
+                    // " - " +
+                    // picker.endDate.format("DD/MM/YYYY")
+                    // );
+            
+                     $(this).addClass("filled");
+                    console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
+                    firstdate = moment(start, "DD/MM/YYYY").unix();
+                    console.log("first " + firstdate);
+                    lastdate = moment(end, "DD/MM/YYYY").unix();
+                    console.log("lst " + lastdate);
+                });
+            })
+
+
+
+                    //  $('.vp-range').each(function(){
+                    //     var $this = $(this);
+                    //     $this.daterangepicker({
+                    //         "timePicker": true,
+                    //         "parentEl": $this.data('parent'),
+                    //         "startDate": startDate,
+                    //         "endDate" : endDate,
+                    //     // minDate: new Date(),
+                    //         locale: {
+                    //             format: 'DD/MM/YYYY hh:mm'
+                    //         }
+                    //     }, function(start, end, label) {
+                    //         //console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
+                    //     });
+                    // })
+
+
+
                 if (discounttype == 'Fixed') {
                 $("#fixed").prop("checked", true);
                 $('.sign-indicator').addClass('hide');
@@ -493,7 +587,7 @@ function saveCampaignDetails() {
             
         });
 
-        var data = { 'couponId' : $('.coupon_id').val(), 'campaignId': $('.camp_id').val(), 'campaign_name': $('#campaign_name').val(), 'last_updated': timezone_offset_minutes, 'coupon_code': $('#coupon_code').val(), 'isLimited': ifLimited, 'isEnabled': '1', 'discount_value': $('#d-val').val(), 'max_redeem': $('#redeem').val(),'merchants': JSON.stringify(merchantlist),'discountType': discountType };
+        var data = { 'couponId' : $('.coupon_id').val(), 'campaignId': $('.camp_id').val(), 'campaign_name': $('#campaign_name').val(), 'last_updated': timezone_offset_minutes, 'coupon_code': $('#coupon_code').val(), 'isLimited': ifLimited, 'isEnabled': '1', 'discount_value': $('#d-val').val(), 'max_redeem': $('#redeem').val(),'merchants': JSON.stringify(merchantlist),'discountType': discountType, "valid-start": firstdate, 'valid-end' : lastdate  };
         var apiUrl = packagePath + '/update_details.php';
         $.ajax({
             url: apiUrl,
@@ -523,7 +617,7 @@ function saveCampaignDetails() {
         console.log('limited ' + ifLimited);
         var itemId = $('input[name=search_result]:checked').attr('id');
         var discountType = $('input[name=discount_type_item]:checked').parent().text().trim();
-        var data = { 'couponId' : $('.coupon_id').val(), 'campaignId': $('.camp_id').val(), 'campaign_name': $('#keyword').val(), 'last_updated': timezone_offset_minutes, 'coupon_code': $('#coupon_codeitem').val(), 'isLimited': ifLimited, 'isEnabled': '1', 'discount_value': $('#dval_item').val(), 'max_redeem': $('#redeemitem').val(),'discountType': discountType, 'Item': itemId  };
+        var data = { 'couponId' : $('.coupon_id').val(), 'campaignId': $('.camp_id').val(), 'campaign_name': $('#keyword').val(), 'last_updated': timezone_offset_minutes, 'coupon_code': $('#coupon_codeitem').val(), 'isLimited': ifLimited, 'isEnabled': '1', 'discount_value': $('#dval_item').val(), 'max_redeem': $('#redeemitem').val(),'discountType': discountType, 'Item': itemId, "valid-start": firstdate, 'valid-end' : lastdate  };
         var apiUrl = packagePath + '/update_details.php';
         $.ajax({
             url: apiUrl,
@@ -543,6 +637,136 @@ function saveCampaignDetails() {
     }
 
     $(document).ready(function() {
+
+        
+          var start = moment();
+          var end = moment();
+    
+        //   $("#review-datepicker").daterangepicker({
+        //     autoUpdateInput: false,
+    
+        //     opens: "right",
+    
+        //       minDate: new Date(),
+        //      "startDate": new Date(),
+    
+        //     locale: {
+        //       cancelLabel: "Clear",
+        //     },
+        //   });
+        
+
+           $('.vp-range').each(function(){
+                var $this = $(this);
+                $this.daterangepicker({
+                    "timePicker": true,
+                    "parentEl": $this.data('parent'),
+                    "startDate": new Date(),
+                   // minDate: new Date(),
+                    locale: {
+                        format: 'DD/MM/YYYY hh:mm'
+                    }
+                }, function (start, end, label)
+                {
+                    // start = picker.startDate.format("DD/MM/YYYY");
+                    // end = picker.endDate.format("DD/MM/YYYY");
+                    // $(this).val(
+                    // picker.startDate.format("DD/MM/YYYY") +
+                    // " - " +
+                    // picker.endDate.format("DD/MM/YYYY")
+                    // );
+            
+                     $(this).addClass("filled");
+                    console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
+                      firstdate = moment(start, "DD/MM/YYYY").unix();
+                    console.log("first " + firstdate);
+                    lastdate = moment(end, "DD/MM/YYYY").unix();
+                    console.log("lst " + lastdate);
+                });
+            })
+    
+        //   $("#review-datepicker").on("apply.daterangepicker", function (
+        //     ev,
+        //     picker
+        //   )
+        //   {
+        //     start = picker.startDate.format("DD/MM/YYYY");
+        //     end = picker.endDate.format("DD/MM/YYYY");
+        //     $(this).val(
+        //       picker.startDate.format("DD/MM/YYYY") +
+        //       " - " +
+        //       picker.endDate.format("DD/MM/YYYY")
+        //     );
+    
+        //     $(this).addClass("filled");
+    
+        //     firstdate = moment(start, "DD/MM/YYYY").unix();
+        //     console.log("first " + firstdate);
+        //     lastdate = moment(end, "DD/MM/YYYY").unix();
+        //     console.log("lst " + lastdate);
+    
+         
+        //    // var cartID = $('.product_detail', $(this).parents('.pr_detail')).find("[name='cart-item-guid']").val();
+        //    // console.log(cartID);
+
+        //    // saveDate(firstdate, lastdate,cartID);
+        //   });
+        
+
+        //  $("#review-datepicker").on("apply.daterangepicker", function (
+        //     ev,
+        //     picker
+        //   )
+        //   {
+        //     start = picker.startDate.format("DD/MM/YYYY");
+        //     end = picker.endDate.format("DD/MM/YYYY");
+        //     $(this).val(
+        //       picker.startDate.format("DD/MM/YYYY") +
+        //       " - " +
+        //       picker.endDate.format("DD/MM/YYYY")
+        //     );
+    
+        //     $(this).addClass("filled");
+    
+        //     firstdate = moment(start, "DD/MM/YYYY").unix();
+        //     console.log("first " + firstdate);
+        //     lastdate = moment(end, "DD/MM/YYYY").unix();
+        //     console.log("lst " + lastdate);
+    
+         
+        //    // var cartID = $('.product_detail', $(this).parents('.pr_detail')).find("[name='cart-item-guid']").val();
+        //    // console.log(cartID);
+
+        //    // saveDate(firstdate, lastdate,cartID);
+        //   });
+
+
+
+
+    
+          $("#review-datepicker").on("cancel.daterangepicker", function (
+            ev,
+            picker
+          )
+          {
+            $(this).val("");
+    
+            $(this).removeClass("filled");
+          });
+
+        $("#review-datepicker1").on("cancel.daterangepicker", function (
+            ev,
+            picker
+          )
+          {
+            $(this).val("");
+    
+            $(this).removeClass("filled");
+          });
+
+
+
+
 
 
         //custom search button
@@ -786,6 +1010,12 @@ $('body').on('click', '.itemradio', function(){
      $('#keyword').val($(this).attr("itemname"));
     
 });
+        
+
+//date range picker
+        
+    //     }
+    //   );
 
 
     });

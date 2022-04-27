@@ -49,6 +49,7 @@
                                         <th>Coupon Code</th>
                                         <th>Discount Value</th>
                                         <th>Merchants</th>
+                                        <th>Validity Period</th>
                                         <th>Redemption</th>
                                         <th>Actions</th>
                                      
@@ -104,9 +105,14 @@
 
                                                     $timezone_name = timezone_name_from_abbr("", $tz*60, false);
                                                     date_default_timezone_set($timezone_name);
-
+ 
                                                     $date = date('d/m/Y H:i', $last_updated);
                                                     $date1 = date('Ymd', $last_updated);
+
+                                                    $valid_end = $coupondetails['valid_end_date'] != null ?  date('d/m/Y H:i', $coupondetails['valid_end_date']) : "";
+                                                    $valid_start = $coupondetails['valid_start_date'] != null ? date('d/m/Y H:i', $coupondetails['valid_start_date']) : "";
+
+
                                                     if($coupon_enabled == 1){
                                                         error_log('index '. $coupon_enabled);
                                                        $checked = "checked = checked";
@@ -123,6 +129,7 @@
                                                     echo "<td>" .  $coupon_code . "</td>";
                                                     echo  "<td>". $discount_type . "</td>";
                                                     echo  "<td>". $merchanttno  . "</td>";
+                                                     echo  "<td>". $valid_start .' - ' . $valid_end  . "</td>";
                                                     echo "<td>";
                                         ?>
 
@@ -184,7 +191,7 @@
 
 
 
-        <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="createcampaign" id="createcampaign">
+        <div class="modal fade modal-campaign-details" tabindex="-1" role="dialog" aria-labelledby="createcampaign" id="createcampaign">
 
             <input type="hidden" class="coupon_id" value="" dir="">
             <input type="hidden" class="camp_id" value="" dir="">
@@ -259,6 +266,13 @@
                                             </span>
                                             <span class="sign-indicator">%</span>
                                        </div>
+                                    
+                                    <div class="form-element val-change">
+                                            <label>Validity Period</label>
+                                            <input type="text" class="w-100 vp-range review-datepicker-input" data-parent="#createcampaign .modal-body" name="validity_period" id='review-datepicker'>
+                                    </div>
+
+                                       <!-- <div class='review-datepicker'><h4>Validity Date</h4><form><div class='form-element'><input class='review-datepicker-input' type='text' name='review-daterange' id='review-datepicker' placeholder='DD/MM/YYYY - DD/MM/YYYY'></div></form></div> -->
                                    
                                          <!-- <label>Discount Value</label>
                                           
@@ -403,6 +417,14 @@
                                         </span>
                                         <span class="sign-indicator">%</span>
                                     </div>
+
+
+                                      <div class="form-element val-change">
+                                            <label>Validity Period</label>
+                                            <input type="text" class="w-100 vp-range review-datepicker-input" data-parent="freeitemcoupon .modal-body" name="validity_period1" id='review-datepicker1'>
+                                    </div>
+
+
                                 </div>                    
 
 
@@ -468,6 +490,17 @@ function isNumber1(evt) {
     }
     return true;
 }
+
+ function waitForElement(elementPath, callBack){
+	window.setTimeout(function(){
+	if($(elementPath).length){
+			callBack(elementPath, $(elementPath));
+	}else{
+			waitForElement(elementPath, callBack);
+	}
+	},10)
+}
+
 
 $('#redeem, #redeemitem').keyup(function(e){         
       if($(this).val().match(/^0/)){
@@ -542,7 +575,7 @@ $(document).ready(function() {
    // $('#coupon_code').input(function(e) { var regex = new RegExp("^[a-zA-Z0-9]+$"); var str = String.fromCharCode(!e.charCode ? e.which : e.charCode); if (regex.test(str)) { return true; } e.preventDefault(); return false; });
     $('.pr-text').keypress(function(e) { var regex = new RegExp("^[a-zA-Z0-9]+$"); var str = String.fromCharCode(!e.charCode ? e.which : e.charCode); if (regex.test(str)) { return true; } e.preventDefault(); return false; });
     
-        });
+        //});
 
         jQuery(window).bind('scroll', function() {
 
@@ -616,7 +649,7 @@ $(document).ready(function() {
             $("#limiteditem").on("click", function() {
                 checklimit($("#limiteditem"),$("#redeemitem"),$("#coupon_codeitem"));
             });
-     //   });
+        });
 
         function checklimit(limited,redeem,couponcode){
             if (limited.prop("checked") == false) {
@@ -664,16 +697,7 @@ $(document).ready(function() {
  })();
 
 
-  function waitForElement(elementPath, callBack){
-	window.setTimeout(function(){
-	if($(elementPath).length){
-			callBack(elementPath, $(elementPath));
-	}else{
-			waitForElement(elementPath, callBack);
-	}
-	},10)
-}
-
+ 
 waitForElement('#pagination-insert',function(){
 var pagination  = $('#campaigntable_paginate');
 $('#pagination-insert').append(pagination);
@@ -687,7 +711,7 @@ $('#campaigntable .th:contains("Last Updated")').click(function() {
 
 });
 
-/
+
 var date2 = $('#campaigntable th:contains("Last Updated1")');
 
 

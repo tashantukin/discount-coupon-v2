@@ -1057,6 +1057,28 @@
             couponleft = maxRedeem - couponqty;
             console.log("itemcoupon " + $itemcoupon);
 
+            //add validation for start and end date
+            $valid_start = coupondetails.result[0].valid_start_date;
+            var validStartDate = new Date($valid_start * 1000); 
+            
+          //  console.log({ startDate })
+            $valid_end = coupondetails.result[0].valid_end_date;
+            var validEndDate = new Date($valid_end * 1000); 
+           //  console.log({$valid_end })
+           // var startDateMoment = moment($valid_start, 'DD.MM.YYYY HH:mm');
+           // var endDate =new Date($valid_end * 1000); 
+
+            const compareDate = moment(new Date()).format('YYYY-MM-DD');
+            console.log({compareDate});
+            const startDate = moment.unix($valid_start).format('YYYY-MM-DD'); 
+            console.log({startDate})
+            const endDate = moment.unix($valid_end).format('YYYY-MM-DD');  
+            console.log({ endDate });
+            const isBetween = moment(compareDate).isBetween(startDate, endDate, undefined, '[])')  
+            console.log({ isBetween });
+            
+
+
             var couponspan =
               '<input type="hidden" class="coupon-msg" id="couponhidden"></span>';
             $(".page-package").append(couponspan);
@@ -1070,7 +1092,12 @@
               } else if (couponqty == maxRedeem) {
                 //TODO: Check if the coupon attained it's maximum allowed redeemable quantity
                 returnError("Expired");
-              } else {
+              }
+              else if (!isBetween) {
+                 returnError("Expired");
+              }
+              
+              else {
                 //show coupons
                 if (merchants != null) {
                   showPromoCodeV2();
@@ -1865,6 +1892,9 @@
           '<span class="coupon-msg" id="msg">Only ' +
           couponleft +
           " available for redemption.</span>";
+      } else if (errorType == "Invalid Date") {
+        errorType =
+          '<span class="coupon-msg" id="msg">Coupon is no longer valid.</span>';
       }
 
       if ($(".promocode-update").find("#msg").length == 0) {

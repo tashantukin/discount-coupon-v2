@@ -1042,5 +1042,478 @@ padding: 6px 12px;
     height: 35px;
   }
 
+/* .review-datepicker {
+  margin-top: 20px;
+}
+
+.review-datepicker .form-element {
+  margin-top: 10px;
+}
+
+.review-datepicker-input {
+  display: inline-block;
+  width: 100%;
+  max-width: 440px;
+  border: 1px solid #c7c7c7;
+  height: 42px !important;
+  line-height: 42px;
+  padding: 0 15px;
+  border-radius: 0;
+}
+.review-datepicker-input.active {
+  display: block;
+}
+
+.purchase-pg-hstry-dtls .have-daterange .ordr-dtls-item-itemdesc {
+  width: 44%;
+}
 
 
+.seller-order-detail-page .ordr-dtls-item-heading .ordr-dtls-item-itemdesc {
+  width: 45%;
+
+}
+
+
+.seller-order-detail-page .ordr-dtls-item-bodyrow .ordr-dtls-item-itemdesc {
+  width: 45%;
+} */
+
+.daterangepicker {
+    z-index: 999999;
+}
+
+.merchant-box-body {
+    overflow-y: scroll;
+}
+
+
+
+.discount-icon , .discount-icon-big {
+    background-image: url(../images/discount.svg)
+}
+.al-middle {
+	vertical-align: middle;
+	margin-top: 10px;
+}
+.page-coupon .blue-btn, .page-coupon  .blue-btn:hover  {
+	font-size: 12px;
+}
+.page-coupon .blsl-list-tblsec table thead th {
+    padding: 15px;
+    font-size: 12px;
+    color: #fff;
+    height: 30px; white-space: nowrap;
+}
+.page-coupon .blsl-list-tblsec table tbody td {
+    height: 30px;
+    padding: 5px 0 5px 15px;
+    font-size: 12px;
+    color: #4d4d4d;
+    white-space: normal;
+}
+.page-coupon .icon.icon-edit {
+    background-image: url(../images/edit_btn.svg);
+    height: 32px;
+    width: 32px;
+    margin-right: 5px;
+}
+.page-coupon .btn-black {
+    background-color: #000;
+    width: 130px;
+    margin-top: 10px;
+    border: 1px solid transparent;
+    display: inline-block;
+    height: 40px;
+    border-radius: 0;
+    margin-right: 10px;  
+}
+.popup.popup-delete-confirm {
+    width: 100%;
+    max-width: 380px;
+    text-align: center;
+    padding: 20px 15px 10px !important;
+
+}
+.btn-area .btn-blue {
+	display: inline-block;
+	width: 130px;
+	padding: 0;
+  border-radius: 0;
+  margin-left: 10px;
+}
+
+.modal-cm {
+	max-width: 515px;
+
+}
+.modal-cm .modal-content {
+	border-radius: 0;
+	padding: 20px 40px;
+}
+.modal-cm .modal-header  , .modal-cm .modal-footer{
+	border:0;
+}
+.modal-footer.text-left {
+	text-align: left !important;
+}
+.modal-cm .modal-header  h4 {
+  
+  font-size: 18px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #4d4d4d;
+}
+.modal-cm .form-element {
+	display: inline-block;
+	width: 100%;
+	margin-bottom: 15px;
+}
+.modal-cm .form-element label {
+	display: inline-block;
+	width: 100%;
+   font-size: 12px;
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #4d4d4d;
+}
+
+.modal-cm .form-element .w-100 {
+	display: inline-block;
+	width: 100%;
+	height: 34px;
+  	border: solid 1px #979797;
+  	line-height: 34px;
+  	padding: 0 15px;
+}
+
+.page-coupon .pgfncyopt .fancy-radio input[type="radio"]:checked + label { background: url(../images/r-check.svg) no-repeat left center; }
+
+.page-coupon .pgfncyopt .fancy-radio input[type="radio"] + label , 
+
+.page-coupon .pgfncyopt .fancy-checkbox input[type="checkbox"] + label { background: url(../images/r-uncheck.svg) no-repeat left center;}
+
+.page-coupon .pgfncyopt .fancy-radio label , .page-coupon .pgfncyopt .fancy-checkbox label { height: 26px; padding-left: 36px;  display: inline-block; border:none; padding-top: 3px; width: 100%;}
+
+.page-coupon .pgfncyopt .fancy-radio label span, 
+
+.page-coupon .pgfncyopt .fancy-checkbox label span { display: inline-block; width: auto; min-height: inherit; vertical-align: inherit;}
+
+.page-coupon .pgfncyopt {display: inline-block; width: 100%; margin-top: 10px;}
+
+.page-coupon .pgfncyopt .fancy-radio {border:none; display: inherit;margin-bottom: 0; width: auto; vertical-align: middle;margin-right: unset; height: auto; border-radius: none;}
+
+.val-change {
+	position: relative;
+}
+.val-change > .sign-indicator {
+    margin-left: 10px;
+    font-size: 16px; 
+}
+.close {opacity: 1;}
+
+#createcampaign input[type=radio],
+#freeitemcoupon input[type=radio]{
+	position: absolute;
+}
+.modal-cm .form-element .w-100:disabled {
+  background: #999;
+  opacity: 0.5;
+  border:1px solid #000;
+}
+.page-coupon .modal-cm .form-element  .pgfncyopt {
+	margin-top: 0;
+}
+/*---------------------------------------------------------------------------------front------------------------------------------------------*/
+.page-review .review-delivery-details span.review-info-detail-text span.review-service-sub-total del{
+  color:#999;
+}
+.coupon-code {
+  border-radius: 3px;
+  width: auto;
+  display: inline-block;
+  padding: 3px 10px 5px 10px;
+  border:1px solid #FF5A60; 
+  color: #FF5A60 !important;
+  position: relative;
+      text-transform: uppercase;
+}
+.item-coupon-box .remove-coupon {
+    margin-left: 10px;
+    font-size: 16px;
+    font-weight: normal;
+    cursor: pointer;
+}
+.lbl-coupon{
+    color: #999;
+    margin-bottom: 5px;
+    font-weight: 400;
+}
+.item-coupon-box .coupon-con { margin-bottom: 5px;}
+.coupon-code i {
+  position: absolute;
+  top: 7px;
+  right: 10px;
+  cursor: pointer;
+}
+span.coupon-msg {
+  margin-top: 3px;
+  display: block;
+  color: red;
+}
+.pr-text {
+    display: inline-block;
+    width: calc(100% - 75px);
+    border-radius: 0;
+    height: 35px;
+    line-height: 35px;
+    font-size: 12px;
+    text-transform: uppercase;
+    border: 1px solid #c9c9c9;
+    padding: 0 15px;
+    margin-bottom: 0px;
+}
+.pr-text::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: #c0c0c0;
+  opacity: 1;
+}
+.pr-text::-moz-placeholder { /* Firefox 19+ */
+  color: #c0c0c0;
+  opacity: 1;
+}
+.pr-text:-ms-input-placeholder { /* IE 10+ */
+  color: #c0c0c0;
+  opacity: 1;
+}
+.pr-text:-moz-placeholder { /* Firefox 18- */
+  color: #c0c0c0;
+  opacity: 1;
+}
+.apply-promo-btn {
+    cursor: pointer;
+    background: rgba(0,0,0,1);
+    color: #fff;
+    font-size: 12px;
+    height: 35px;
+    word-spacing: 3px;
+    border-radius: 0;
+    float: right;
+    width: 75px;
+    text-align: center;
+    line-height: 35px;
+    margin-bottom: 15px;
+    border: none;
+}
+/*.apply-promo-btn.disable{
+ background: #c0c0c0;
+}*/
+.coupon-cod{
+  border-radius: 3px;
+  border:1px solid #999;
+  width: auto !important;
+  padding: 3px;
+  line-height: 1;
+ }
+ .purhstdtls-delvry-subtotal > del {
+  color: #999;
+ }
+ .ordr-dtls-trans-info .ordr-dtls-buyer-infoind {
+    margin-bottom: 10px ;
+}
+.yn .onoffswitch-inner::before{
+  content: "ON"
+}
+.yn .onoffswitch-inner::after{
+  content: "OFF"
+}
+
+element {
+
+}
+.w-100.is-invalid, .was-validated .w-100:invalid {
+
+    border-color: #dc3545;
+    
+}
+.item-detail-left .item-price-text, .item-box-bottom .item-price.offer {
+    color: #ff5a60;
+}
+
+.item-price del{
+  font-size: 12px;
+  margin-left: 5px;
+  color: #000;
+}
+.blsl-list-tblsec table tbody td:last-child {
+  width: 130px;
+}
+.error_msg { font-size: 13px; color:#dc3545;}
+.no-b-margin { margin-bottom: 0px;}
+
+.modal-campaign-details .modal-cm {
+  max-width: 100%;
+  width: 720px;
+}
+
+.classy-merchant-box {
+  border: 1px solid #c4c4c4;
+  background-color: #f0f0f0;
+}
+.merchant-box-head {
+  border-bottom: 1px solid #c4c4c4;
+}
+.merchant-box-head input[type=text] {
+  background-color: transparent;
+  border: none;
+  padding: 5px 15px;
+  font-size: 12px;
+  font-weight: 600;
+  height: 35px;
+  width: 100%;
+  background-image: url(../images/icon-search.png);
+  background-repeat: no-repeat;
+  background-size: 18px;
+  background-position: 95% center;
+}
+.merchant-box-body .fancy-checkbox input[type=checkbox] {
+  display: none;
+}
+.merchant-box-body .fancy-checkbox {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+.merchant-box-body {
+  padding: 10px 15px;
+  height: 300px;
+  position: relative
+}
+.merchant-box-body .fancy-checkbox input[type=checkbox] + label {
+  margin-bottom: 0;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  color: #999999;
+  height: auto;
+}
+.merchant-box-body .fancy-checkbox input[type=checkbox] + label:before {
+  content: "";
+  margin-right: 10px;
+  display: flex;
+  width: 23px;
+  height: 23px;
+  background-image: url(../images/checkbox1_unchecked.png);
+  background-repeat: no-repeat;
+  background-size: 22px;
+  background-position: center;
+}
+.merchant-box-body .fancy-checkbox input[type=checkbox]:checked + label:before {
+  background-image: url(../images/checkbox1_checked.png);
+}
+
+.modal-campaign-details .modal-cm .left-part .w-100,
+.modal-campaign-details .modal-cm .right-part .w-100  {
+  width: 60%;
+}
+
+.mx-350 {
+  width: 350px;
+  max-width: 100%;
+
+}
+.mx-350 .close-popup {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+.w-100 {
+  width: 100%;
+}
+.mx-350 .btn-black {
+  border-radius: 0;
+  padding:10px 0; 
+}
+#send-delivery-track-info { font-size: 14px; font-weight: 700; margin-top: 5px; display: inline-block;}
+
+.search-i-free {
+  width: 450px;max-width: 100%;
+  position: relative;
+}
+.search-i-free button {
+  background: #000;
+  position: absolute;
+  top: 0;
+  right:0;
+  height: 100%;
+  width: 50px;
+  border:none;
+}
+.search-i-free button img {
+  height: 20px;
+}
+.free-coupan-list {
+        height: 118px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background: #f9f9f9;
+    margin-bottom: 25px;
+}
+.free-coupan-list table thead {
+  border-top:1px solid #d9d9d9;
+  border-bottom:1px solid #d9d9d9;
+  background: #fff;
+}
+.free-coupan-list table tbody {
+  background: #f9f9f9;
+
+}
+.free-coupan-list table tbody tr td{
+  border:none !important;
+  font-size: 12px;
+}
+.free-coupan-list table tbody tr td.pgfncyopt {
+  padding: 5px 0;
+
+line-height: normal;
+
+margin: 0;
+}
+.free-coupan-list table tbody tr td.pgfncyopt input[type="radio"] {
+  position: absolute;
+}
+.group-search { position: relative; }
+.group-search .form-control { 
+  color: #c2c2c2;
+  border: solid 1px #979797;
+  z-index: 99;
+  border-radius: 0px;
+  height: 35px;
+}
+.table-filter { 
+  padding: 15px;
+  padding-bottom: 0;
+}
+.group-search .btn-search {
+  position:  absolute;
+  right: 0;
+  top: 0;
+  width: 40px;
+  border-radius: 0;
+    background: none;
+  height: 100%;
+}
+.modal-campaign-details .form-element .vp-range {
+  width: 100% !important;
+}
+
+.blsl-list-tblsec table thead {
+  background-color: #43484f;
+}
+.blsl-list-tblsec table tbody td a {
+  display: inline-flex;
+}
