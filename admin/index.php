@@ -335,7 +335,7 @@
         <div class="modal fade modal-campaign-details" tabindex="-1" role="dialog" aria-labelledby="freeitemcoupon" id="freeitemcoupon">
             <div class="modal-dialog modal-cm" role="document">
                 <div class="modal-content">
-                    <form class="needs-validation" action=" " method="post" id="createcampaign2" novalidate>
+                    <form class="needs-validation" id="createcampaign2" novalidate>
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><img
                                     src="images/cross-icon.svg"></button>

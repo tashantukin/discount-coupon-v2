@@ -977,7 +977,12 @@ $('body').on('keyup', '.merchant-box-head > input', function(){
     });
 });  
 
-$('body').on('click', '#search', function(){
+$('body').on('click', '#search', function (event)
+{
+   
+    event.preventDefault();
+    //do what you want
+  
     !$('#keyword').val() ? $('#keyword').addClass("noinput") : searchItem($('#keyword').val(),''), $('#keyword').removeClass("noinput") ;
   
 });
