@@ -358,7 +358,9 @@
     function decrementCouponBespoke()
     {
       console.log("dec");
-      orderId = $(".invoice-id").text();
+      var splittedPath = new URL(window.location.href).pathname.split('/');
+      var invoiceId = splittedPath[splittedPath.indexOf('success') + 1]
+      orderId =  invoiceId  //$(".invoice-id").text();
       var data = { order_guid: orderId };
       var apiUrl = packagePaths + "/update_coupon_qty.php";
       $.ajax({
@@ -795,9 +797,15 @@
       //NOTE: Page URL may vary. depending on the payment method you use. This one is for payment gateways other than cod.
       if (url.indexOf("/user/checkout/success") >= 0) {
         console.log("for stripe");
+        var splittedPath = new URL(window.location.href).pathname.split('/');
+        var invoiceId = splittedPath[splittedPath.indexOf('success') + 1]
+        console.log((splittedPath[splittedPath.indexOf('success') + 1]));
+
+
         waitForElement(".invoice-id", function ()
         {
-          orderId = $(".invoice-id").text();
+
+          orderId = invoiceId;
           console.log(orderId);
           checkRedeemStatus_bespoke();
         });
@@ -805,7 +813,7 @@
         {
           waitForElement(".invoice-id", function ()
           {
-            orderId = $(".invoice-id").text();
+            orderId = invoiceId;
             console.log("decrement");
             decrementCouponBespoke();
           });
@@ -815,10 +823,13 @@
       //BESPOKE
       //this url is for COD type of payment
       if (url.indexOf("/user/checkout/gateway-selected") >= 0) {
+         var splittedPath = new URL(window.location.href).pathname.split('/');
+          var invoiceId = splittedPath[splittedPath.indexOf('success') + 1]
+          console.log((splittedPath[splittedPath.indexOf('success') + 1]));
         console.log("check redeem stat");
         waitForElement(".invoice-id", function ()
         {
-          orderId = $(".invoice-id").text();
+          orderId = invoiceId //$(".invoice-id").text();
           console.log(orderId);
           checkRedeemStatus_bespoke();
         });
@@ -826,7 +837,7 @@
         {
           waitForElement(".invoice-id", function ()
           {
-            orderId = $(".invoice-id").text();
+            orderId = invoiceId //$(".invoice-id").text();
             console.log("decrement");
             decrementCouponBespoke();
           });
